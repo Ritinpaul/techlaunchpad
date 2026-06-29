@@ -6,12 +6,8 @@ const nextConfig = {
         source: '/(.*)',
         headers: [
           {
-            key: 'X-Frame-Options',
-            value: 'SAMEORIGIN',
-          },
-          {
             key: 'Content-Security-Policy',
-            value: "frame-ancestors 'self' https://*.wix.com https://*.wixsite.com https://*.editorx.com",
+            value: "frame-ancestors 'self' https://*.wix.com https://*.wixsite.com https://*.editorx.com https://*.wixstudio.com",
           },
         ],
       },
