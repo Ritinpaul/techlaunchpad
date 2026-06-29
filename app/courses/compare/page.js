@@ -110,27 +110,44 @@ export default function ComparePage() {
               {/* Price banner */}
               <div style={{ display: 'grid', gridTemplateColumns: `160px ${activeCourses.map(() => '1fr').join(' ')}`, gap: 0, marginBottom: 32 }}>
                 <div />
-                {activeCourses.map(c => (
-                  <div key={c.id} style={{
-                    padding: '24px 20px', textAlign: 'center',
-                    background: c.isFlagship ? 'var(--purple)' : 'var(--white)',
-                    border: `2px solid ${c.isFlagship ? 'var(--purple)' : 'var(--black)'}`,
-                    borderRadius: 'var(--radius-card)',
-                    margin: '0 6px',
-                  }}>
-                    <span className={c.isFlagship ? 'tag-most-chosen' : 'tag-category'} style={{ marginBottom: 8, display: 'inline-block' }}>
-                      {c.isFlagship ? 'Most Chosen' : c.category}
-                    </span>
-                    <div style={{ fontSize: 16, fontWeight: 700, color: c.isFlagship ? 'var(--white)' : 'var(--navy)', marginBottom: 8 }}>{c.shortName}</div>
-                    <div style={{ fontSize: 28, fontWeight: 700, color: c.isFlagship ? 'var(--yellow)' : 'var(--purple)' }}>
-                      {formatRupees(c.price)}
+                {activeCourses.map(c => {
+                  let badge = null;
+                  if (c.id === 'all-in-one') badge = '⭐ BEST VALUE';
+                  else if (c.id === 'bootcamp') badge = '🔥 MOST POPULAR';
+                  else if (c.id === 'case-comp') badge = '📈 TRENDING';
+
+                  return (
+                    <div key={c.id} style={{
+                      padding: '24px 20px', textAlign: 'center', position: 'relative',
+                      background: c.isFlagship ? 'var(--purple)' : 'var(--white)',
+                      border: `2px solid ${c.isFlagship ? 'var(--purple)' : 'var(--black)'}`,
+                      borderRadius: 'var(--radius-card)',
+                      margin: '0 6px',
+                    }}>
+                      {badge && (
+                        <div style={{ position: 'absolute', top: -12, left: '50%', transform: 'translateX(-50%)', background: 'var(--yellow)', color: 'var(--navy)', fontSize: 11, fontWeight: 800, padding: '4px 12px', borderRadius: 100, whiteSpace: 'nowrap' }}>
+                          {badge}
+                        </div>
+                      )}
+                      <span className={c.isFlagship ? 'tag-most-chosen' : 'tag-category'} style={{ marginBottom: 8, display: 'inline-block', marginTop: badge ? 8 : 0 }}>
+                        {c.category}
+                      </span>
+                      <div style={{ fontSize: 16, fontWeight: 700, color: c.isFlagship ? 'var(--white)' : 'var(--navy)', marginBottom: 8 }}>{c.shortName}</div>
+                      <div style={{ fontSize: 28, fontWeight: 700, color: c.isFlagship ? 'var(--yellow)' : 'var(--purple)' }}>
+                        {formatRupees(c.price)}
+                      </div>
+                      {c.originalPrice && (
+                        <>
+                          <div style={{ fontSize: 14, color: c.isFlagship ? 'rgba(255,255,255,0.6)' : 'var(--slate)', textDecoration: 'line-through' }}>{formatRupees(c.originalPrice)}</div>
+                          <div style={{ fontSize: 13, color: c.isFlagship ? '#a7f3d0' : '#059669', fontWeight: 700, marginTop: 4 }}>Save {formatRupees(c.originalPrice - c.price)}</div>
+                        </>
+                      )}
+                      <div style={{ marginTop: 12 }}>
+                        <Link href={c.href} className="btn btn-primary" style={{ fontSize: 13, height: 40, padding: '0 16px' }}>Explore →</Link>
+                      </div>
                     </div>
-                    {c.originalPrice && <div style={{ fontSize: 13, color: c.isFlagship ? 'rgba(255,255,255,0.5)' : 'var(--slate)', textDecoration: 'line-through' }}>{formatRupees(c.originalPrice)}</div>}
-                    <div style={{ marginTop: 12 }}>
-                      <Link href={c.href} className="btn btn-primary" style={{ fontSize: 13, height: 40, padding: '0 16px' }}>Enroll</Link>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
 
               {/* Feature rows */}

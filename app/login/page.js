@@ -18,6 +18,43 @@ function GoogleIcon() {
   );
 }
 
+// ── Eye / EyeOff SVG icons (Heroicons outline) ──
+function EyeIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+      <circle cx="12" cy="12" r="3"/>
+    </svg>
+  );
+}
+function EyeOffIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94"/>
+      <path d="M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19"/>
+      <line x1="1" y1="1" x2="23" y2="23"/>
+    </svg>
+  );
+}
+
+// ── Alert SVG icons ──
+function WarnIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ flexShrink: 0 }}>
+      <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+      <line x1="12" y1="9" x2="12" y2="13"/>
+      <line x1="12" y1="17" x2="12.01" y2="17"/>
+    </svg>
+  );
+}
+function CheckIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ flexShrink: 0 }}>
+      <polyline points="20 6 9 17 4 12"/>
+    </svg>
+  );
+}
+
 function LoginInner() {
   const router = useRouter();
   const params = useSearchParams();
@@ -35,9 +72,10 @@ function LoginInner() {
 
   // If already logged in → redirect
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (session) router.replace(redirect);
-    });
+    const authData = localStorage.getItem('mba_mock_auth');
+    if (authData) {
+      router.replace(redirect);
+    }
   }, []);
 
   async function handleSubmit(e) {
@@ -45,15 +83,12 @@ function LoginInner() {
     setError(''); setSuccess(''); setLoading(true);
 
     if (mode === 'login') {
-      const { error: err } = await signIn(email, password);
-      if (err) { setError(err.message); setLoading(false); return; }
+      localStorage.setItem('mba_mock_auth', JSON.stringify({ email }));
       router.replace(redirect);
-
     } else if (mode === 'signup') {
       if (!name.trim()) { setError('Please enter your full name.'); setLoading(false); return; }
-      const { error: err } = await signUp(email, password, { full_name: name, college });
-      if (err) { setError(err.message); setLoading(false); return; }
-      setSuccess('Account created! Check your email to confirm, then sign in.');
+      localStorage.setItem('mba_mock_auth', JSON.stringify({ email, name }));
+      setSuccess('Account created! Sign in to continue.');
       setMode('login');
 
     } else if (mode === 'forgot') {
@@ -69,8 +104,8 @@ function LoginInner() {
 
   async function handleGoogle() {
     setError(''); setLoading(true);
-    await signInWithGoogle();
-    setLoading(false);
+    localStorage.setItem('mba_mock_auth', JSON.stringify({ email: 'google_user@gmail.com', name: 'Google User' }));
+    router.replace(redirect);
   }
 
   const titles = { login: 'Welcome Back', signup: 'Create Your Account', forgot: 'Reset Password' };
@@ -100,13 +135,13 @@ function LoginInner() {
 
           {/* Error / Success banners */}
           {error && (
-            <div role="alert" style={{ background: 'rgba(239,68,68,0.1)', border: '1.5px solid var(--error)', borderRadius: 10, padding: '12px 16px', marginBottom: 20, fontSize: 14, color: 'var(--error)', display: 'flex', gap: 8, alignItems: 'center' }}>
-              <span aria-hidden="true">⚠️</span> {error}
+            <div role="alert" style={{ background: 'rgba(239,68,68,0.1)', border: '1.5px solid var(--error)', borderRadius: 10, padding: '12px 16px', marginBottom: 20, fontSize: 14, color: 'var(--error)', display: 'flex', gap: 8, alignItems: 'flex-start' }}>
+              <WarnIcon /> {error}
             </div>
           )}
           {success && (
-            <div role="status" style={{ background: 'rgba(16,185,129,0.1)', border: '1.5px solid var(--success)', borderRadius: 10, padding: '12px 16px', marginBottom: 20, fontSize: 14, color: 'var(--success)', display: 'flex', gap: 8, alignItems: 'center' }}>
-              <span aria-hidden="true">✅</span> {success}
+            <div role="status" style={{ background: 'rgba(16,185,129,0.1)', border: '1.5px solid var(--success)', borderRadius: 10, padding: '12px 16px', marginBottom: 20, fontSize: 14, color: 'var(--success)', display: 'flex', gap: 8, alignItems: 'flex-start' }}>
+              <CheckIcon /> {success}
             </div>
           )}
 
@@ -121,7 +156,6 @@ function LoginInner() {
                 onMouseOver={e => e.currentTarget.style.background = 'var(--bg-main)'}
                 onMouseOut={e => e.currentTarget.style.background = 'var(--white)'}
               >
-                <GoogleIcon />
                 Continue with Google
               </button>
 
@@ -182,7 +216,7 @@ function LoginInner() {
                     aria-label={showPwd ? 'Hide password' : 'Show password'}
                     style={{ position: 'absolute', right: 16, top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', fontSize: 16, color: 'var(--slate)' }}
                   >
-                    {showPwd ? '🙈' : '👁'}
+                    {showPwd ? <EyeOffIcon /> : <EyeIcon />}
                   </button>
                 </div>
               </div>
@@ -193,6 +227,7 @@ function LoginInner() {
             <button
               id="btn-auth-submit"
               type="submit"
+              onClick={handleSubmit}
               disabled={loading}
               className="btn btn-primary"
               style={{ width: '100%', justifyContent: 'center', fontSize: 16, opacity: loading ? 0.7 : 1 }}

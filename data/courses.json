@@ -51,21 +51,25 @@
     "comboSavings": 2000,
     "groupOffer": { "minSize": 2, "discountBase": 30 },
     "tracker": { "cv": 3, "pi": 7, "gd": 7 },
-    "outcomes": "Structured SIP and Final Placement interview preparation across Finance, Consulting, Product, Marketing, and Strategy tracks with 1:1 mentor sessions.",
+    "outcomes": "End-to-end placement interview preparation — domain-specific, company-specific, and mentor-matched. Two tracks: Master (7 PIs, 7 GDs, 5 CVs) and Mini (5 PIs, 5 GDs, 3 CVs). Both include 20+ hours of domain prep sessions and access to 100+ HR contacts from top B-Schools.",
     "features": [
-      "7 domain-specific PI mock interviews",
-      "7 group discussion practice sessions",
-      "3 ATS-optimised CV review rounds",
-      "Matched mentor from your target company",
-      "Live session recordings for async review",
-      "Certificate of completion"
+      "Mentorship by IIM/XLRI alumni from your target company domain",
+      "1:1 mentor sessions with 24×7 availability",
+      "Master: 7 Mock PIs + 7 Mock GDs + 5 CV Reviews (can be topped up)",
+      "Mini: 5 Mock PIs + 5 Mock GDs + 3 CV Reviews (can be topped up)",
+      "20+ hours of end-to-end domain preparation sessions",
+      "Latest company-wise & profile-wise interview transcripts",
+      "Full JD preparation & psychometric assessment support",
+      "AI-based platform access for profile assessment and mock PIs",
+      "Access to 100+ HR contacts from top companies (Master only)",
+      "Group of 2: 20% off | Group of 3+: 30% off"
     ],
     "curriculum": [
-      { "week": "Week 1", "title": "Domain + Mentor Match", "desc": "Select Finance, Consulting, Product, Marketing, or Operations." },
-      { "week": "Week 2-3", "title": "PI Framework Drills", "desc": "Why MBA, walk me through, strengths/weaknesses, behavioural." },
-      { "week": "Week 4-5", "title": "Mock PI Rounds", "desc": "3 structured mock interviews with detailed mentor feedback." },
-      { "week": "Week 5-6", "title": "GD Practice", "desc": "7 GD sessions across topic types: abstract, case, current affairs." },
-      { "week": "Week 6-8", "title": "CV Reviews + Placement Readiness", "desc": "3 CV reviews, company research sessions, offer negotiation." }
+      { "week": "Week 1", "title": "Domain + Mentor Match", "desc": "Select Finance, Consulting, Product, Marketing, HR, or Operations. Matched within 48 hours." },
+      { "week": "Week 2-3", "title": "Domain Preparation Sessions", "desc": "20+ hours of structured domain prep — frameworks, company research, JD decoding." },
+      { "week": "Week 3-5", "title": "Mock PI Rounds", "desc": "5 or 7 structured 1:1 mock interviews with mentor feedback on every response." },
+      { "week": "Week 5-6", "title": "GD Practice", "desc": "5 or 7 GD sessions — abstract, case GD, current affairs, stress GD formats." },
+      { "week": "Week 6-8", "title": "CV Reviews + Placement Readiness", "desc": "3 or 5 ATS-optimised CV reviews, psychometric prep, offer negotiation support." }
     ],
     "href": "/courses/bootcamp"
   },
@@ -86,20 +90,22 @@
     "comboSavings": 3500,
     "groupOffer": { "minSize": 2, "discountBase": 30 },
     "tracker": { "cv": 1, "pi": 0, "gd": 0 },
-    "outcomes": "Real client work delivered through Prodmark Consultants Pvt. Ltd. — a graded, verifiable work output in your domain that sits on your CV as evidence, not a course certificate.",
+    "outcomes": "Real client work delivered through Prodmark Business Consultants Pvt. Ltd. — not a course, not a simulation. A graded, verifiable deliverable in your chosen domain (Finance, Consulting, HR, or Product Management) that lives on your CV as real evidence.",
     "features": [
-      "Real client project via Prodmark Consultants",
-      "Graded deliverable for your CV",
-      "Domain choice: Strategy, Finance, Marketing, or Operations",
-      "Mentor feedback on deliverables",
-      "Verifiable project reference letter",
-      "LinkedIn-ready project description"
+      "Work under Prodmark Business Consultants Pvt. Ltd. (not a coaching institute)",
+      "2-Month Track: 8 hours of domain sessions + 5 ATS-friendly CV points",
+      "1-Month Track: 4 hours of sessions + 2 ATS-friendly CV points",
+      "Domains: Finance, Consulting, HR, or Product Management",
+      "Special guest sessions by JP Morgan banker / IIM-A consultant / Nestlé Asia Talent Manager",
+      "AI-based platform access for profile assessment, CV prep, and mock PIs",
+      "Certificate of Completion + flexible submission (up to 3 months)",
+      "Group of 2: 30% off on enrollment"
     ],
     "curriculum": [
-      { "week": "Week 1", "title": "Project Brief + Onboarding", "desc": "Client introduction, scope definition, domain alignment." },
-      { "week": "Week 2-3", "title": "Research + Analysis", "desc": "Primary and secondary research, data gathering, framework application." },
-      { "week": "Week 3-4", "title": "Deliverable Development", "desc": "Strategy deck / financial model / marketing plan." },
-      { "week": "Week 5-6", "title": "Review + Final Submission", "desc": "Mentor review, client presentation, grading, certificate." }
+      { "week": "Week 1", "title": "Domain Briefing + Onboarding", "desc": "8hrs (2-month) or 4hrs (1-month) deep-dive into domain: ins & outs, real client context." },
+      { "week": "Week 2-4", "title": "Project Assignment + Research", "desc": "Assigned basis your domain discussion. Finance: COGS, EBITDA, Valuation / Consulting: P&L, Market Entry / HR: Org Design, Comp / PM: BRD, Wireframe." },
+      { "week": "Week 4-6", "title": "Deliverable Development", "desc": "Build the actual client-grade output with mentor feedback at every stage." },
+      { "week": "Week 6-8", "title": "Special Session + Submission", "desc": "Guest expert session (JP Morgan / IIM-A / Nestlé). Final submission, grading, and Certificate Roll-Out." }
     ],
     "href": "/courses/live-project"
   },
@@ -120,20 +126,23 @@
     "comboSavings": 2000,
     "groupOffer": { "minSize": 2, "discountBase": 30 },
     "tracker": { "cv": 0, "pi": 0, "gd": 0 },
-    "outcomes": "Structured competitive case-solving practice with mentor feedback. Builds the analytical muscle and presentation skill that consulting and strategy recruiters test for explicitly.",
+    "outcomes": "Trained by Unstop's national toppers (AIR 1, 6, 10 & 15). 20+ national winners. 8 hours of structured sessions covering market research to financial models — plus 30+ winning PPTs not found anywhere else.",
     "features": [
-      "Case framework mastery (MECE, Profitability, Market Entry)",
-      "Timed case solving practice",
-      "Presentation and slide narration coaching",
-      "Peer team formation for competition practice",
-      "Access to 20+ past B-school competition cases",
-      "Certificate of completion"
+      "Sessions by Unstop National Toppers: AIR 1, 6, 10 & 15",
+      "8 hours covering Market Research to Financial Model for roadmaps",
+      "30+ National Finals & Winning PPTs (exclusive — not found elsewhere)",
+      "Canva Pro Access for 1 Year",
+      "1:1 mentorship if you clear Executive Summary round of any Corporate Competition",
+      "20+ national winners produced in past cohorts",
+      "1 CV point via our Annual MSME Competition on Unstop",
+      "AI-based platform access for profile assessment and CV prep",
+      "Group of 2: 30% off | Group of 3+: 40% off"
     ],
     "curriculum": [
-      { "week": "Week 1", "title": "Frameworks + Structure", "desc": "MECE thinking, profitability trees, market sizing, M&A cases." },
-      { "week": "Week 2", "title": "Solo Case Solving", "desc": "Timed solo sessions, mentor feedback on structure and logic." },
-      { "week": "Week 3", "title": "Team Simulation", "desc": "Competitive format with peer teams, 48-hour turnaround cases." },
-      { "week": "Week 4", "title": "Presentation + Finals Prep", "desc": "Slide narration, Q&A handling, confidence under pressure." }
+      { "week": "Week 1", "title": "Frameworks + Market Research", "desc": "MECE, profitability trees, market sizing — how Unstop toppers approach the Executive Summary." },
+      { "week": "Week 2", "title": "Financial Modeling for Case Comps", "desc": "P&L modeling, scenario analysis, and building future roadmaps that win in judging rounds." },
+      { "week": "Week 3", "title": "Team Simulation + PPT Review", "desc": "Competitive format with peer teams. Review of 30+ winning PPT structures." },
+      { "week": "Week 4", "title": "Finals Prep + MSME Competition", "desc": "Slide narration, Q&A handling, and participation in our Annual MSME Competition on Unstop." }
     ],
     "href": "/courses/case-comp"
   },
@@ -153,18 +162,18 @@
     "comboId": null,
     "groupOffer": null,
     "tracker": { "cv": 0, "pi": 0, "gd": 0 },
-    "outcomes": "Verifiable Excel credential covering advanced formulas, pivot analysis, financial modeling, and dashboard design — the baseline skill Finance and Consulting recruiters assume.",
+    "outcomes": "Advanced Excel including Power Query — XLOOKUP, INDEX-MATCH, 20+ core functions, financial modeling, and dynamic dashboard design. The baseline skill Finance and Consulting recruiters assume.",
     "features": [
-      "Advanced formulas: INDEX/MATCH, SUMIFS, array formulas",
-      "Pivot tables and pivot charts",
-      "Financial modeling fundamentals",
-      "Dashboard design for data storytelling",
+      "XLOOKUP, INDEX-MATCH & Power Query (20+ core Excel functions)",
+      "Pivot tables, pivot charts, and conditional logic",
+      "Session on Financial Modelling in Excel",
+      "Dynamic dashboard design for data storytelling",
       "Verifiable certificate from Prodmark Consultants",
-      "Lifetime access to course materials"
+      "Group of 2: 30% off | Group of 3+: 40% off"
     ],
     "curriculum": [
-      { "week": "Week 1", "title": "Power Formulas + Data", "desc": "Advanced lookups, conditional logic, data cleaning at scale." },
-      { "week": "Week 2", "title": "Modeling + Dashboards", "desc": "P&L model, scenario analysis, dynamic dashboard with slicers." }
+      { "week": "Week 1", "title": "Power Formulas + Power Query", "desc": "XLOOKUP, INDEX-MATCH, SUMIFS, array formulas, and data cleaning with Power Query." },
+      { "week": "Week 2", "title": "Financial Modeling + Dashboards", "desc": "P&L model, scenario analysis, dynamic dashboard with slicers and conditional formatting." }
     ],
     "href": "/courses/excel-cert"
   },
@@ -184,18 +193,18 @@
     "comboId": null,
     "groupOffer": null,
     "tracker": { "cv": 0, "pi": 0, "gd": 0 },
-    "outcomes": "End-to-end dashboard and reporting skill using Power BI — a direct credential for roles in Consulting, Operations, and Product that require data storytelling beyond Excel.",
+    "outcomes": "Modelling queries and building interactive dashboards in Power BI — including dynamic dashboarding from 5+ data sources including web. The data storytelling credential for Consulting, Operations, and Product roles.",
     "features": [
-      "Data import from Excel, SQL, and APIs",
-      "DAX formulas for calculated measures",
-      "Interactive dashboard design",
-      "Report sharing and collaboration",
+      "Modelling queries and measures in Power BI",
+      "Interactive dashboard design with drill-throughs",
+      "Dynamic dashboarding from 5+ data sources including Web",
+      "DAX formulas for calculated measures and time intelligence",
       "Verifiable certificate from Prodmark Consultants",
-      "Lifetime access to course materials"
+      "Group of 2: 30% off | Group of 3+: 40% off"
     ],
     "curriculum": [
-      { "week": "Week 1", "title": "Data Modelling + DAX", "desc": "Star schema, relationships, DAX fundamentals, time intelligence." },
-      { "week": "Week 2", "title": "Dashboards + Publishing", "desc": "Visual best practices, interactive filters, publish to Power BI Service." }
+      { "week": "Week 1", "title": "Data Modelling + DAX", "desc": "Star schema, relationships, DAX fundamentals, and modelling queries on BI." },
+      { "week": "Week 2", "title": "Dynamic Dashboards + Publishing", "desc": "5+ data sources (Excel, SQL, Web), interactive filters, and publishing to Power BI Service." }
     ],
     "href": "/courses/powerbi-cert"
   }

@@ -3,6 +3,12 @@ import courses from '@/data/courses.json';
 import testimonials from '@/data/testimonials.json';
 import mentors from '@/data/mentors.json';
 import USPPopup from '@/components/layout/USPPopup';
+import ProgramWizard from '@/components/ui/ProgramWizard';
+import FreeResourceKit from '@/components/ui/FreeResourceKit';
+import MockCommunity from '@/components/ui/MockCommunity';
+import CompetitorTable from '@/components/ui/CompetitorTable';
+import SearchableFAQ from '@/components/ui/SearchableFAQ';
+import PageScripts from '@/components/ui/PageScripts';
 import { getInitials } from '@/lib/utils';
 
 export const metadata = {
@@ -10,7 +16,7 @@ export const metadata = {
   description: 'MBA Partner helps current MBA students land Summer Internship Placements and Final Placements through Live Projects, Case Competitions, and a Placements Bootcamp.',
 };
 
-// Scroll-reveal injected client-side via script
+// Scroll-reveal injected client-side via PageScripts
 const statsData = [
   { num: '9.6/10', label: 'Avg. Mentor Rating' },
   { num: '5,000+', label: 'Student Network' },
@@ -31,10 +37,12 @@ const pathCards = [
 ];
 
 const steps = [
-  { num: '01', title: 'Enroll & Onboard',               desc: 'Choose your program and domain track. Immediate access to the student community and onboarding call.' },
-  { num: '02', title: 'Get Matched to a Mentor',         desc: 'Matched by domain and B-school profile within 48 hours. Your mentor placed at a company on your target list.' },
-  { num: '03', title: 'Execute & Build',                  desc: 'Live Project with real client output, Case Competition rounds, and domain Bootcamp modules — all running concurrently.' },
-  { num: '04', title: 'Mock Interviews & Placement Support', desc: 'Domain-specific mock interviews, CV review, and 1:1 sessions timed to your campus placement calendar.' },
+  { num: '01', title: 'Choose Your Track',           desc: 'Pick from Placement Bootcamp, Case Competitions, Live Projects, or a Combo. Transparent pricing — no hidden fees.' },
+  { num: '02', title: 'Onboard in 24 hrs',           desc: 'Get matched to your IIM alumni mentor aligned to your domain and target companies. Receive your full resource pack immediately.' },
+  { num: '03', title: 'Build Your Profile',          desc: 'CV reviews, Live Projects, and Case Competition coaching. Real deliverables — not passive video watching.' },
+  { num: '04', title: 'Mock & Prepare',              desc: 'Mock PIs, Mock GDs, domain prep sessions, psychometric assessments, and company-specific interview transcripts.' },
+  { num: '05', title: 'Compete & Win',               desc: 'Enter case competitions with coaching from AIR 1, AIR 6, AIR 10. Add real wins to your CV before placement season.' },
+  { num: '06', title: 'Land the Offer',              desc: 'Placement-verified outcomes. Avg package ₹38L+. Certificate, transcripts, and a track record ready for your dream company.' },
 ];
 
 const faqs = [
@@ -49,7 +57,33 @@ const faqs = [
 const faqLeft = faqs.slice(0, 3);
 const faqRight = faqs.slice(3);
 
-const COMPANIES = ['Accenture', 'KPMG', 'Kearney', 'Reliance', 'Pine Labs', 'JM Financial', 'Times of India', 'Media.net'];
+const COMPANIES = ['Tata Administrative Service', 'Times of India', 'Amazon', 'AB InBev', 'Deloitte', 'Titan', 'PwC', 'Accenture', 'Kotak', 'Nomura', 'Lodha', 'Axis Bank', 'L\'Oréal', 'HSBC', 'Media.net', 'Gulf Oil'];
+
+// Wall of Fame — real placement data from Testimonials.xlsx
+const WALL_OF_FAME = [
+  { name: 'Ananyo Roy',         college: 'XLRI Jamshedpur',  company: 'TAS',            domain: 'HR',          year: '2024' },
+  { name: 'Divyanshi Jaiswal',  college: 'NMIMS Mumbai',     company: 'Nomura',         domain: 'Finance',     year: '2024' },
+  { name: 'Bolagani Premchand', college: 'IIM Lucknow',      company: 'Amazon',         domain: 'Marketing',   year: '2024' },
+  { name: 'Aparna Sudhir',      college: 'SIBM Bangalore',   company: 'Deloitte',       domain: 'Consulting',  year: '2024' },
+  { name: 'Akshita Satwal',     college: 'MDI Gurgaon',      company: 'Titan',          domain: 'Marketing',   year: '2024' },
+  { name: 'Nikhil Gandhi',      college: 'NMIMS Mumbai',     company: 'AB InBev',       domain: 'Marketing',   year: '2024' },
+  { name: 'Aayushi Gupta',      college: 'FMS Delhi',        company: 'Amazon',         domain: 'Operations',  year: '2025' },
+  { name: 'Pavan Pawar',        college: 'SIBM Bangalore',   company: 'Ediglobe',       domain: 'Consulting',  year: '2025' },
+  { name: 'Tanisha Sen',        college: 'IIM Ranchi',       company: 'Times of India', domain: 'Marketing',   year: '2025' },
+  { name: 'Pradipto Mondal',    college: 'IIM Mumbai',       company: 'AAICLAS',        domain: 'Operations',  year: '2025' },
+  { name: 'Yusuf Hasan',        college: 'XLRI Jamshedpur',  company: 'Deloitte',       domain: 'Consulting',  year: '2024' },
+  { name: 'Madhumitha',         college: 'IIM Bangalore',    company: 'Accenture',      domain: 'Consulting',  year: '2025' },
+];
+
+const DOMAIN_COLORS = {
+  'Consulting':          { bg: '#1a1a2e', accent: '#E8B86D' },
+  'Finance':             { bg: '#0f1724', accent: '#60a5fa' },
+  'Marketing':           { bg: '#1a0f0f', accent: '#f87171' },
+  'HR':                  { bg: '#0f1a0f', accent: '#4ade80' },
+  'Operations':          { bg: '#0f171a', accent: '#34d399' },
+  'Product':             { bg: '#1a1000', accent: '#fbbf24' },
+  'General Management':  { bg: '#1a1a1a', accent: '#a78bfa' },
+};
 
 export default function HomePage() {
   const featuredCourses = courses.slice(0, 3);
@@ -63,15 +97,21 @@ export default function HomePage() {
       {/* ── 01 HERO ── */}
       <section className="hero-section" aria-labelledby="hero-h1">
         <div className="container">
+          {/* MBA Student / CAT-OMET Mode Toggle */}
+          <div style={{ display: 'flex', gap: 8, marginBottom: 24, flexWrap: 'wrap' }}>
+            <Link href="/" style={{ padding: '7px 18px', borderRadius: 999, background: 'var(--navy)', color: 'var(--white)', fontSize: 13, fontWeight: 700, textDecoration: 'none', border: '2px solid var(--navy)' }}>MBA Student</Link>
+            <Link href="/cat-omet" style={{ padding: '7px 18px', borderRadius: 999, background: 'transparent', color: 'var(--navy)', fontSize: 13, fontWeight: 700, textDecoration: 'none', border: '2px solid var(--navy)', opacity: 0.6 }}>Pre-MBA Aspirant</Link>
+          </div>
           <div className="hero-grid">
             <div className="hero-copy">
-              <p className="eyebrow hero-eyebrow">For MBA Students Heading Into Placements</p>
+              <p className="eyebrow hero-eyebrow">India&apos;s Premier MBA Career Platform · IIM Alumni Founded · Since 2020</p>
               <h1 className="hero-h1" id="hero-h1">
-                Committee Roles Don&apos;t Get You&nbsp;Shortlisted.{' '}
-                <span className="text-purple">Outcomes Do.</span>
+                Get Mentored by the{' '}
+                <span className="text-purple">Top 1%.</span><br/>
+                Land Your Dream Placement.
               </h1>
               <p className="hero-sub">
-                Live Projects, Case Competitions, and a Placements Bootcamp — the three credentials that turn a thin CV into a shortlist.
+                Committee PORs and graduation internships are no longer enough. Build a CV that actually clears the first cut — with IIM, XLRI and FMS mentors guiding every step.
               </p>
 
               <div className="hero-stat-strip" role="group" aria-label="Key statistics">
@@ -83,23 +123,45 @@ export default function HomePage() {
                 ))}
               </div>
 
+              {/* Urgency badge */}
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#fff5f0', border: '1.5px solid #f97316', borderRadius: 999, padding: '6px 14px', marginBottom: 20, fontSize: 13, fontWeight: 700, color: '#c2410c' }}>
+                <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#f97316', display: 'inline-block', animation: 'pulse 1.5s infinite' }} />
+                Next batch closing — 12 seats remaining
+              </div>
+
               <div className="hero-ctas">
                 <Link href="/courses" className="btn btn-primary">Explore Programs</Link>
                 <Link href="/mentors" className="btn btn-secondary">Talk to a Mentor</Link>
               </div>
+              <p style={{ fontSize: 13, color: 'var(--slate)', marginTop: 12 }}>Starting from ₹3,499 · EMI from ₹583/month · No cost EMI available</p>
             </div>
 
             <div className="hero-visual" aria-hidden="true">
-              <div className="hero-img-wrap" style={{ background: 'linear-gradient(160deg, var(--purple) 0%, #531BFF 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <div style={{ textAlign: 'center', color: 'rgba(255,255,255,0.9)', padding: 40 }}>
-                  <div style={{ fontSize: 64, marginBottom: 16 }}>🎓</div>
-                  <div style={{ fontSize: 18, fontWeight: 700 }}>Placement-Ready</div>
-                  <div style={{ fontSize: 14, opacity: 0.8, marginTop: 4 }}>in 10-12 weeks</div>
-                </div>
+              <div className="hero-img-wrap" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+                <img src="/images/mentor_student_session.jpg" alt="Mentoring session" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               </div>
-              <div className="hero-proof-card">
-                <div className="hero-proof-num">700+</div>
-                <div className="hero-proof-label">Students Mentored to&nbsp;Placement</div>
+              {/* Cohort Snapshot Widget */}
+              <div style={{ background: '#0d1117', border: '1.5px solid rgba(255,255,255,0.12)', borderRadius: 16, padding: '20px 24px', marginTop: 16, color: 'white' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+                  <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)' }}>COHORT SNAPSHOT</span>
+                  <span style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 11, color: '#4ade80', fontWeight: 700 }}>
+                    <span style={{ width: 7, height: 7, background: '#4ade80', borderRadius: '50%', display: 'inline-block' }} />
+                    Live
+                  </span>
+                </div>
+                {[
+                  { label: 'Average student rating', value: '9.6', unit: '/10', color: '#f97316' },
+                  { label: 'Placed in desired domain', value: '98.7', unit: '%', color: '#60a5fa' },
+                  { label: 'Average package', value: '₹38L', unit: '+', color: '#4ade80' },
+                  { label: 'Students mentored', value: '5,000', unit: '+', color: '#f97316' },
+                  { label: 'Verified reviews', value: '700', unit: '+', color: '#facc15' },
+                ].map(row => (
+                  <div key={row.label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 0', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
+                    <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)' }}>{row.label}</span>
+                    <span style={{ fontSize: 16, fontWeight: 800, color: row.color }}>{row.value}<span style={{ fontSize: 12 }}>{row.unit}</span></span>
+                  </div>
+                ))}
+                <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)', marginTop: 12, textAlign: 'right' }}>Data verified · Updated batch 2024–25</p>
               </div>
             </div>
           </div>
@@ -112,15 +174,27 @@ export default function HomePage() {
           <p style={{ textAlign: 'center', fontSize: 12, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--slate)', marginBottom: 20 }}>
             Our Students Now Work At
           </p>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 0, overflowX: 'auto', flexWrap: 'nowrap' }} role="list">
-            {COMPANIES.map((co, i) => (
-              <div key={co} role="listitem" style={{ flexShrink: 0, padding: '8px 28px', borderRight: i < COMPANIES.length - 1 ? '1px solid var(--black)' : 'none' }}>
-                <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--navy)', whiteSpace: 'nowrap' }}>{co}</span>
-              </div>
-            ))}
+          <div className="marquee-wrapper" role="list">
+            <div className="marquee-content">
+              {/* First set of companies */}
+              {COMPANIES.map((co) => (
+                <div key={`set1-${co}`} className="marquee-item" role="listitem">
+                  <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--navy)' }}>{co}</span>
+                </div>
+              ))}
+              {/* Second set of companies (for seamless loop) */}
+              {COMPANIES.map((co) => (
+                <div key={`set2-${co}`} className="marquee-item" role="listitem">
+                  <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--navy)' }}>{co}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
+
+      {/* ── 02.5 WIZARD ── */}
+      <ProgramWizard />
 
       {/* ── 03 METRICS BAND ── */}
       <section className="metrics-band" aria-label="Placement outcome statistics">
@@ -196,24 +270,26 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── 06 HOW IT WORKS ── */}
+      {/* ── 06 HOW IT WORKS — 6-step Career Roadmap ── */}
       <section style={{ background: 'var(--white)', padding: 'var(--section-gap) 0' }} aria-labelledby="how-heading">
         <div className="container">
           <div className="section-header">
             <p className="eyebrow">The Process</p>
-            <h2 id="how-heading">From Enrollment to Placement</h2>
-            <p>Four steps, zero ambiguity about what happens after you pay.</p>
+            <h2 id="how-heading">Your MBA Career Roadmap</h2>
+            <p>From enrollment to offer letter — 6 steps backed by IIM alumni who have done it themselves.</p>
           </div>
-          <div className="steps-track" role="list">
-            {steps.map(s => (
-              <div key={s.num} className="step" role="listitem">
-                <div className="step-num" aria-hidden="true">{s.num}</div>
-                <div>
-                  <div className="step-title">{s.title}</div>
-                  <p className="step-desc">{s.desc}</p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 20 }}>
+            {steps.map((s, i) => {
+              const accentColors = ['#fff3e0','#e3f2fd','#f3e5f5','#e8f5e9','#fff8e1','#fce4ec'];
+              return (
+                <div key={s.num} style={{ background: 'var(--white)', border: '2px solid var(--black)', borderRadius: 'var(--radius-card)', padding: '28px 24px', position: 'relative', overflow: 'hidden' }} className="card">
+                  <div style={{ position: 'absolute', top: 0, right: 0, width: 80, height: 80, background: accentColors[i], borderRadius: '0 0 0 80px', opacity: 0.7 }} />
+                  <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', color: 'var(--purple)', marginBottom: 12, textTransform: 'uppercase' }}>STEP {s.num}</div>
+                  <div style={{ fontWeight: 700, fontSize: 17, color: 'var(--navy)', marginBottom: 10 }}>{s.title}</div>
+                  <p style={{ fontSize: 14, color: 'var(--slate)', lineHeight: 1.6, margin: 0 }}>{s.desc}</p>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -230,9 +306,13 @@ export default function HomePage() {
             {featuredMentors.map(m => (
               <article key={m.id} className="mentor-card">
                 <div className="mentor-photo">
-                  <div className="mentor-photo-placeholder">
-                    <div className="mentor-avatar">{getInitials(m.name)}</div>
-                  </div>
+                  {m.photo ? (
+                    <img src={m.photo} alt={`${m.name} - ${m.company}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  ) : (
+                    <div className="mentor-photo-placeholder">
+                      <div className="mentor-avatar">{getInitials(m.name)}</div>
+                    </div>
+                  )}
                 </div>
                 <div className="mentor-info">
                   <div className="mentor-credential">{m.school} · {m.role}, {m.company}</div>
@@ -244,6 +324,49 @@ export default function HomePage() {
           </div>
           <div style={{ textAlign: 'center', marginTop: 40 }}>
             <Link href="/mentors" className="btn btn-secondary">Meet All Mentors →</Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 06.5 FREE RESOURCE KIT ── */}
+      <FreeResourceKit />
+
+      {/* ── 07.5 WALL OF FAME ── */}
+      <section style={{ background: 'var(--bg-main)', padding: 'var(--section-gap) 0' }} aria-labelledby="wall-heading">
+        <div className="container">
+          <div className="section-header">
+            <p className="eyebrow">Wall of Fame</p>
+            <h2 id="wall-heading">Students Who Made It Big</h2>
+            <p>Real students. Real companies. Real results.</p>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 16 }}>
+            {WALL_OF_FAME.map(p => {
+              const color = DOMAIN_COLORS[p.domain] || '#f5f5f5';
+              return (
+                <div key={p.name + p.company} style={{ background: 'var(--white)', border: '2px solid var(--black)', borderRadius: 'var(--radius-card)', padding: '20px 20px 16px', transition: 'transform 200ms ease, box-shadow 200ms ease' }} className="card">
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 14 }}>
+                    <div style={{ width: 42, height: 42, borderRadius: '50%', background: color, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 15, color: 'var(--navy)', flexShrink: 0, border: '2px solid var(--black)' }}>
+                      {p.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
+                    </div>
+                    <div>
+                      <div style={{ fontWeight: 700, fontSize: 14, color: 'var(--navy)' }}>{p.name}</div>
+                      <div style={{ fontSize: 12, color: 'var(--slate)' }}>{p.college}</div>
+                    </div>
+                    <span style={{ marginLeft: 'auto', fontSize: 11, color: 'var(--slate)', fontWeight: 600 }}>{p.year}</span>
+                  </div>
+                  <div style={{ borderTop: '1px solid var(--hairline)', paddingTop: 12, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                      <span style={{ fontSize: 12, color: 'var(--slate)' }}>Placed at</span>
+                      <span style={{ fontWeight: 800, fontSize: 13, color: 'var(--navy)' }}>{p.company}</span>
+                    </div>
+                    <span style={{ fontSize: 11, fontWeight: 700, background: color, color: 'var(--navy)', padding: '3px 10px', borderRadius: 999, border: '1.5px solid rgba(0,0,0,0.1)' }}>{p.domain}</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <div style={{ textAlign: 'center', marginTop: 32 }}>
+            <Link href="/testimonials" className="btn btn-secondary">See All 70+ Placements →</Link>
           </div>
         </div>
       </section>
@@ -273,7 +396,16 @@ export default function HomePage() {
                   {getInitials(featuredTestimonials[0].name)}
                 </div>
                 <div>
-                  <div style={{ fontWeight: 700, color: 'var(--navy)', fontSize: 15 }}>{featuredTestimonials[0].name}</div>
+                  <div style={{ fontWeight: 700, color: 'var(--navy)', fontSize: 15, display: 'flex', alignItems: 'center', gap: 6 }}>
+                    {featuredTestimonials[0].name}
+                    {featuredTestimonials[0].linkedin && (
+                      <a href={featuredTestimonials[0].linkedin} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', color: '#0a66c2', background: 'white', borderRadius: 2 }} title={`View ${featuredTestimonials[0].name} on LinkedIn`}>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                        </svg>
+                      </a>
+                    )}
+                  </div>
                   <div style={{ fontSize: 13, color: 'var(--slate)' }}>{featuredTestimonials[0].college} · {featuredTestimonials[0].program}</div>
                 </div>
               </div>
@@ -292,7 +424,16 @@ export default function HomePage() {
                 <div className="testimonial-author">
                   <div className="testimonial-avatar">{getInitials(t.name)}</div>
                   <div>
-                    <div className="testimonial-name">{t.name}</div>
+                    <div className="testimonial-name" style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                      {t.name}
+                      {t.linkedin && (
+                        <a href={t.linkedin} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', color: '#0a66c2', background: 'white', borderRadius: 2 }} title={`View ${t.name} on LinkedIn`}>
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                          </svg>
+                        </a>
+                      )}
+                    </div>
                     <div className="testimonial-institution">{t.college}</div>
                   </div>
                 </div>
@@ -305,6 +446,62 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── VIDEO TESTIMONIALS ── */}
+      <section id="video-testimonials" style={{ background: 'var(--navy)', padding: 'var(--section-gap) 0' }} aria-labelledby="video-testimonials-heading">
+        <div className="container">
+          <div className="section-header" style={{ marginBottom: 48 }}>
+            <p className="eyebrow" style={{ color: 'rgba(255,255,255,0.7)', background: 'rgba(255,255,255,0.1)' }}>In Their Own Words</p>
+            <h2 id="video-testimonials-heading" style={{ color: 'var(--white)' }}>Video Testimonials</h2>
+            <p style={{ color: 'rgba(255,255,255,0.7)' }}>Unscripted. Real students. Real results.</p>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 24 }}>
+            {[
+              { name: 'Mridul Agarwal', college: 'IIM Calcutta', domain: 'Consulting', domainColor: 'var(--yellow)', file: 'Mridul IIM Calcutta.mp4' },
+              { name: 'Ananya Sharma', college: 'Welingkar Mumbai', domain: 'Marketing', domainColor: 'var(--blue)', file: 'Ananya Welingkar.mp4' },
+              { name: 'Jigar Mehta', college: 'IIM Amritsar', domain: 'Finance', domainColor: 'var(--purple)', file: 'Jigar IIM Amritsar.mp4' },
+            ].map(({ name, college, domain, domainColor, file }) => (
+              <div
+                key={name}
+                style={{
+                  background: 'rgba(255,255,255,0.04)',
+                  border: '1.5px solid rgba(255,255,255,0.12)',
+                  borderRadius: 'var(--radius-card)',
+                  overflow: 'hidden',
+                  transition: 'border-color 0.2s, transform 0.2s',
+                }}
+              >
+                <div style={{ height: 4, background: domainColor }} />
+                <video
+                  controls
+                  preload="metadata"
+                  style={{ width: '100%', display: 'block', maxHeight: 210, background: '#000' }}
+                  aria-label={`Video testimonial by ${name} from ${college}`}
+                >
+                  <source src={`/videos/${encodeURIComponent(file)}`} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+                <div style={{ padding: '16px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
+                  <div>
+                    <div style={{ fontWeight: 700, color: 'var(--white)', fontSize: 14, marginBottom: 2 }}>{name}</div>
+                    <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.55)' }}>{college}</div>
+                  </div>
+                  <span style={{ fontSize: 11, fontWeight: 700, background: domainColor, color: 'var(--navy)', padding: '4px 12px', borderRadius: 20, flexShrink: 0 }}>{domain}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div style={{ textAlign: 'center', marginTop: 40 }}>
+            <Link href="/testimonials" className="btn btn-primary">Watch All Video Testimonials →</Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 08.5 COMPETITOR TABLE ── */}
+      <CompetitorTable />
+
+      {/* ── 08.7 MOCK COMMUNITY ── */}
+      <MockCommunity />
+
       {/* ── 09 FAQ ── */}
       <section id="faq" style={{ background: 'var(--bg-main)', padding: 'var(--section-gap) 0' }} aria-labelledby="faq-heading">
         <div className="container">
@@ -313,7 +510,7 @@ export default function HomePage() {
             <h2 id="faq-heading">Before You Enroll</h2>
             <p>The six questions we hear most from students comparing options.</p>
           </div>
-          <FAQAccordion left={faqLeft} right={faqRight} />
+          <SearchableFAQ faqs={faqs} />
         </div>
       </section>
 
@@ -331,70 +528,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Scroll-reveal + FAQ script */}
-      <FAQScript />
-      <RevealScript />
+      {/* Scroll-reveal + FAQ — client component (no hydration issues) */}
+      <PageScripts />
     </>
   );
 }
 
-// FAQ Accordion (server-renderable, hydrated by script below)
-function FAQAccordion({ left, right }) {
-  return (
-    <div className="faq-grid">
-      <div className="faq-col">
-        {left.map((f, i) => (
-          <div key={i} className="faq-item">
-            <button className="faq-question" aria-expanded="false">
-              {f.q}
-              <svg className="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-            </button>
-            <div className="faq-answer">{f.a}</div>
-          </div>
-        ))}
-      </div>
-      <div className="faq-col">
-        {right.map((f, i) => (
-          <div key={i} className="faq-item">
-            <button className="faq-question" aria-expanded="false">
-              {f.q}
-              <svg className="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-            </button>
-            <div className="faq-answer">{f.a}</div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
 
-// Inline scripts (only for progressive enhancement — no client boundary needed)
-function FAQScript() {
-  return (
-    <script dangerouslySetInnerHTML={{ __html: `
-      document.querySelectorAll('.faq-question').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const item = btn.closest('.faq-item');
-          const isOpen = item.classList.contains('open');
-          item.classList.toggle('open', !isOpen);
-          btn.setAttribute('aria-expanded', !isOpen);
-        });
-      });
-    ` }} />
-  );
-}
-
-function RevealScript() {
-  return (
-    <script dangerouslySetInnerHTML={{ __html: `
-      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        const els = document.querySelectorAll('.program-card, .mentor-card, .testimonial-card, .step, .faq-item, .card');
-        els.forEach(el => el.classList.add('reveal'));
-        const obs = new IntersectionObserver(entries => {
-          entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-        }, { threshold: 0.08 });
-        els.forEach(el => obs.observe(el));
-      }
-    ` }} />
-  );
-}

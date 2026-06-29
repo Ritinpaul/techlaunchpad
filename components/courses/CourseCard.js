@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { formatRupees, makeWhatsAppLink } from '@/lib/utils';
 import GroupEnrollModal from './GroupEnrollModal';
+import EnrollButton from '@/components/ui/EnrollButton';
 
 export default function CourseCard({ course, showComboHint = true }) {
   const [modalOpen, setModalOpen] = useState(false);
@@ -45,18 +46,27 @@ export default function CourseCard({ course, showComboHint = true }) {
           </div>
         )}
 
-        <div className="program-price-row">
-          <span className="price-label">Cohort Price</span>
-          <span className="price-value">{formatRupees(course.price)}</span>
+        <div className="program-price-row" style={{ display: 'flex', flexDirection: 'column', gap: 4, marginBottom: 24 }}>
+          <span className="price-label" style={{ fontSize: 13, color: 'var(--slate)' }}>Cohort Price</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            <span className="price-value" style={{ fontSize: 28, fontWeight: 800 }}>{formatRupees(course.price)}</span>
+            {course.originalPrice && (
+              <span className="price-original" style={{ textDecoration: 'line-through', color: '#94a3b8', fontSize: 16 }}>
+                {formatRupees(course.originalPrice)}
+              </span>
+            )}
+          </div>
           {course.originalPrice && (
-            <span className="price-original">{formatRupees(course.originalPrice)}</span>
+            <div style={{ display: 'inline-flex', background: '#ecfdf5', color: '#059669', border: '1px solid #a7f3d0', padding: '4px 8px', borderRadius: 6, fontSize: 13, fontWeight: 700, width: 'fit-content', marginTop: 4 }}>
+              Save {formatRupees(course.originalPrice - course.price)}
+            </div>
           )}
         </div>
 
         <div style={{ display: 'flex', gap: 8 }}>
-          <Link href={course.href} className="btn btn-primary" style={{ flex: 1, justifyContent: 'center' }}>
+          <EnrollButton course={course} className="btn btn-primary" style={{ flex: 1, justifyContent: 'center' }}>
             View Program
-          </Link>
+          </EnrollButton>
           {course.groupOffer && (
             <button
               className="btn btn-secondary-light"

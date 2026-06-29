@@ -52,6 +52,7 @@ const NAV_ITEMS = [
     items: [
       { icon: '🎓', href: '/mentors',        label: 'Our Mentors',         desc: 'IIM alumni from top firms'  },
       { icon: '⭐', href: '/testimonials',   label: 'Student Outcomes',    desc: '200+ placed students'       },
+      { icon: '📹', href: '/#video-testimonials', label: 'Video Testimonials', desc: 'Hear from our alumni'   },
       { icon: '🏛', href: '/college-collab', label: 'College Tie-ups',     desc: '12 partner colleges'        },
     ],
   },
@@ -115,6 +116,7 @@ export default function Navbar() {
   const closeTimer = useRef(null);
 
   const isLoginPage = pathname?.startsWith('/login');
+  const isDashboardPage = pathname?.startsWith('/dashboard');
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80);
@@ -123,17 +125,27 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session: s } }) => setSession(s));
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, s) => setSession(s));
-    return () => subscription.unsubscribe();
-  }, []);
+    const authData = localStorage.getItem('mba_mock_auth');
+    if (authData) {
+      const parsed = JSON.parse(authData);
+      setSession({
+        user: {
+          email: parsed.email,
+          user_metadata: { full_name: parsed.name || parsed.email.split('@')[0] }
+        }
+      });
+    } else {
+      setSession(null);
+    }
+  }, [pathname]); // Re-check when route changes
 
   // Close dropdown on route change
   useEffect(() => { setOpenDropdown(null); setMenuOpen(false); }, [pathname]);
 
   async function handleSignOut() {
     setUserMenuOpen(false);
-    await signOut();
+    localStorage.removeItem('mba_mock_auth');
+    setSession(null);
     router.push('/');
   }
 
@@ -146,7 +158,7 @@ export default function Navbar() {
     closeTimer.current = setTimeout(() => setOpenDropdown(null), 150);
   }
 
-  if (isLoginPage) return null;
+  if (isLoginPage || isDashboardPage) return null;
 
   const displayName = session?.user?.user_metadata?.full_name
     || session?.user?.email?.split('@')[0]

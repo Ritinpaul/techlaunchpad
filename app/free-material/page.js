@@ -47,6 +47,30 @@ const RESOURCES = [
   },
 ];
 
+const FREE_SESSIONS = [
+  {
+    title: 'B-School Comparison & CV Skeleton',
+    desc: 'Learn how to pick the right B-School for your profile and build a CV skeleton that gets shortlisted — taught by an IIM alumnus.',
+    youtubeId: 'zZXBRobYRCE',
+    tag: 'CAT/OMET Prep',
+    accent: 'var(--purple)',
+  },
+  {
+    title: 'MBA Game Plan',
+    desc: 'Full strategy session on how to approach MBA placements — from domain selection to interview day. A must-watch before SIP season.',
+    youtubeId: 'eIgTrOVCyRw',
+    tag: 'Placements',
+    accent: 'var(--blue)',
+  },
+  {
+    title: 'HR Contacts Demo',
+    desc: 'See how to build and use a real HR contact database from top companies — a live demo of a strategy that actually gets responses.',
+    youtubeId: 'OhVg0Wf9JzU',
+    tag: 'Placements',
+    accent: 'var(--yellow)',
+  },
+];
+
 export default function FreeMaterialPage() {
   return (
     <>
@@ -109,7 +133,40 @@ export default function FreeMaterialPage() {
         </section>
       ))}
 
-      {/* ── CAT HUB BRIDGE ── */}
+      {/* ── FREE VIDEO SESSIONS ── */}
+      <section style={{ background: 'var(--navy)', padding: 'var(--section-gap) 0' }} aria-labelledby="free-videos-h2">
+        <div className="container">
+          <div style={{ textAlign: 'center', marginBottom: 48 }}>
+            <p className="eyebrow" style={{ color: 'rgba(255,255,255,0.7)', background: 'rgba(255,255,255,0.08)', marginBottom: 12 }}>Free on YouTube</p>
+            <h2 id="free-videos-h2" style={{ color: 'var(--white)', marginBottom: 16 }}>Free Sessions by MBA Partner</h2>
+            <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: 17, maxWidth: 560, margin: '0 auto' }}>
+              Watch our free YouTube sessions — no registration, no paywall. Real advice from alumni who sat where you're sitting.
+            </p>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 24 }}>
+            {FREE_SESSIONS.map((v) => (
+              <article key={v.youtubeId} style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 'var(--radius-card)', overflow: 'hidden' }}>
+                <div style={{ position: 'relative', paddingBottom: '56.25%', background: '#000' }}>
+                  <iframe
+                    src={`https://www.youtube.com/embed/${v.youtubeId}`}
+                    title={v.title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0 }}
+                  />
+                </div>
+                <div style={{ padding: '20px 24px 24px' }}>
+                  <span style={{ fontSize: 11, fontWeight: 700, background: v.accent, color: v.accent === 'var(--yellow)' ? 'var(--navy)' : 'var(--white)', padding: '3px 10px', borderRadius: 'var(--radius-tag)', display: 'inline-block', marginBottom: 10 }}>{v.tag}</span>
+                  <h3 style={{ color: 'var(--white)', fontSize: 16, fontWeight: 700, marginBottom: 8, lineHeight: 1.4 }}>{v.title}</h3>
+                  <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 13, lineHeight: 1.6 }}>{v.desc}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+
       <section style={{ background: 'var(--black)', padding: '80px 0' }} aria-labelledby="cat-bridge">
         <div className="container">
           <div className="free-cat-bridge" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center' }}>

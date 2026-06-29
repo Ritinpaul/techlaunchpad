@@ -82,33 +82,29 @@ export default function DashboardPage() {
 
   useEffect(() => {
     (async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) { router.replace('/login?redirect=/dashboard'); return; }
+      const authData = localStorage.getItem('mba_mock_auth');
+      if (!authData) { router.replace('/login?redirect=/dashboard'); return; }
 
-      setUser(session.user);
+      const parsed = JSON.parse(authData);
+      setUser({ email: parsed.email, user_metadata: { full_name: parsed.name || parsed.email.split('@')[0] } });
 
-      // Fetch or create profile
-      let { data: p } = await supabase.from('profiles').select('*').eq('id', session.user.id).single();
-      if (!p) {
-        const { data: created } = await supabase.from('profiles').insert({
-          id: session.user.id,
-          full_name: session.user.user_metadata?.full_name || session.user.email?.split('@')[0],
-          email: session.user.email,
-          college: session.user.user_metadata?.college || '',
-          cv_sessions_done: 0,
-          pi_sessions_done: 0,
-          gd_sessions_done: 0,
-          enrolled_course: 'bootcamp',
-        }).select().single();
-        p = created;
-      }
-      setProfile(p);
+      // Mock profile
+      setProfile({
+        id: 'mock-123',
+        full_name: parsed.name || parsed.email.split('@')[0],
+        email: parsed.email,
+        college: 'IIM Mock',
+        cv_sessions_done: 0,
+        pi_sessions_done: 0,
+        gd_sessions_done: 0,
+        enrolled_course: 'bootcamp',
+      });
       setLoading(false);
     })();
   }, []);
 
   async function handleSignOut() {
-    await signOut();
+    localStorage.removeItem('mba_mock_auth');
     router.replace('/');
   }
 
@@ -150,11 +146,17 @@ export default function DashboardPage() {
   const TABS = ['overview', 'tracker', 'sessions', 'mocks', 'materials'];
 
   return (
-    <div style={{ minHeight: '100vh', background: 'var(--bg-main)', paddingTop: 72 }}>
+    <div style={{ minHeight: '100vh', background: 'var(--bg-main)', paddingTop: 0 }}>
 
       {/* Dashboard nav */}
-      <div style={{ background: 'var(--white)', borderBottom: '2px solid var(--black)', position: 'sticky', top: 72, zIndex: 50 }}>
-        <div className="container" style={{ display: 'flex', alignItems: 'center', gap: 0, overflowX: 'auto' }}>
+      <div style={{ background: 'var(--white)', borderBottom: '2px solid var(--black)', position: 'sticky', top: 0, zIndex: 50 }}>
+        <div className="container" style={{ display: 'flex', alignItems: 'center', gap: 8, overflowX: 'auto' }}>
+          
+          {/* Logo for Dashboard */}
+          <Link href="/" style={{ fontSize: 20, fontWeight: 900, color: 'var(--navy)', textDecoration: 'none', marginRight: 24, flexShrink: 0 }}>
+            MBA Partner<span style={{ color: 'var(--purple)' }}>.</span>
+          </Link>
+
           {TABS.map(tab => (
             <button
               key={tab}

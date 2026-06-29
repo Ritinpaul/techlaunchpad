@@ -82,8 +82,17 @@ export default function TestimonialsPage() {
                       {t.name[0]}
                     </div>
                     <div>
-                      <div style={{ fontWeight: 700, color: 'var(--white)', fontSize: 14 }}>{t.name}</div>
-                      <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.65)' }}>{t.college} · Placed at {t.company}</div>
+                      <div style={{ fontWeight: 700, color: 'var(--white)', fontSize: 14, display: 'flex', alignItems: 'center', gap: 6 }}>
+                        {t.name}
+                        {t.linkedin && (
+                          <a href={t.linkedin} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', color: '#0a66c2', background: 'white', borderRadius: 2 }} title={`View ${t.name} on LinkedIn`}>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                            </svg>
+                          </a>
+                        )}
+                      </div>
+                      <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.65)' }}>{t.college} · Placed at {t.companyPlaced}</div>
                     </div>
                   </div>
                 </blockquote>
@@ -148,7 +157,16 @@ export default function TestimonialsPage() {
                     </p>
                     <div style={{ borderTop: '1px solid var(--hairline)', paddingTop: 16, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       <div>
-                        <div style={{ fontWeight: 700, color: 'var(--navy)', fontSize: 14 }}>{t.name}</div>
+                        <div style={{ fontWeight: 700, color: 'var(--navy)', fontSize: 14, display: 'flex', alignItems: 'center', gap: 6 }}>
+                          {t.name}
+                          {t.linkedin && (
+                            <a href={t.linkedin} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', color: '#0a66c2', background: 'white', borderRadius: 2 }} title={`View ${t.name} on LinkedIn`}>
+                              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                              </svg>
+                            </a>
+                          )}
+                        </div>
                         <div style={{ fontSize: 12, color: 'var(--slate)', marginTop: 2 }}>{t.college}</div>
                       </div>
                       <div style={{ textAlign: 'right' }}>
@@ -163,6 +181,59 @@ export default function TestimonialsPage() {
           </div>
         </div>
       </section>
+
+      {/* ── VIDEO TESTIMONIALS ── */}
+      <section style={{ background: 'var(--navy)', padding: 'var(--section-gap) 0' }} aria-labelledby="video-testimonials-heading">
+        <div className="container">
+          <div className="section-header" style={{ marginBottom: 48 }}>
+            <p className="eyebrow" style={{ color: 'rgba(255,255,255,0.7)', background: 'rgba(255,255,255,0.1)' }}>In Their Own Words</p>
+            <h2 id="video-testimonials-heading" style={{ color: 'var(--white)' }}>Video Testimonials</h2>
+            <p style={{ color: 'rgba(255,255,255,0.7)' }}>Unscripted. Real students. Real results.</p>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 24 }}>
+            {[
+              { name: 'Mridul Agarwal', college: 'IIM Calcutta', domain: 'Consulting', domainColor: 'var(--yellow)', file: 'Mridul IIM Calcutta.mp4' },
+              { name: 'Ananya Sharma', college: 'Welingkar Mumbai', domain: 'Marketing', domainColor: 'var(--blue)', file: 'Ananya Welingkar.mp4' },
+              { name: 'Jigar Mehta', college: 'IIM Amritsar', domain: 'Finance', domainColor: 'var(--purple)', file: 'Jigar IIM Amritsar.mp4' },
+              { name: 'Satwik Reddy', college: 'IMT Ghaziabad', domain: 'Operations', domainColor: 'var(--yellow)', file: 'Satwik IMT Ghaziabad.mp4' },
+              { name: 'Siddhant Gupta', college: 'Delhi School of Economics', domain: 'Product Management', domainColor: 'var(--blue)', file: 'Siddhant DSE.mp4' },
+              { name: 'Tushar Bhatt', college: 'GLIM Chennai', domain: 'General Management', domainColor: 'var(--yellow)', file: 'Tushar GLIM C.mp4' },
+            ].map(({ name, college, domain, domainColor, file }) => (
+              <div
+                key={name}
+                style={{
+                  background: 'rgba(255,255,255,0.04)',
+                  border: '1.5px solid rgba(255,255,255,0.12)',
+                  borderRadius: 'var(--radius-card)',
+                  overflow: 'hidden',
+                  transition: 'border-color 0.2s, transform 0.2s',
+                }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.35)'; e.currentTarget.style.transform = 'translateY(-4px)'; }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)'; e.currentTarget.style.transform = 'translateY(0)'; }}
+              >
+                <div style={{ height: 4, background: domainColor }} />
+                <video
+                  controls
+                  preload="metadata"
+                  style={{ width: '100%', display: 'block', maxHeight: 210, background: '#000' }}
+                  aria-label={`Video testimonial by ${name} from ${college}`}
+                >
+                  <source src={`/videos/${encodeURIComponent(file)}`} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+                <div style={{ padding: '16px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
+                  <div>
+                    <div style={{ fontWeight: 700, color: 'var(--white)', fontSize: 14, marginBottom: 2 }}>{name}</div>
+                    <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.55)' }}>{college}</div>
+                  </div>
+                  <span style={{ fontSize: 11, fontWeight: 700, background: domainColor, color: 'var(--navy)', padding: '4px 12px', borderRadius: 20, flexShrink: 0 }}>{domain}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
 
       {/* ── CTA ── */}
       <section style={{ background: 'var(--navy)', padding: '80px 0', textAlign: 'center' }}>

@@ -163,6 +163,54 @@ export default function MentorsPage() {
         </div>
       </section>
 
+      {/* ── APPLY AS MENTOR ── */}
+      <section id="apply-mentor" style={{ background: 'var(--bg-main)', padding: 'var(--section-gap) 0' }} aria-labelledby="apply-mentor-heading">
+        <div className="container">
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center' }}>
+            <div>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, background: 'var(--yellow)', border: '2px solid var(--black)', borderRadius: 30, padding: '6px 16px', marginBottom: 20 }}>
+                <span style={{ fontSize: 16 }}>🎓</span>
+                <span style={{ fontSize: 12, fontWeight: 800, color: 'var(--navy)', letterSpacing: '0.05em' }}>ONCE A STUDENT, NOW A MENTOR</span>
+              </div>
+              <h2 id="apply-mentor-heading" style={{ marginBottom: 16 }}>Want to Become a Mentor?</h2>
+              <p style={{ color: 'var(--slate)', fontSize: 17, lineHeight: 1.7, marginBottom: 16 }}>
+                90% of our mentors were once MBA Partner students. If you&apos;ve placed in your target domain and want to give back — we&apos;d love to have you.
+              </p>
+              <ul className="feature-list" style={{ marginBottom: 32 }}>
+                <li>Share a 60-second intro video (what you do + why you want to mentor)</li>
+                <li>Tell us your B-School, company, and domain</li>
+                <li>We match you with relevant students — you pick the schedule</li>
+                <li>Earn referral bonuses and recognition in our mentor network</li>
+              </ul>
+              <a
+                href="https://wa.me/917042732092?text=Hi! I'd like to apply as a mentor at MBA Partner. Here's my intro: [Name, B-School, Company, Domain, and video link]"
+                target="_blank" rel="noopener noreferrer"
+                className="btn btn-primary"
+              >
+                Apply as a Mentor on WhatsApp →
+              </a>
+            </div>
+            <div style={{ background: 'var(--white)', border: '2px solid var(--black)', borderRadius: 'var(--radius-card)', padding: '36px', boxShadow: '4px 4px 0 var(--black)' }}>
+              <p className="eyebrow" style={{ marginBottom: 20 }}>What You Need to Apply</p>
+              {[
+                { icon: '🎥', title: '60-Second Intro Video', desc: 'YouTube, Instagram Reel, or Drive link — why you want to mentor and your story' },
+                { icon: '🏛️', title: 'B-School + Company', desc: 'Your MBA college and current employer. IIM, XLRI, SPJIMR, FMS, or equivalent' },
+                { icon: '🎯', title: 'Domain Expertise', desc: 'Consulting, Finance, Marketing, Operations, Product, or General Management' },
+                { icon: '⏰', title: 'Availability', desc: 'Minimum 2 sessions/month — sessions are 45 mins each, fully remote' },
+              ].map(({ icon, title, desc }) => (
+                <div key={title} style={{ display: 'flex', gap: 16, marginBottom: 24, alignItems: 'flex-start' }}>
+                  <div style={{ width: 44, height: 44, background: 'var(--yellow)', border: '2px solid var(--black)', borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20, flexShrink: 0 }}>{icon}</div>
+                  <div>
+                    <div style={{ fontWeight: 700, color: 'var(--navy)', marginBottom: 4 }}>{title}</div>
+                    <div style={{ fontSize: 13, color: 'var(--slate)', lineHeight: 1.5 }}>{desc}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── CTA ── */}
       <section style={{ background: 'var(--purple)', padding: '80px 0', textAlign: 'center' }}>
         <div className="container">

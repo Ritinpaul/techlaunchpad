@@ -5,6 +5,16 @@ import ComboSavingsBanner from '@/components/courses/ComboSavingsBanner';
 import GroupEnrollModal from '@/components/courses/GroupEnrollModal';
 import { formatRupees } from '@/lib/utils';
 
+// Brochure Drive links (view only)
+const BROCHURES = {
+  'case-comp':    { url: 'https://drive.google.com/file/d/11lxjrZXK0_e4lbgVp0hf7gPVL1ckb_ef/view', label: 'Case Comp Brochure (PDF)' },
+  'live-project': { url: 'https://drive.google.com/file/d/1hXQ56KLgo9Pxyv2MvWXndg_yJtG4wXSV/view', label: 'Live Project Brochure' },
+  'bootcamp':     { url: null, label: null },
+  'all-in-one':   { url: null, label: null },
+  'excel-cert':   { url: null, label: null },
+  'powerbi-cert': { url: null, label: null },
+};
+
 // Generate static routes for all course slugs
 export async function generateStaticParams() {
   return courses.map(c => ({ slug: c.slug }));
@@ -36,6 +46,7 @@ export default async function CourseDetailPage({ params }) {
 
   const colors = DOMAIN_TAGS[course.slug] || { bg: 'var(--purple)', text: 'var(--white)' };
   const combo = courses.find(c => c.id === course.comboId);
+  const brochure = BROCHURES[course.slug];
 
   const whatsappMsg = encodeURIComponent(`Hi! I'd like to enroll in ${course.name}. Price: ₹${course.price.toLocaleString('en-IN')}`);
 
@@ -76,6 +87,18 @@ export default async function CourseDetailPage({ params }) {
                 >
                   Enroll Now — ₹{course.price.toLocaleString('en-IN')}
                 </a>
+                {brochure?.url ? (
+                  <a href={brochure.url} target="_blank" rel="noopener noreferrer"
+                    className="btn" style={{ background: 'rgba(255,255,255,0.15)', color: colors.text, border: `2px solid rgba(255,255,255,0.4)` }}>
+                    📄 View Brochure
+                  </a>
+                ) : (
+                  <a href={`https://wa.me/917042732092?text=${encodeURIComponent(`Hi! Can you share the brochure for ${course.name}?`)}`}
+                    target="_blank" rel="noopener noreferrer"
+                    className="btn" style={{ background: 'rgba(255,255,255,0.15)', color: colors.text, border: `2px solid rgba(255,255,255,0.4)` }}>
+                    📄 Get Brochure
+                  </a>
+                )}
                 {course.groupOffer && (
                   <Link href="#group-pricing" className="btn" style={{ background: 'rgba(255,255,255,0.15)', color: colors.text, border: `2px solid rgba(255,255,255,0.4)` }}>
                     👥 Group Pricing
@@ -88,11 +111,23 @@ export default async function CourseDetailPage({ params }) {
             </div>
 
             {/* Price box */}
-            <div style={{ background: 'rgba(255,255,255,0.15)', border: '2px solid rgba(255,255,255,0.3)', borderRadius: 'var(--radius-card)', padding: '32px', textAlign: 'center', minWidth: 200, flexShrink: 0 }}>
+            <div style={{ background: 'rgba(255,255,255,0.15)', border: '2px solid rgba(255,255,255,0.3)', borderRadius: 'var(--radius-card)', padding: '32px', textAlign: 'center', minWidth: 220, flexShrink: 0 }}>
               <div style={{ fontSize: 12, fontWeight: 700, color: colors.text, opacity: 0.7, letterSpacing: '0.08em', marginBottom: 8 }}>COHORT PRICE</div>
               <div style={{ fontSize: 40, fontWeight: 700, color: 'var(--yellow)', marginBottom: 4 }}>₹{course.price.toLocaleString('en-IN')}</div>
-              {course.originalPrice && <div style={{ fontSize: 14, color: colors.text, opacity: 0.5, textDecoration: 'line-through', marginBottom: 16 }}>₹{course.originalPrice.toLocaleString('en-IN')}</div>}
+              {course.originalPrice && (
+                <>
+                  <div style={{ fontSize: 14, color: colors.text, opacity: 0.5, textDecoration: 'line-through', marginBottom: 6 }}>₹{course.originalPrice.toLocaleString('en-IN')}</div>
+                  <div style={{ display: 'inline-block', background: '#ecfdf5', color: '#059669', fontSize: 13, fontWeight: 700, padding: '4px 10px', borderRadius: 6, marginBottom: 16 }}>
+                    Save ₹{(course.originalPrice - course.price).toLocaleString('en-IN')}
+                  </div>
+                </>
+              )}
               <div style={{ fontSize: 13, color: colors.text, opacity: 0.7 }}>One-time · All sessions included</div>
+              
+              <div style={{ marginTop: 16, paddingTop: 16, borderTop: '1px solid rgba(255,255,255,0.2)' }}>
+                <div style={{ fontSize: 13, color: colors.text, opacity: 0.9, marginBottom: 8, fontWeight: 600 }}>✅ 100% Refund Policy</div>
+                <div style={{ fontSize: 13, color: colors.text, opacity: 0.9, fontWeight: 600 }}>💳 No-Cost EMI Available</div>
+              </div>
             </div>
           </div>
         </div>
@@ -213,6 +248,32 @@ export default async function CourseDetailPage({ params }) {
           </div>
         </section>
       )}
+
+      {/* ── BROCHURE DOWNLOAD ── */}
+      {brochure?.url ? (
+        <section style={{ background: 'var(--navy)', padding: '56px 0' }}>
+          <div className="container">
+            <div style={{ display: 'flex', alignItems: 'center', gap: 32, flexWrap: 'wrap', justifyContent: 'space-between' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
+                <div style={{ width: 60, height: 60, background: 'var(--yellow)', border: '2px solid rgba(255,255,255,0.3)', borderRadius: 16, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 28, flexShrink: 0 }}>📄</div>
+                <div>
+                  <div style={{ fontSize: 12, fontWeight: 700, color: 'rgba(255,255,255,0.6)', letterSpacing: '0.08em', marginBottom: 4 }}>FREE DOWNLOAD</div>
+                  <div style={{ fontSize: 20, fontWeight: 700, color: 'var(--white)', marginBottom: 4 }}>{brochure.label}</div>
+                  <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.6)' }}>Full course details, fees, curriculum, and outcomes — all in one document</div>
+                </div>
+              </div>
+              <a
+                href={brochure.url}
+                target="_blank" rel="noopener noreferrer"
+                className="btn btn-primary"
+                style={{ flexShrink: 0 }}
+              >
+                ⬇ Open Brochure
+              </a>
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       {/* ── BOTTOM ENROLL ── */}
       <section style={{ background: 'var(--bg-main)', padding: '80px 0', textAlign: 'center' }}>

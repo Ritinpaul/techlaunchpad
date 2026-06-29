@@ -193,6 +193,92 @@ export default function CatOmetPage() {
         </div>
       </section>
 
+      {/* ── OMET HUB ── */}
+      <section style={{ background: 'var(--white)', padding: 'var(--section-gap) 0' }} aria-labelledby="omet-heading">
+        <div className="container">
+          <div className="section-header">
+            <p className="eyebrow">OMETs — XAT, SNAP, NMAT & More</p>
+            <h2 id="omet-heading">OMET Mock Test Series</h2>
+            <p>Dedicated mock series for every major OMET exam. Releasing through August–December 2026.</p>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 20, marginBottom: 48 }}>
+            {[
+              { exam: 'SNAP', icon: '🎯', color: 'var(--purple)', count: 4, date: 'Aug 2026', desc: 'Symbiosis National Aptitude Test — 60 questions, 60 min' },
+              { exam: 'NMAT', icon: '📊', color: 'var(--blue)', count: 4, date: 'Aug 2026', desc: 'NMIMS Management Aptitude Test — 108 questions, 120 min' },
+              { exam: 'MAHCET', icon: '📐', color: 'var(--yellow)', count: 3, date: 'Sep 2026', desc: 'Maharashtra CET — 200 questions, 150 min' },
+              { exam: 'XGMT', icon: '🔢', color: 'var(--orange)', count: 3, date: 'Sep 2026', desc: 'XAT / XIMB General Management Test' },
+              { exam: 'KAT', icon: '✍️', color: '#2d9cdb', count: 3, date: 'Oct 2026', desc: 'KIIT Admission Test — 120 questions, 120 min' },
+            ].map(({ exam, icon, color, count, date, desc }) => (
+              <div key={exam} style={{ background: 'var(--bg-main)', border: '2px solid var(--black)', borderRadius: 'var(--radius-card)', padding: '28px 24px', position: 'relative', overflow: 'hidden' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 12 }}>
+                  <div style={{ width: 48, height: 48, background: color, border: '2px solid var(--black)', borderRadius: 14, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 22 }}>{icon}</div>
+                  <span style={{ fontSize: 11, fontWeight: 700, background: 'var(--navy)', color: 'var(--white)', padding: '4px 10px', borderRadius: 20 }}>COMING SOON</span>
+                </div>
+                <div style={{ fontWeight: 800, fontSize: 20, color: 'var(--navy)', marginBottom: 4 }}>{exam}</div>
+                <div style={{ fontSize: 13, color: 'var(--slate)', marginBottom: 12, lineHeight: 1.5 }}>{desc}</div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--purple)' }}>{count} Mocks Planned</span>
+                  <span style={{ fontSize: 12, color: 'var(--slate)', display: 'flex', alignItems: 'center', gap: 4 }}>
+                    📅 {date}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div style={{ textAlign: 'center' }}>
+            <a
+              href="https://wa.me/917042732092?text=Hi! I want to be notified when OMET mocks go live on MBA Partner."
+              target="_blank" rel="noopener noreferrer"
+              className="btn btn-primary"
+            >
+              🔔 Notify Me When OMET Mocks Go Live
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ── GDPI MASTERCLASS COMING SOON ── */}
+      <section style={{ background: 'var(--bg-main)', padding: 'var(--section-gap) 0' }} aria-labelledby="gdpi-masterclass-heading">
+        <div className="container">
+          <div style={{ background: 'var(--black)', border: '2px solid var(--black)', borderRadius: 24, padding: '56px 48px', display: 'grid', gridTemplateColumns: '1fr auto', gap: 48, alignItems: 'center', flexWrap: 'wrap' }}>
+            <div>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'var(--yellow)', border: '2px solid rgba(255,255,255,0.2)', borderRadius: 30, padding: '6px 14px', marginBottom: 20 }}>
+                <span style={{ fontSize: 14 }}>🗓️</span>
+                <span style={{ fontSize: 12, fontWeight: 800, color: 'var(--navy)', letterSpacing: '0.06em' }}>LAUNCHING DECEMBER 2026</span>
+              </div>
+              <h2 id="gdpi-masterclass-heading" style={{ color: 'var(--white)', marginBottom: 12 }}>GDPI Masterclass</h2>
+              <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: 17, lineHeight: 1.65, marginBottom: 28, maxWidth: 560 }}>
+                Crack the Group Discussion & Personal Interview round with structured practice, past transcripts, and mentors who just converted from your target IIMs.
+              </p>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 32 }}>
+                {['10 PI Mock Rounds', '10 GD Practice Sessions', '100+ Past Transcripts', 'Domain-specific Q&A', 'Mentors — Just Converted', 'IIM A/B/C Insights'].map(f => (
+                  <span key={f} style={{ fontSize: 12, fontWeight: 700, background: 'rgba(255,255,255,0.1)', color: 'var(--white)', border: '1.5px solid rgba(255,255,255,0.25)', padding: '6px 14px', borderRadius: 20 }}>{f}</span>
+                ))}
+              </div>
+              <a
+                href="https://wa.me/917042732092?text=Hi! I'd like to be on the waitlist for the GDPI Masterclass launching in December."
+                target="_blank" rel="noopener noreferrer"
+                className="btn btn-primary"
+              >
+                🔔 Join the Waitlist
+              </a>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12, flexShrink: 0 }}>
+              {[
+                { num: '10', label: 'PI Mock Rounds' },
+                { num: '10', label: 'GD Sessions' },
+                { num: '100+', label: 'Past Transcripts' },
+              ].map(s => (
+                <div key={s.label} style={{ background: 'rgba(255,255,255,0.08)', border: '2px solid rgba(255,255,255,0.15)', borderRadius: 16, padding: '16px 28px', textAlign: 'center' }}>
+                  <div style={{ fontSize: 32, fontWeight: 700, color: 'var(--yellow)' }}>{s.num}</div>
+                  <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.7)', marginTop: 2 }}>{s.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── IIM CUTOFFS TABLE ── */}
       <section style={{ background: 'var(--bg-main)', padding: 'var(--section-gap) 0' }} aria-labelledby="cutoffs-heading">
         <div className="container">

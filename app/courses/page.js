@@ -2,6 +2,9 @@ import Link from 'next/link';
 import courses from '@/data/courses.json';
 import CourseCard from '@/components/courses/CourseCard';
 import ComboSavingsBanner from '@/components/courses/ComboSavingsBanner';
+import GroupEnrollmentSection from '@/components/ui/GroupEnrollmentSection';
+import PageScripts from '@/components/ui/PageScripts';
+import EnrollButton from '@/components/ui/EnrollButton';
 
 export const metadata = {
   title: 'All Programs',
@@ -51,7 +54,7 @@ export default function CoursesPage() {
                   ))}
                 </div>
                 <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-                  <Link href={flagship.href} className="btn btn-primary">Enroll in All-In-One</Link>
+                  <EnrollButton course={flagship} className="btn btn-primary">Enroll in All-In-One</EnrollButton>
                   <Link href="/courses/compare" className="btn" style={{ background: 'rgba(255,255,255,0.15)', color: 'var(--white)', border: '2px solid rgba(255,255,255,0.4)' }}>Compare with Others</Link>
                 </div>
               </div>
@@ -83,33 +86,7 @@ export default function CoursesPage() {
       </section>
 
       {/* ── HOW PRICING WORKS ── */}
-      <section style={{ background: 'var(--white)', padding: 'var(--section-gap) 0' }} aria-labelledby="pricing-heading">
-        <div className="container">
-          <div className="section-header">
-            <p className="eyebrow">Group Pricing</p>
-            <h2 id="pricing-heading">Enroll With Batchmates, Save Together</h2>
-            <p>Two to five students enrolling as a group get 30–45% off. The group discount stacks with the combo pricing.</p>
-          </div>
-
-          <div className="courses-group-strip" style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 0, border: '2px solid var(--black)', borderRadius: 'var(--radius-card)', overflow: 'hidden' }}>
-            {[
-              { size: '2 Students', disc: '30% Off' },
-              { size: '3 Students', disc: '35% Off' },
-              { size: '4 Students', disc: '40% Off' },
-              { size: '5 Students', disc: '45% Off' },
-            ].map((row, i) => (
-              <div key={row.size} style={{ padding: '28px 20px', textAlign: 'center', borderRight: i < 3 ? '1px solid var(--black)' : 'none', background: i === 3 ? 'var(--yellow)' : 'var(--white)' }}>
-                <div style={{ fontSize: 28, fontWeight: 700, color: 'var(--purple)', marginBottom: 4 }}>{row.disc}</div>
-                <div style={{ fontSize: 14, color: 'var(--navy)' }}>{row.size}</div>
-              </div>
-            ))}
-          </div>
-
-          <p style={{ textAlign: 'center', marginTop: 24, fontSize: 14, color: 'var(--slate)' }}>
-            👥 Select any program and click the group icon to calculate your group price instantly.
-          </p>
-        </div>
-      </section>
+      <GroupEnrollmentSection />
 
       {/* ── FAQ ── */}
       <section style={{ background: 'var(--bg-main)', padding: 'var(--section-gap) 0' }} aria-labelledby="cfaq-heading">
@@ -149,22 +126,8 @@ export default function CoursesPage() {
       </section>
 
       <ComboSavingsBanner />
-      <CourseFAQScript />
+      <PageScripts enableReveal={false} />
     </>
   );
 }
 
-function CourseFAQScript() {
-  return (
-    <script dangerouslySetInnerHTML={{ __html: `
-      document.querySelectorAll('.faq-question').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const item = btn.closest('.faq-item');
-          const isOpen = item.classList.contains('open');
-          item.classList.toggle('open', !isOpen);
-          btn.setAttribute('aria-expanded', !isOpen);
-        });
-      });
-    ` }} />
-  );
-}

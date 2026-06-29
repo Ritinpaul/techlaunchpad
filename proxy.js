@@ -11,6 +11,9 @@ export async function proxy(request) {
 
   if (!isProtected) return NextResponse.next();
 
+  // MOCK AUTH: Always allow access to dashboard for the hackathon
+  return NextResponse.next();
+
   // Read Supabase session from cookies
   const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL,

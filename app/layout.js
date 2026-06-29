@@ -16,6 +16,8 @@ export const metadata = {
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import ChatBot from '@/components/ui/ChatBot';
+import FloatingCTA from '@/components/ui/FloatingCTA';
+
 
 export default function RootLayout({ children }) {
   return (
@@ -24,8 +26,10 @@ export default function RootLayout({ children }) {
         <Navbar />
         <main>{children}</main>
         <Footer />
+        <FloatingCTA />
         <ChatBot />
       </body>
     </html>
   );
 }
+
