@@ -37,20 +37,20 @@ export default function USPPopup() {
           style={{ position: 'absolute', top: 16, right: 16 }}
         >✕</button>
 
-        <p className="eyebrow" style={{ marginBottom: 12 }}>Why MBA Partner</p>
-        <h2 id="usp-title" style={{ fontSize: 'clamp(22px,3vw,28px)', marginBottom: 8, color: 'var(--navy)' }}>
+        <p className="eyebrow" style={{ marginBottom: 8, fontSize: 11 }}>Why MBA Partner</p>
+        <h2 id="usp-title" style={{ fontSize: 'clamp(18px,2.5vw,22px)', marginBottom: 8, color: 'var(--navy)' }}>
           What Makes the Difference at Placement Season
         </h2>
-        <p style={{ color: 'var(--slate)', marginBottom: 32, fontSize: 15 }}>
+        <p style={{ color: 'var(--slate)', marginBottom: 24, fontSize: 14 }}>
           Our students now work at McKinsey, Bain, Goldman Sachs, Amazon, and HUL.
         </p>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 32 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 24 }}>
           {USPs.map((u) => (
-            <div key={u.title} style={{ background: 'var(--white)', border: '2px solid var(--black)', borderRadius: 16, padding: '20px 16px' }}>
-              <div style={{ fontSize: 28, marginBottom: 8 }}>{u.icon}</div>
-              <div style={{ fontWeight: 700, color: 'var(--navy)', fontSize: 15, marginBottom: 4 }}>{u.title}</div>
-              <div style={{ fontSize: 13, color: 'var(--slate)', lineHeight: 1.5 }}>{u.desc}</div>
+            <div key={u.title} style={{ background: 'var(--white)', border: '2px solid var(--black)', borderRadius: 12, padding: '16px 12px' }}>
+              <div style={{ fontSize: 24, marginBottom: 6 }}>{u.icon}</div>
+              <div style={{ fontWeight: 700, color: 'var(--navy)', fontSize: 14, marginBottom: 4 }}>{u.title}</div>
+              <div style={{ fontSize: 12, color: 'var(--slate)', lineHeight: 1.4 }}>{u.desc}</div>
             </div>
           ))}
         </div>
