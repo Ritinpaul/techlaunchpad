@@ -66,7 +66,6 @@ function MegaDropdown({ item, onClose }) {
         {item.sections.map((sec) => (
           sec.items.map((di, i) => (
             <Link key={i} href={di.href} className="mega-dropdown-item" onClick={onClose}>
-              <div className="mega-dropdown-item-icon" style={{ background: 'var(--bg-main)' }}>{di.icon}</div>
               <div className="mega-dropdown-item-text">
                 <strong>{di.label}</strong>
                 <span>{di.desc}</span>
@@ -94,7 +93,6 @@ function MegaDropdown({ item, onClose }) {
     <div className="mega-dropdown" style={{ minWidth: 260 }}>
       {item.items.map((di, i) => (
         <Link key={i} href={di.href} className="mega-dropdown-item" onClick={onClose}>
-          <div className="mega-dropdown-item-icon" style={{ background: 'var(--bg-main)' }}>{di.icon}</div>
           <div className="mega-dropdown-item-text">
             <strong>{di.label}</strong>
             <span>{di.desc}</span>
