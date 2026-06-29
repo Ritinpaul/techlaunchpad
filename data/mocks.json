@@ -1,0 +1,12 @@
+[
+  { "id": "mk1", "title": "Case Reasoning & Strategy",       "section": "Consulting", "questionCount": 20, "duration": 20, "isLive": true,  "releaseDate": null,       "tags": ["Consulting", "Strategy"] },
+  { "id": "mk2", "title": "Finance & Markets",              "section": "Finance",    "questionCount": 20, "duration": 20, "isLive": true,  "releaseDate": null,       "tags": ["Finance", "BFSI"] },
+  { "id": "mk3", "title": "Marketing & Brand Management",   "section": "Marketing",  "questionCount": 20, "duration": 20, "isLive": true,  "releaseDate": null,       "tags": ["Marketing", "FMCG"] },
+  { "id": "mk4", "title": "Operations & Supply Chain",      "section": "Operations", "questionCount": 20, "duration": 20, "isLive": true,  "releaseDate": null,       "tags": ["Operations"] },
+  { "id": "mk5", "title": "General Management",             "section": "GM",         "questionCount": 20, "duration": 20, "isLive": true,  "releaseDate": null,       "tags": ["General Management"] },
+  { "id": "mk6", "title": "Mock Test 6 — Mixed",            "section": "Mixed",      "questionCount": 20, "duration": 20, "isLive": false, "releaseDate": "2026-07-15", "tags": [] },
+  { "id": "mk7", "title": "Mock Test 7 — Mixed",            "section": "Mixed",      "questionCount": 20, "duration": 20, "isLive": false, "releaseDate": "2026-07-22", "tags": [] },
+  { "id": "mk8", "title": "Mock Test 8 — Mixed",            "section": "Mixed",      "questionCount": 20, "duration": 20, "isLive": false, "releaseDate": "2026-07-29", "tags": [] },
+  { "id": "mk9", "title": "Mock Test 9 — Mixed",            "section": "Mixed",      "questionCount": 20, "duration": 20, "isLive": false, "releaseDate": "2026-08-05", "tags": [] },
+  { "id": "mk10","title": "Mock Test 10 — Mixed",           "section": "Mixed",      "questionCount": 20, "duration": 20, "isLive": false, "releaseDate": "2026-08-12", "tags": [] }
+]

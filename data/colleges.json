@@ -1,0 +1,14 @@
+[
+  { "id": "c1",  "name": "IIM Shillong",   "tier": "IIM",    "city": "Shillong",   "isPartner": true  },
+  { "id": "c2",  "name": "IIM Rohtak",     "tier": "IIM",    "city": "Rohtak",     "isPartner": true  },
+  { "id": "c3",  "name": "IIM Raipur",     "tier": "IIM",    "city": "Raipur",     "isPartner": true  },
+  { "id": "c4",  "name": "IMT Ghaziabad",  "tier": "Tier-2", "city": "Ghaziabad",  "isPartner": true  },
+  { "id": "c5",  "name": "NMIMS Mumbai",   "tier": "Tier-2", "city": "Mumbai",     "isPartner": true  },
+  { "id": "c6",  "name": "IIM Trichy",     "tier": "IIM",    "city": "Trichy",     "isPartner": true  },
+  { "id": "c7",  "name": "IIM Udaipur",    "tier": "IIM",    "city": "Udaipur",    "isPartner": true  },
+  { "id": "c8",  "name": "SPJIMR Mumbai",  "tier": "Tier-1", "city": "Mumbai",     "isPartner": true  },
+  { "id": "c9",  "name": "IIM Kashipur",   "tier": "IIM",    "city": "Kashipur",   "isPartner": true  },
+  { "id": "c10", "name": "XLRI Delhi",     "tier": "Tier-1", "city": "Delhi",      "isPartner": true  },
+  { "id": "c11", "name": "SIBM Pune",      "tier": "Tier-2", "city": "Pune",       "isPartner": false },
+  { "id": "c12", "name": "Great Lakes",    "tier": "Tier-2", "city": "Chennai",    "isPartner": false }
+]

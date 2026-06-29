@@ -1,0 +1,64 @@
+{
+  "cat": {
+    "percentileTable": [
+      { "score": 200, "percentile": 99.9 },
+      { "score": 185, "percentile": 99.5 },
+      { "score": 170, "percentile": 99.0 },
+      { "score": 160, "percentile": 98.0 },
+      { "score": 150, "percentile": 97.0 },
+      { "score": 140, "percentile": 95.0 },
+      { "score": 130, "percentile": 92.0 },
+      { "score": 120, "percentile": 88.0 },
+      { "score": 110, "percentile": 83.0 },
+      { "score": 100, "percentile": 75.0 },
+      { "score": 90,  "percentile": 65.0 },
+      { "score": 80,  "percentile": 52.0 },
+      { "score": 70,  "percentile": 40.0 },
+      { "score": 60,  "percentile": 28.0 }
+    ],
+    "colleges": [
+      { "name": "IIM Ahmedabad",   "cutoff99": 99.5, "cutoff98": null,  "avg_salary": 35.0 },
+      { "name": "IIM Bangalore",   "cutoff99": 99.0, "cutoff98": null,  "avg_salary": 33.0 },
+      { "name": "IIM Calcutta",    "cutoff99": 99.0, "cutoff98": null,  "avg_salary": 34.0 },
+      { "name": "IIM Lucknow",     "cutoff99": 97.0, "cutoff98": 97.0,  "avg_salary": 28.0 },
+      { "name": "IIM Kozhikode",   "cutoff99": 96.0, "cutoff98": 96.0,  "avg_salary": 26.0 },
+      { "name": "IIM Shillong",    "cutoff99": 93.0, "cutoff98": 91.0,  "avg_salary": 19.0 },
+      { "name": "IIM Rohtak",      "cutoff99": 91.0, "cutoff98": 90.0,  "avg_salary": 18.0 },
+      { "name": "IIM Raipur",      "cutoff99": 90.0, "cutoff98": 89.0,  "avg_salary": 17.5 },
+      { "name": "IIM Trichy",      "cutoff99": 90.0, "cutoff98": 89.0,  "avg_salary": 17.0 },
+      { "name": "IIM Udaipur",     "cutoff99": 90.0, "cutoff98": 89.0,  "avg_salary": 17.0 },
+      { "name": "IIM Kashipur",    "cutoff99": 90.0, "cutoff98": 89.0,  "avg_salary": 17.0 },
+      { "name": "XLRI Jamshedpur", "cutoff99": 95.0, "cutoff98": 93.0,  "avg_salary": 29.0 },
+      { "name": "SPJIMR Mumbai",   "cutoff99": 98.0, "cutoff98": 97.0,  "avg_salary": 31.0 },
+      { "name": "MDI Gurgaon",     "cutoff99": 94.0, "cutoff98": 92.0,  "avg_salary": 24.0 },
+      { "name": "NMIMS Mumbai",    "cutoff99": 93.0, "cutoff98": 91.0,  "avg_salary": 22.0 },
+      { "name": "IMT Ghaziabad",   "cutoff99": 90.0, "cutoff98": 88.0,  "avg_salary": 19.0 }
+    ]
+  },
+  "omet": {
+    "percentileTable": [
+      { "score": 100, "percentile": 99.0 },
+      { "score": 90,  "percentile": 97.0 },
+      { "score": 80,  "percentile": 93.0 },
+      { "score": 70,  "percentile": 85.0 },
+      { "score": 60,  "percentile": 72.0 },
+      { "score": 50,  "percentile": 55.0 },
+      { "score": 40,  "percentile": 38.0 },
+      { "score": 30,  "percentile": 22.0 }
+    ],
+    "colleges": [
+      { "name": "XLRI Jamshedpur (BM/HRM)",  "cutoff99": 96.0, "avg_salary": 29.0 },
+      { "name": "XLRI Delhi",                 "cutoff99": 90.0, "avg_salary": 24.0 },
+      { "name": "SPJIMR Mumbai",              "cutoff99": 95.0, "avg_salary": 31.0 },
+      { "name": "IMT Ghaziabad",              "cutoff99": 85.0, "avg_salary": 19.0 }
+    ]
+  },
+  "profileFactors": [
+    { "id": "acad10",  "label": "Xth Percentage",          "weight": 0.10, "scale": 100 },
+    { "id": "acad12",  "label": "XIIth Percentage",        "weight": 0.10, "scale": 100 },
+    { "id": "ugScore", "label": "UG Percentage / CGPA",    "weight": 0.15, "scale": 100 },
+    { "id": "work",    "label": "Work Experience (months)","weight": 0.20, "scale": 48 },
+    { "id": "extra",   "label": "Extra-curriculars (score)","weight": 0.15, "scale": 10 },
+    { "id": "catPct",  "label": "CAT Percentile",          "weight": 0.30, "scale": 100 }
+  ]
+}

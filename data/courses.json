@@ -1,0 +1,202 @@
+[
+  {
+    "id": "all-in-one",
+    "slug": "all-in-one",
+    "name": "All-In-One Combo",
+    "shortName": "All-In-One",
+    "category": "All-In-One Combo",
+    "tagline": "Bootcamp + Case Comp + Live Project",
+    "price": 14999,
+    "originalPrice": 18500,
+    "duration": "10-12 weeks",
+    "format": "Live + Async",
+    "domains": "All Domains",
+    "isFlagship": true,
+    "comboId": null,
+    "groupOffer": { "minSize": 2, "discountBase": 30 },
+    "tracker": { "cv": 5, "pi": 7, "gd": 7 },
+    "outcomes": "The complete placement-prep stack in a single enrollment — Live Project output for your CV, Case Competition practice, and domain-specific mock interviews.",
+    "features": [
+      "Live Project with real client output (CV-ready)",
+      "Case Competition preparation sessions",
+      "7 domain-specific PI mock interviews",
+      "7 group discussion practice sessions",
+      "5 ATS-optimised CV review rounds",
+      "Matched mentor from your target company",
+      "Certificate from Prodmark Consultants"
+    ],
+    "curriculum": [
+      { "week": "Week 1-2", "title": "Onboarding + Mentor Matching", "desc": "Domain selection, mentor introduction, live project briefing." },
+      { "week": "Week 3-6", "title": "Live Project Execution", "desc": "Real client deliverable — strategy, marketing, or finance output." },
+      { "week": "Week 5-8", "title": "Case Competition Training", "desc": "Structured case solving, frameworks, presentation skills." },
+      { "week": "Week 7-10", "title": "Bootcamp: PI + GD", "desc": "7 mock PIs and 7 mock GDs with mentor feedback." },
+      { "week": "Week 9-12", "title": "CV Reviews + Final Prep", "desc": "5 ATS CV reviews, company research, offer management." }
+    ],
+    "href": "/courses/all-in-one"
+  },
+  {
+    "id": "bootcamp",
+    "slug": "bootcamp",
+    "name": "Placements Bootcamp",
+    "shortName": "Bootcamp",
+    "category": "Bootcamp",
+    "tagline": "Domain-specific PI + GD interview prep",
+    "price": 7999,
+    "originalPrice": null,
+    "duration": "6-8 weeks",
+    "format": "Live Sessions",
+    "domains": "5 Domains",
+    "isFlagship": false,
+    "comboId": "all-in-one",
+    "comboSavings": 2000,
+    "groupOffer": { "minSize": 2, "discountBase": 30 },
+    "tracker": { "cv": 3, "pi": 7, "gd": 7 },
+    "outcomes": "Structured SIP and Final Placement interview preparation across Finance, Consulting, Product, Marketing, and Strategy tracks with 1:1 mentor sessions.",
+    "features": [
+      "7 domain-specific PI mock interviews",
+      "7 group discussion practice sessions",
+      "3 ATS-optimised CV review rounds",
+      "Matched mentor from your target company",
+      "Live session recordings for async review",
+      "Certificate of completion"
+    ],
+    "curriculum": [
+      { "week": "Week 1", "title": "Domain + Mentor Match", "desc": "Select Finance, Consulting, Product, Marketing, or Operations." },
+      { "week": "Week 2-3", "title": "PI Framework Drills", "desc": "Why MBA, walk me through, strengths/weaknesses, behavioural." },
+      { "week": "Week 4-5", "title": "Mock PI Rounds", "desc": "3 structured mock interviews with detailed mentor feedback." },
+      { "week": "Week 5-6", "title": "GD Practice", "desc": "7 GD sessions across topic types: abstract, case, current affairs." },
+      { "week": "Week 6-8", "title": "CV Reviews + Placement Readiness", "desc": "3 CV reviews, company research sessions, offer negotiation." }
+    ],
+    "href": "/courses/bootcamp"
+  },
+  {
+    "id": "live-project",
+    "slug": "live-project",
+    "name": "Live Projects",
+    "shortName": "Live Project",
+    "category": "Live Project",
+    "tagline": "Real client work for your CV",
+    "price": 4999,
+    "originalPrice": null,
+    "duration": "4-6 weeks",
+    "format": "Project-based",
+    "domains": "1-2 Domains",
+    "isFlagship": false,
+    "comboId": "all-in-one",
+    "comboSavings": 3500,
+    "groupOffer": { "minSize": 2, "discountBase": 30 },
+    "tracker": { "cv": 1, "pi": 0, "gd": 0 },
+    "outcomes": "Real client work delivered through Prodmark Consultants Pvt. Ltd. — a graded, verifiable work output in your domain that sits on your CV as evidence, not a course certificate.",
+    "features": [
+      "Real client project via Prodmark Consultants",
+      "Graded deliverable for your CV",
+      "Domain choice: Strategy, Finance, Marketing, or Operations",
+      "Mentor feedback on deliverables",
+      "Verifiable project reference letter",
+      "LinkedIn-ready project description"
+    ],
+    "curriculum": [
+      { "week": "Week 1", "title": "Project Brief + Onboarding", "desc": "Client introduction, scope definition, domain alignment." },
+      { "week": "Week 2-3", "title": "Research + Analysis", "desc": "Primary and secondary research, data gathering, framework application." },
+      { "week": "Week 3-4", "title": "Deliverable Development", "desc": "Strategy deck / financial model / marketing plan." },
+      { "week": "Week 5-6", "title": "Review + Final Submission", "desc": "Mentor review, client presentation, grading, certificate." }
+    ],
+    "href": "/courses/live-project"
+  },
+  {
+    "id": "case-comp",
+    "slug": "case-comp",
+    "name": "Case Competition Prep",
+    "shortName": "Case Comp",
+    "category": "Case Competition",
+    "tagline": "Analytical muscle for consulting roles",
+    "price": 3499,
+    "originalPrice": null,
+    "duration": "3-4 weeks",
+    "format": "Live + Practice",
+    "domains": "Consulting · Strategy",
+    "isFlagship": false,
+    "comboId": "all-in-one",
+    "comboSavings": 2000,
+    "groupOffer": { "minSize": 2, "discountBase": 30 },
+    "tracker": { "cv": 0, "pi": 0, "gd": 0 },
+    "outcomes": "Structured competitive case-solving practice with mentor feedback. Builds the analytical muscle and presentation skill that consulting and strategy recruiters test for explicitly.",
+    "features": [
+      "Case framework mastery (MECE, Profitability, Market Entry)",
+      "Timed case solving practice",
+      "Presentation and slide narration coaching",
+      "Peer team formation for competition practice",
+      "Access to 20+ past B-school competition cases",
+      "Certificate of completion"
+    ],
+    "curriculum": [
+      { "week": "Week 1", "title": "Frameworks + Structure", "desc": "MECE thinking, profitability trees, market sizing, M&A cases." },
+      { "week": "Week 2", "title": "Solo Case Solving", "desc": "Timed solo sessions, mentor feedback on structure and logic." },
+      { "week": "Week 3", "title": "Team Simulation", "desc": "Competitive format with peer teams, 48-hour turnaround cases." },
+      { "week": "Week 4", "title": "Presentation + Finals Prep", "desc": "Slide narration, Q&A handling, confidence under pressure." }
+    ],
+    "href": "/courses/case-comp"
+  },
+  {
+    "id": "excel-cert",
+    "slug": "excel-cert",
+    "name": "Advanced Excel",
+    "shortName": "Excel",
+    "category": "Certification",
+    "tagline": "Finance & Consulting baseline skill",
+    "price": 1499,
+    "originalPrice": null,
+    "duration": "2 weeks",
+    "format": "Self-paced",
+    "domains": "Finance · Consulting · Operations",
+    "isFlagship": false,
+    "comboId": null,
+    "groupOffer": null,
+    "tracker": { "cv": 0, "pi": 0, "gd": 0 },
+    "outcomes": "Verifiable Excel credential covering advanced formulas, pivot analysis, financial modeling, and dashboard design — the baseline skill Finance and Consulting recruiters assume.",
+    "features": [
+      "Advanced formulas: INDEX/MATCH, SUMIFS, array formulas",
+      "Pivot tables and pivot charts",
+      "Financial modeling fundamentals",
+      "Dashboard design for data storytelling",
+      "Verifiable certificate from Prodmark Consultants",
+      "Lifetime access to course materials"
+    ],
+    "curriculum": [
+      { "week": "Week 1", "title": "Power Formulas + Data", "desc": "Advanced lookups, conditional logic, data cleaning at scale." },
+      { "week": "Week 2", "title": "Modeling + Dashboards", "desc": "P&L model, scenario analysis, dynamic dashboard with slicers." }
+    ],
+    "href": "/courses/excel-cert"
+  },
+  {
+    "id": "powerbi-cert",
+    "slug": "powerbi-cert",
+    "name": "Power BI",
+    "shortName": "Power BI",
+    "category": "Certification",
+    "tagline": "Data storytelling for strategy roles",
+    "price": 1499,
+    "originalPrice": null,
+    "duration": "2 weeks",
+    "format": "Self-paced",
+    "domains": "Consulting · Operations · Product",
+    "isFlagship": false,
+    "comboId": null,
+    "groupOffer": null,
+    "tracker": { "cv": 0, "pi": 0, "gd": 0 },
+    "outcomes": "End-to-end dashboard and reporting skill using Power BI — a direct credential for roles in Consulting, Operations, and Product that require data storytelling beyond Excel.",
+    "features": [
+      "Data import from Excel, SQL, and APIs",
+      "DAX formulas for calculated measures",
+      "Interactive dashboard design",
+      "Report sharing and collaboration",
+      "Verifiable certificate from Prodmark Consultants",
+      "Lifetime access to course materials"
+    ],
+    "curriculum": [
+      { "week": "Week 1", "title": "Data Modelling + DAX", "desc": "Star schema, relationships, DAX fundamentals, time intelligence." },
+      { "week": "Week 2", "title": "Dashboards + Publishing", "desc": "Visual best practices, interactive filters, publish to Power BI Service." }
+    ],
+    "href": "/courses/powerbi-cert"
+  }
+]

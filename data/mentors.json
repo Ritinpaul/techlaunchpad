@@ -1,0 +1,67 @@
+[
+  {
+    "id": "m1",
+    "name": "Arjun Sharma",
+    "school": "IIM Ahmedabad",
+    "company": "McKinsey & Company",
+    "role": "Senior Engagement Manager",
+    "domains": ["Consulting", "Strategy"],
+    "bio": "Arjun has 8+ years of strategy consulting experience and has mentored 300+ MBA students through summer placements. Specialises in market entry, restructuring, and M&A cases.",
+    "photo": "/images/arjun.jpg",
+    "linkedin": "#",
+    "sortOrder": 1,
+    "isFeatured": true
+  },
+  {
+    "id": "m2",
+    "name": "Priya Nair",
+    "school": "IIM Bangalore",
+    "company": "Bain & Company",
+    "role": "Principal",
+    "domains": ["Consulting", "General Management"],
+    "bio": "Priya specialises in case interview prep and has helped students crack top consulting firms across 4 MBA cohorts. Expert in structured problem-solving and MECE thinking.",
+    "photo": "/images/Priya.jpg",
+    "linkedin": "#",
+    "sortOrder": 2,
+    "isFeatured": true
+  },
+  {
+    "id": "m3",
+    "name": "Rohan Mehta",
+    "school": "IIM Calcutta",
+    "company": "Goldman Sachs",
+    "role": "Vice President, Investment Banking",
+    "domains": ["Finance", "Investment Banking"],
+    "bio": "Rohan brings deep finance expertise and has guided 200+ students into top BFSI placements. Covers valuation, DCF modeling, and investment banking interview prep.",
+    "photo": "/images/rohan.jpg",
+    "linkedin": "#",
+    "sortOrder": 3,
+    "isFeatured": true
+  },
+  {
+    "id": "m4",
+    "name": "Sneha Kapoor",
+    "school": "IIM Lucknow",
+    "company": "Amazon",
+    "role": "Senior Product Manager",
+    "domains": ["Product", "General Management"],
+    "bio": "Sneha is an ex-FMCG brand manager turned tech PM who coaches students on product and general management roles. Expert in product sense, metrics, and behavioural interviews.",
+    "photo": "/images/aisha.jpg",
+    "linkedin": "#",
+    "sortOrder": 4,
+    "isFeatured": true
+  },
+  {
+    "id": "m5",
+    "name": "Vikram Joshi",
+    "school": "XLRI Jamshedpur",
+    "company": "Hindustan Unilever",
+    "role": "Marketing Director",
+    "domains": ["Marketing", "FMCG"],
+    "bio": "Vikram leads marketing at HUL and has trained 150+ students on brand management, consumer insights, and FMCG strategy. Covers 4P interviews and go-to-market frameworks.",
+    "photo": "/images/mentor_student_session.jpg",
+    "linkedin": "#",
+    "sortOrder": 5,
+    "isFeatured": false
+  }
+]
