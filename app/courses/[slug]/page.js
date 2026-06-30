@@ -160,9 +160,20 @@ export default async function CourseDetailPage({ params }) {
                     </span>
                   )}
                 </div>
-                {course.originalPrice && (
-                  <div style={{ display: 'inline-block', background: '#ecfdf5', color: '#059669', fontSize: 12, fontWeight: 700, padding: '3px 10px', borderRadius: 6, marginBottom: 10 }}>
-                    Save ₹{(course.originalPrice - course.price).toLocaleString('en-IN')}
+                {course.originalPrice ? (
+                  <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: 16 }}>
+                    <div style={{ display: 'inline-block', background: '#ecfdf5', color: '#059669', fontSize: 12, fontWeight: 700, padding: '3px 10px', borderRadius: 6 }}>
+                      Save ₹{(course.originalPrice - course.price).toLocaleString('en-IN')}
+                    </div>
+                    <div style={{ display: 'inline-flex', alignItems: 'center', gap: 4, background: '#f0fdf4', border: '1px solid #bbf7d0', color: '#166534', fontSize: 12, fontWeight: 700, padding: '3px 10px', borderRadius: 6 }}>
+                      💳 EMI from ₹{Math.round(course.price / 12).toLocaleString('en-IN')}/mo
+                    </div>
+                  </div>
+                ) : (
+                  <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: 16 }}>
+                    <div style={{ display: 'inline-flex', alignItems: 'center', gap: 4, background: '#f0fdf4', border: '1px solid #bbf7d0', color: '#166534', fontSize: 12, fontWeight: 700, padding: '3px 10px', borderRadius: 6 }}>
+                      💳 EMI from ₹{Math.round(course.price / 12).toLocaleString('en-IN')}/mo
+                    </div>
                   </div>
                 )}
                 <p style={{ fontSize: 12, color: 'var(--slate)', marginBottom: 16 }}>Cohort Price · One-time payment</p>
@@ -184,6 +195,10 @@ export default async function CourseDetailPage({ params }) {
                 >
                   Reserve My Spot
                 </a>
+                <div style={{ textAlign: 'center', fontSize: 13, color: 'var(--slate)', marginBottom: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+                  <span style={{ color: '#f59e0b', fontSize: 14 }}>★★★★★</span>
+                  <span style={{ fontWeight: 600, color: 'var(--navy)' }}>4,200+</span> students enrolled
+                </div>
                 <a
                   href={`https://wa.me/917042732092?text=${encodeURIComponent(`Hi! I'd like to book a consultation about ${course.name}`)}`}
                   target="_blank" rel="noopener noreferrer"
@@ -301,6 +316,31 @@ export default async function CourseDetailPage({ params }) {
           </div>
         </section>
       )}
+
+      {/* ── WHO THIS IS NOT FOR ── */}
+      <section style={{ background: 'var(--white)', padding: 'var(--section-gap) 0' }} aria-labelledby="not-for-heading">
+        <div className="container" style={{ maxWidth: 800 }}>
+          <div style={{ background: 'var(--bg-main)', border: '2px solid var(--black)', borderRadius: 24, padding: '48px', position: 'relative', overflow: 'hidden' }}>
+            <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: 6, background: 'var(--yellow)' }}></div>
+            <h2 id="not-for-heading" style={{ fontSize: 24, marginBottom: 16 }}>Who This Is <span style={{ color: 'var(--purple)', textDecoration: 'underline' }}>NOT</span> For</h2>
+            <p style={{ color: 'var(--slate)', fontSize: 15, marginBottom: 24, lineHeight: 1.6 }}>We want to be upfront. This program requires serious commitment. Do not enroll if any of the following apply to you:</p>
+            
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 16 }}>
+              {[
+                "You aren't willing to put in 4-5 hours per week of active effort.",
+                "You already have a highly optimized CV and 3+ live projects.",
+                "You expect a magic pill without practicing mock interviews.",
+                "Your placement season is more than 12 months away (wait for the next cohort)."
+              ].map((item, idx) => (
+                <li key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: 12, fontSize: 15, color: 'var(--navy)', lineHeight: 1.5 }}>
+                  <span style={{ color: '#ef4444', fontWeight: 900, fontSize: 18, lineHeight: 1 }}>×</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
 
       {/* ── CURRICULUM (timeline view) ── */}
       <section style={{ background: 'var(--white)', padding: 'var(--section-gap) 0' }} aria-labelledby="curriculum-heading">
@@ -516,10 +556,15 @@ export default async function CourseDetailPage({ params }) {
               href={`https://wa.me/917042732092?text=${whatsappMsg}`}
               target="_blank" rel="noopener noreferrer"
               className="btn btn-primary"
+              style={{ padding: '16px 32px', fontSize: 16 }}
             >
-              Enroll on WhatsApp — ₹{course.price.toLocaleString('en-IN')}
+              Enroll in {course.shortName} →
             </a>
             <Link href="/courses/compare" className="btn btn-secondary-light">Compare Programs First</Link>
+          </div>
+          <div style={{ textAlign: 'center', fontSize: 13, color: 'rgba(255,255,255,0.6)', marginTop: 16, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+            <span style={{ color: '#f59e0b', fontSize: 14 }}>★★★★★</span>
+            <span style={{ fontWeight: 600, color: 'var(--white)' }}>4,200+</span> students enrolled
           </div>
         </div>
       </section>

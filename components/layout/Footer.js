@@ -68,7 +68,7 @@ export default function Footer() {
           <div className="footer-col">
             <h4>Contact</h4>
             <ul>
-              <li><a href="mailto:bharat.kapoor@prodmarkconsulting.in">bharat.kapoor@</a></li>
+              <li><a href="mailto:bharat.kapoor@prodmarkconsulting.in" style={{ wordBreak: 'break-all' }}>bharat.kapoor@prodmarkconsulting.in</a></li>
               <li><a href="tel:+917042732092">+91 70427 32092</a></li>
               <li><a href="#">WhatsApp Community</a></li>
               <li><Link href="/login">Student Login</Link></li>

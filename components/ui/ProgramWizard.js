@@ -134,8 +134,45 @@ export default function ProgramWizard() {
 
           {/* Sidebar Questionnaire */}
           <div className="wizard-sidebar">
-            <h4 style={{ color: 'var(--yellow)', fontSize: 13, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 24 }}>Which Program is Right For You?</h4>
-            
+            <h4 style={{ color: 'var(--yellow)', fontSize: 13, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 16 }}>Which Program is Right For You?</h4>
+
+            {/* Step Progress Dots */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 0, marginBottom: 24 }}>
+              {[
+                { num: 1, label: 'Background', done: answers.background !== null },
+                { num: 2, label: 'Placements', done: answers.placements !== null },
+                { num: 3, label: 'Case Comps', done: answers.caseComps !== null },
+                { num: 4, label: 'Projects', done: answers.liveProjects !== null },
+              ].map((s, i, arr) => {
+                const active = answers.background === null ? i === 0
+                  : answers.placements === null ? i === 1
+                  : answers.caseComps === null ? i === 2
+                  : answers.liveProjects === null ? i === 3
+                  : i === 4;
+                return (
+                  <div key={s.num} style={{ display: 'flex', alignItems: 'center', flex: i < arr.length - 1 ? 1 : 'none' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flexShrink: 0 }}>
+                      <div style={{
+                        width: 28, height: 28, borderRadius: '50%',
+                        background: s.done ? 'var(--yellow)' : active ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.06)',
+                        border: `2px solid ${s.done ? 'var(--yellow)' : active ? 'rgba(255,255,255,0.5)' : 'rgba(255,255,255,0.15)'}`,
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        fontSize: 11, fontWeight: 800,
+                        color: s.done ? 'var(--navy)' : active ? 'white' : 'rgba(255,255,255,0.3)',
+                        transition: 'all 300ms ease',
+                      }}>
+                        {s.done ? '✓' : s.num}
+                      </div>
+                      <span style={{ fontSize: 9, color: s.done ? 'var(--yellow)' : 'rgba(255,255,255,0.35)', marginTop: 3, fontWeight: 700, whiteSpace: 'nowrap', letterSpacing: '0.03em' }}>{s.label}</span>
+                    </div>
+                    {i < arr.length - 1 && (
+                      <div style={{ flex: 1, height: 2, background: s.done ? 'var(--yellow)' : 'rgba(255,255,255,0.1)', margin: '0 4px', marginBottom: 16, transition: 'background 300ms ease' }} />
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+
             <div className="wizard-question-group">
               <div className="wizard-question">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>

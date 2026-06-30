@@ -251,7 +251,7 @@ export default function CatOmetPage() {
                 Crack the Group Discussion & Personal Interview round with structured practice, past transcripts, and mentors who just converted from your target IIMs.
               </p>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 32 }}>
-                {['10 PI Mock Rounds', '10 GD Practice Sessions', '100+ Past Transcripts', 'Domain-specific Q&A', 'Mentors — Just Converted', 'IIM A/B/C Insights'].map(f => (
+                {['7 PI Mock Rounds', '7 GD Practice Sessions', '5 CV Review Rounds', 'Domain-specific Q&A', 'Mentors — Just Converted', 'IIM A/B/C Insights'].map(f => (
                   <span key={f} style={{ fontSize: 12, fontWeight: 700, background: 'rgba(255,255,255,0.1)', color: 'var(--white)', border: '1.5px solid rgba(255,255,255,0.25)', padding: '6px 14px', borderRadius: 20 }}>{f}</span>
                 ))}
               </div>
@@ -265,9 +265,9 @@ export default function CatOmetPage() {
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12, flexShrink: 0 }}>
               {[
-                { num: '10', label: 'PI Mock Rounds' },
-                { num: '10', label: 'GD Sessions' },
-                { num: '100+', label: 'Past Transcripts' },
+                { num: '7', label: 'PI Mock Rounds' },
+                { num: '7', label: 'GD Sessions' },
+                { num: '5', label: 'CV Review Rounds' },
               ].map(s => (
                 <div key={s.label} style={{ background: 'rgba(255,255,255,0.08)', border: '2px solid rgba(255,255,255,0.15)', borderRadius: 16, padding: '16px 28px', textAlign: 'center' }}>
                   <div style={{ fontSize: 32, fontWeight: 700, color: 'var(--yellow)' }}>{s.num}</div>

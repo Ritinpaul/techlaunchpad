@@ -121,7 +121,7 @@ export default function ReadinessQuiz() {
   return (
     <section
       id="readiness-quiz"
-      style={{ background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)', padding: 'var(--section-gap) 0', fontFamily: 'system-ui, -apple-system, sans-serif' }}
+      style={{ background: 'var(--black)', padding: 'var(--section-gap) 0' }}
       aria-labelledby="quiz-heading"
     >
       <div className="container">

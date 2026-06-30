@@ -11,6 +11,8 @@ import SearchableFAQ from '@/components/ui/SearchableFAQ';
 import ReadinessQuiz from '@/components/ui/ReadinessQuiz';
 import HomepageCompareStrip from '@/components/ui/HomepageCompareStrip';
 import PageScripts from '@/components/ui/PageScripts';
+import CountdownTimer from '@/components/ui/CountdownTimer';
+import GroupEnrollmentSection from '@/components/ui/GroupEnrollmentSection';
 import { getInitials } from '@/lib/utils';
 
 export const metadata = {
@@ -122,14 +124,31 @@ export default function HomePage() {
     <>
       <USPPopup />
 
+      {/* ── TICKER STRIP ── */}
+      <div className="marquee-container" style={{ marginTop: '80px' }}>
+        <div className="marquee-content">
+          {[...Array(3)].map((_, i) => (
+            <span key={i} style={{ display: 'contents' }}>
+              <span className="marquee-item">5,000+ Students <span className="marquee-dot"></span></span>
+              <span className="marquee-item">98.7% Placed in Desired Domain <span className="marquee-dot"></span></span>
+              <span className="marquee-item">IIM - XLRI - FMS Mentors <span className="marquee-dot"></span></span>
+              <span className="marquee-item">Live Consulting Projects <span className="marquee-dot"></span></span>
+              <span className="marquee-item">AIR 1 Case Mentor <span className="marquee-dot"></span></span>
+              <span className="marquee-item">30+ Winning Case PPTs <span className="marquee-dot"></span></span>
+            </span>
+          ))}
+        </div>
+      </div>
+
       {/* ── 01 HERO ── */}
-      <section className="hero-section" aria-labelledby="hero-h1">
+      <section className="hero-section" aria-labelledby="hero-h1" style={{ paddingTop: 40 }}>
         <div className="container">
           {/* Mode Toggle */}
           <div style={{ display: 'flex', gap: 8, marginBottom: 24, flexWrap: 'wrap' }}>
             <Link href="/" style={{ padding: '7px 18px', borderRadius: 999, background: 'var(--navy)', color: 'var(--white)', fontSize: 13, fontWeight: 700, textDecoration: 'none', border: '2px solid var(--navy)' }}>MBA Student</Link>
             <Link href="/cat-omet" style={{ padding: '7px 18px', borderRadius: 999, background: 'transparent', color: 'var(--navy)', fontSize: 13, fontWeight: 700, textDecoration: 'none', border: '2px solid var(--navy)', opacity: 0.6 }}>Pre-MBA Aspirant</Link>
           </div>
+
           <div className="hero-grid">
             <div className="hero-copy">
               <p className="eyebrow hero-eyebrow">India&apos;s Premier MBA Career Platform · IIM Alumni Founded · Since 2020</p>
@@ -149,10 +168,13 @@ export default function HomePage() {
                   </div>
                 ))}
               </div>
-              {/* Urgency badge */}
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#fff5f0', border: '1.5px solid #f97316', borderRadius: 999, padding: '6px 14px', marginBottom: 20, fontSize: 13, fontWeight: 700, color: '#c2410c' }}>
-                <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#f97316', display: 'inline-block', animation: 'pulse 1.5s infinite' }} />
-                Next batch closing Jul 10 — 8 seats remaining
+              {/* Urgency badge + Countdown */}
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginBottom: 4 }}>
+                <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#fff5f0', border: '1.5px solid #f97316', borderRadius: 999, padding: '6px 14px', fontSize: 13, fontWeight: 700, color: '#c2410c' }}>
+                  <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#f97316', display: 'inline-block', animation: 'pulse 1.5s infinite' }} />
+                  Next batch closing Jul 10 — 8 seats remaining
+                </div>
+                <CountdownTimer targetDate="2025-07-10T23:59:59" />
               </div>
               <div className="hero-ctas">
                 <Link href="/courses" className="btn btn-primary">Explore Programs</Link>
@@ -211,7 +233,7 @@ export default function HomePage() {
       </section>
 
       {/* ── 01.5 URGENCY BAR ── */}
-      <div style={{ background: '#1a1a2e', borderTop: '2px solid var(--yellow)', borderBottom: '1px solid rgba(255,255,255,0.08)', padding: '14px 0', textAlign: 'center' }}>
+      <div style={{ background: 'var(--black)', borderTop: '2px solid var(--yellow)', borderBottom: '1px solid rgba(255,255,255,0.08)', padding: '14px 0', textAlign: 'center' }}>
         <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 20, flexWrap: 'wrap' }}>
           <span style={{ display: 'flex', alignItems: 'center', gap: 8, color: 'rgba(255,255,255,0.85)', fontSize: 14 }}>
             <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#f97316', display: 'inline-block', animation: 'pulse 1.5s infinite', flexShrink: 0 }} />
@@ -254,7 +276,7 @@ export default function HomePage() {
       <HomepageCompareStrip />
 
       {/* ── 04 PATH FINDER ── */}
-      <section style={{ background: 'var(--white)', padding: 'var(--section-gap) 0' }} aria-labelledby="path-heading">
+      <section style={{ background: 'var(--white)', padding: '0 0 var(--section-gap) 0' }} aria-labelledby="path-heading">
         <div className="container">
           <div className="section-header">
             <p className="eyebrow">Find Your Starting Point</p>
@@ -284,6 +306,32 @@ export default function HomePage() {
             <p className="eyebrow">Program Catalog</p>
             <h2 id="programs-heading">Programs Built Around Placement Season</h2>
             <p>Each program maps to a specific gap in your placement profile — not a generic curriculum.</p>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16, marginBottom: 40 }}>
+            {[
+              { name: 'Live Project', price: '4,999' },
+              { name: 'Bootcamp', price: '7,999' },
+              { name: 'All-In-One Combo', price: '14,999', highlight: true }
+            ].map(p => (
+              <div key={p.name} style={{
+                background: p.highlight ? 'var(--navy)' : 'var(--white)',
+                border: `2px solid ${p.highlight ? 'var(--navy)' : 'rgba(0,0,0,0.1)'}`,
+                borderRadius: '16px',
+                padding: '20px',
+                textAlign: 'center',
+                boxShadow: p.highlight ? '0 12px 24px rgba(0,0,0,0.15)' : 'none',
+                transform: p.highlight ? 'scale(1.05)' : 'none',
+                zIndex: p.highlight ? 1 : 0
+              }}>
+                <div style={{ fontSize: 13, fontWeight: 800, color: p.highlight ? 'var(--yellow)' : 'var(--slate)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 8 }}>
+                  {p.name}
+                </div>
+                <div style={{ fontSize: 32, fontWeight: 900, color: p.highlight ? 'var(--white)' : 'var(--navy)' }}>
+                  ₹{p.price}
+                </div>
+                {p.highlight && <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.7)', marginTop: 4, fontWeight: 600 }}>Best Value · Save ₹3,999</div>}
+              </div>
+            ))}
           </div>
           <div className="programs-grid">
             {featuredCourses.map(course => (
@@ -572,6 +620,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ── 11.25 GROUP ENROLLMENT ── */}
+      <GroupEnrollmentSection />
 
       {/* ── 11.5 FREE TOOLS DISCOVERY ── */}
       <section style={{ background: 'var(--navy)', padding: 'var(--section-gap) 0' }} aria-labelledby="free-tools-heading">
