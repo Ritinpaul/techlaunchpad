@@ -8,6 +8,7 @@ import FreeResourceKit from '@/components/ui/FreeResourceKit';
 import MockCommunity from '@/components/ui/MockCommunity';
 import CompetitorTable from '@/components/ui/CompetitorTable';
 import SearchableFAQ from '@/components/ui/SearchableFAQ';
+import ReadinessQuiz from '@/components/ui/ReadinessQuiz';
 import PageScripts from '@/components/ui/PageScripts';
 import { getInitials } from '@/lib/utils';
 
@@ -16,7 +17,6 @@ export const metadata = {
   description: 'MBA Partner helps current MBA students land Summer Internship Placements and Final Placements through Live Projects, Case Competitions, and a Placements Bootcamp.',
 };
 
-// Scroll-reveal injected client-side via PageScripts
 const statsData = [
   { num: '9.6/10', label: 'Avg. Mentor Rating' },
   { num: '5,000+', label: 'Student Network' },
@@ -37,12 +37,40 @@ const pathCards = [
 ];
 
 const steps = [
-  { num: '01', title: 'Choose Your Track',           desc: 'Pick from Placement Bootcamp, Case Competitions, Live Projects, or a Combo. Transparent pricing — no hidden fees.' },
-  { num: '02', title: 'Onboard in 24 hrs',           desc: 'Get matched to your IIM alumni mentor aligned to your domain and target companies. Receive your full resource pack immediately.' },
-  { num: '03', title: 'Build Your Profile',          desc: 'CV reviews, Live Projects, and Case Competition coaching. Real deliverables — not passive video watching.' },
-  { num: '04', title: 'Mock & Prepare',              desc: 'Mock PIs, Mock GDs, domain prep sessions, psychometric assessments, and company-specific interview transcripts.' },
-  { num: '05', title: 'Compete & Win',               desc: 'Enter case competitions with coaching from AIR 1, AIR 6, AIR 10. Add real wins to your CV before placement season.' },
-  { num: '06', title: 'Land the Offer',              desc: 'Placement-verified outcomes. Avg package ₹38L+. Certificate, transcripts, and a track record ready for your dream company.' },
+  { num: '01', title: 'Choose Your Track',    desc: 'Pick from Placement Bootcamp, Case Competitions, Live Projects, or a Combo. Transparent pricing — no hidden fees.' },
+  { num: '02', title: 'Onboard in 24 hrs',    desc: 'Get matched to your IIM alumni mentor aligned to your domain and target companies. Receive your full resource pack immediately.' },
+  { num: '03', title: 'Build Your Profile',   desc: 'CV reviews, Live Projects, and Case Competition coaching. Real deliverables — not passive video watching.' },
+  { num: '04', title: 'Mock & Prepare',       desc: 'Mock PIs, Mock GDs, domain prep sessions, psychometric assessments, and company-specific interview transcripts.' },
+  { num: '05', title: 'Compete & Win',        desc: 'Enter case competitions with coaching from AIR 1, AIR 6, AIR 10. Add real wins to your CV before placement season.' },
+  { num: '06', title: 'Land the Offer',       desc: 'Placement-verified outcomes. Avg package ₹38L+. Certificate, transcripts, and a track record ready for your dream company.' },
+];
+
+const TIMELINE = [
+  { week: 'Week 1', title: 'Onboard & Match', desc: 'Mentor matched to your domain within 24 hrs. CV audit done. Resource kit delivered.', color: '#8b5cf6' },
+  { week: 'Week 2', title: 'CV Deep-Dive',    desc: 'Round 1 & 2 of ATS-optimised CV review. STAR format coaching. Bullet rewriting.', color: '#f97316' },
+  { week: 'Week 3', title: 'Live Project',    desc: 'Real client brief assigned. You deliver a consulting output with mentor feedback.', color: '#22c55e' },
+  { week: 'Week 4', title: 'Mock PI Begin',   desc: 'First 2 domain-specific mock interviews. Feedback report. Company-specific prep.', color: '#60a5fa' },
+  { week: 'Week 5', title: 'GD + Case Comp',  desc: 'GD simulation and case competition coaching. Structuring, group dynamics, delivery.', color: '#eab308' },
+  { week: 'Week 6', title: 'Final Mock + CV', desc: 'Final PI mock. CV Round 5 polish. Day-0 prep checklist. You\'re placement-ready.', color: '#ec4899' },
+];
+
+const BEFORE_AFTER = [
+  {
+    before: 'Assisted in marketing campaigns as part of the marketing committee of college XYZ.',
+    after: 'Led a 3-member team to design and execute a D2C go-to-market strategy for Prodmark Consultants, resulting in 18% growth in trial signups over 4 weeks. Deliverable presented to client\'s CMO.',
+
+    tag: 'CV Bullet — Marketing',
+  },
+  {
+    before: 'Good communication and leadership skills. Passionate about finance and investment banking.',
+    after: '"Walk me through the DCF for a high-growth SaaS company." Answered without hesitation, citing comparable transaction multiples and WACC assumptions — landed the Nomura offer.',
+    tag: 'PI Preparation — Finance',
+  },
+  {
+    before: '"Tell me about yourself." Practiced once with a friend. Rambled for 3 minutes.',
+    after: 'Delivered a 90-second structured walk-through: education → live project → domain rationale → why this company. Mentor called it "one of the best answers I\'ve heard from a fresher."',
+    tag: 'Interview Execution',
+  },
 ];
 
 const faqs = [
@@ -52,14 +80,12 @@ const faqs = [
   { q: 'Can I enroll in the All-In-One Combo if SIP season is 3 months away?', a: 'Yes — 3 months is the ideal enrollment window. It allows the Live Project to complete and be written up for your CV before campus season begins, and leaves 4–6 weeks for mock interview prep.' },
   { q: 'Can I switch domains after enrolling?', a: 'For the Bootcamp and Live Project, domain selection is confirmed at enrollment because mentor matching and project allocation are immediate. Switches are handled case by case within the first 72 hours.' },
   { q: "What's the difference between a Live Project and a Case Competition?", a: 'A Live Project is a real client engagement with a verifiable output (a deliverable you can show on your CV and discuss in interviews). A Case Competition is structured practice — high-pressure, timed problem solving that builds the analytical and presentation muscle consulting recruiters test for explicitly.' },
+  { q: 'How are mentors selected?', a: 'Every mentor has placed at a company in their domain via campus placements — not through lateral hiring. We verify their college, batch year, and current role. Mentors go through a calibration session before they coach any student.' },
+  { q: 'What if I am not from a top-10 B-school?', a: 'Many of our highest-placed students are from Tier-2 colleges — NMIMS, SIBM, IMT, Welingkar. Strong CV, confident PI, and a real project are what gets you shortlisted. The school is a filter for the first round, but your profile wins the offer.' },
 ];
 
-const faqLeft = faqs.slice(0, 3);
-const faqRight = faqs.slice(3);
+const COMPANIES = ['Tata Administrative Service', 'Times of India', 'Amazon', 'AB InBev', 'Deloitte', 'Titan', 'PwC', 'Accenture', 'Kotak', 'Nomura', 'Lodha', 'Axis Bank', "L'Oréal", 'HSBC', 'Media.net', 'Gulf Oil'];
 
-const COMPANIES = ['Tata Administrative Service', 'Times of India', 'Amazon', 'AB InBev', 'Deloitte', 'Titan', 'PwC', 'Accenture', 'Kotak', 'Nomura', 'Lodha', 'Axis Bank', 'L\'Oréal', 'HSBC', 'Media.net', 'Gulf Oil'];
-
-// Wall of Fame — real placement data from Testimonials.xlsx
 const WALL_OF_FAME = [
   { name: 'Ananyo Roy',         college: 'XLRI Jamshedpur',  company: 'TAS',            domain: 'HR',          year: '2024' },
   { name: 'Divyanshi Jaiswal',  college: 'NMIMS Mumbai',     company: 'Nomura',         domain: 'Finance',     year: '2024' },
@@ -76,19 +102,20 @@ const WALL_OF_FAME = [
 ];
 
 const DOMAIN_COLORS = {
-  'Consulting':          { bg: '#1a1a2e', accent: '#E8B86D' },
-  'Finance':             { bg: '#0f1724', accent: '#60a5fa' },
-  'Marketing':           { bg: '#1a0f0f', accent: '#f87171' },
-  'HR':                  { bg: '#0f1a0f', accent: '#4ade80' },
-  'Operations':          { bg: '#0f171a', accent: '#34d399' },
-  'Product':             { bg: '#1a1000', accent: '#fbbf24' },
-  'General Management':  { bg: '#1a1a1a', accent: '#a78bfa' },
+  'Consulting':  '#f3e5f5',
+  'Finance':     '#e3f2fd',
+  'Marketing':   '#fff3e0',
+  'HR':          '#e8f5e9',
+  'Operations':  '#e0f7fa',
+  'Product':     '#fff8e1',
 };
 
 export default function HomePage() {
-  const featuredCourses = courses.slice(0, 3);
-  const featuredTestimonials = testimonials.filter(t => t.isFeatured).slice(0, 3);
-  const featuredMentors = mentors.filter(m => m.isFeatured).slice(0, 4);
+  const featuredCourses      = courses.slice(0, 3);
+  const featuredTestimonials = testimonials.filter(t => t.isFeatured).slice(0, 4);
+  const featuredMentors      = mentors.filter(m => m.isFeatured).slice(0, 4);
+
+  const heroMentor           = mentors.find(m => m.isFeatured) || mentors[0];
 
   return (
     <>
@@ -97,7 +124,7 @@ export default function HomePage() {
       {/* ── 01 HERO ── */}
       <section className="hero-section" aria-labelledby="hero-h1">
         <div className="container">
-          {/* MBA Student / CAT-OMET Mode Toggle */}
+          {/* Mode Toggle */}
           <div style={{ display: 'flex', gap: 8, marginBottom: 24, flexWrap: 'wrap' }}>
             <Link href="/" style={{ padding: '7px 18px', borderRadius: 999, background: 'var(--navy)', color: 'var(--white)', fontSize: 13, fontWeight: 700, textDecoration: 'none', border: '2px solid var(--navy)' }}>MBA Student</Link>
             <Link href="/cat-omet" style={{ padding: '7px 18px', borderRadius: 999, background: 'transparent', color: 'var(--navy)', fontSize: 13, fontWeight: 700, textDecoration: 'none', border: '2px solid var(--navy)', opacity: 0.6 }}>Pre-MBA Aspirant</Link>
@@ -113,7 +140,6 @@ export default function HomePage() {
               <p className="hero-sub">
                 Committee PORs and graduation internships are no longer enough. Build a CV that actually clears the first cut — with IIM, XLRI and FMS mentors guiding every step.
               </p>
-
               <div className="hero-stat-strip" role="group" aria-label="Key statistics">
                 {statsData.map(s => (
                   <div key={s.label} className="hero-stat-item">
@@ -122,26 +148,41 @@ export default function HomePage() {
                   </div>
                 ))}
               </div>
-
               {/* Urgency badge */}
               <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#fff5f0', border: '1.5px solid #f97316', borderRadius: 999, padding: '6px 14px', marginBottom: 20, fontSize: 13, fontWeight: 700, color: '#c2410c' }}>
                 <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#f97316', display: 'inline-block', animation: 'pulse 1.5s infinite' }} />
-                Next batch closing — 12 seats remaining
+                Next batch closing Jul 10 — 8 seats remaining
               </div>
-
               <div className="hero-ctas">
                 <Link href="/courses" className="btn btn-primary">Explore Programs</Link>
-                <Link href="/mentors" className="btn btn-secondary">Talk to a Mentor</Link>
+                <Link href="#readiness-quiz" className="btn btn-secondary">Check My Readiness</Link>
               </div>
               <p style={{ fontSize: 13, color: 'var(--slate)', marginTop: 12 }}>Starting from ₹3,499 · EMI from ₹583/month · No cost EMI available</p>
             </div>
 
             <div className="hero-visual" aria-hidden="true">
-              <div className="hero-img-wrap" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
-                <img src="/images/mentor_student_session.jpg" alt="Mentoring session" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-              </div>
+              {/* Featured Mentor Card */}
+              {heroMentor && (
+                <div style={{ background: 'var(--white)', border: '2px solid var(--black)', borderRadius: 'var(--radius-card)', padding: '24px', marginBottom: 16, display: 'flex', alignItems: 'center', gap: 16, boxShadow: '4px 4px 0 var(--black)' }}>
+                  <div style={{ width: 56, height: 56, borderRadius: '50%', background: 'var(--purple)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--white)', fontWeight: 800, fontSize: 18, flexShrink: 0, border: '2px solid var(--black)', overflow: 'hidden' }}>
+                    {heroMentor.photo ? (
+                      <img src={heroMentor.photo} alt={heroMentor.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    ) : getInitials(heroMentor.name)}
+                  </div>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontWeight: 800, fontSize: 15, color: 'var(--navy)' }}>{heroMentor.name}</div>
+                    <div style={{ fontSize: 12, color: 'var(--slate)', marginBottom: 6 }}>{heroMentor.school} · {heroMentor.role}, {heroMentor.company}</div>
+                    <span style={{ fontSize: 11, fontWeight: 700, background: 'var(--yellow)', color: 'var(--navy)', padding: '3px 10px', borderRadius: 999 }}>{heroMentor.domains?.[0]}</span>
+                  </div>
+                  <div style={{ fontSize: 11, color: 'var(--slate)', textAlign: 'right', flexShrink: 0 }}>
+                    <div style={{ fontWeight: 700, color: 'var(--navy)', fontSize: 13 }}>Your Mentor</div>
+                    <div>Matched in 24 hrs</div>
+                  </div>
+                </div>
+              )}
+
               {/* Cohort Snapshot Widget */}
-              <div style={{ background: '#0d1117', border: '1.5px solid rgba(255,255,255,0.12)', borderRadius: 16, padding: '20px 24px', marginTop: 16, color: 'white' }}>
+              <div style={{ background: '#0d1117', border: '1.5px solid rgba(255,255,255,0.12)', borderRadius: 16, padding: '20px 24px', color: 'white' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
                   <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)' }}>COHORT SNAPSHOT</span>
                   <span style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 11, color: '#4ade80', fontWeight: 700 }}>
@@ -154,7 +195,7 @@ export default function HomePage() {
                   { label: 'Placed in desired domain', value: '98.7', unit: '%', color: '#60a5fa' },
                   { label: 'Average package', value: '₹38L', unit: '+', color: '#4ade80' },
                   { label: 'Students mentored', value: '5,000', unit: '+', color: '#f97316' },
-                  { label: 'Verified reviews', value: '700', unit: '+', color: '#facc15' },
+                  { label: 'Seats remaining (Jul 10)', value: '8', unit: ' only', color: '#facc15' },
                 ].map(row => (
                   <div key={row.label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 0', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
                     <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)' }}>{row.label}</span>
@@ -168,6 +209,17 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── 01.5 URGENCY BAR ── */}
+      <div style={{ background: '#1a1a2e', borderTop: '2px solid var(--yellow)', borderBottom: '1px solid rgba(255,255,255,0.08)', padding: '14px 0', textAlign: 'center' }}>
+        <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 20, flexWrap: 'wrap' }}>
+          <span style={{ display: 'flex', alignItems: 'center', gap: 8, color: 'rgba(255,255,255,0.85)', fontSize: 14 }}>
+            <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#f97316', display: 'inline-block', animation: 'pulse 1.5s infinite', flexShrink: 0 }} />
+            <strong style={{ color: 'var(--yellow)' }}>Batch Closing Jul 10.</strong> Only 8 seats remaining for the All-In-One Combo.
+          </span>
+          <Link href="/courses/all-in-one" className="btn btn-primary" style={{ padding: '8px 20px', fontSize: 13 }}>Reserve Your Seat →</Link>
+        </div>
+      </div>
+
       {/* ── 02 TRUST BAR ── */}
       <div style={{ background: 'var(--white)', borderTop: '2px solid var(--black)', borderBottom: '2px solid var(--black)', padding: '28px 0' }} aria-label="Recruiters our students work at">
         <div className="container">
@@ -176,13 +228,11 @@ export default function HomePage() {
           </p>
           <div className="marquee-wrapper" role="list">
             <div className="marquee-content">
-              {/* First set of companies */}
               {COMPANIES.map((co) => (
                 <div key={`set1-${co}`} className="marquee-item" role="listitem">
                   <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--navy)' }}>{co}</span>
                 </div>
               ))}
-              {/* Second set of companies (for seamless loop) */}
               {COMPANIES.map((co) => (
                 <div key={`set2-${co}`} className="marquee-item" role="listitem">
                   <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--navy)' }}>{co}</span>
@@ -193,22 +243,11 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* ── 02.5 WIZARD ── */}
+      {/* ── 02.5 PROGRAM WIZARD ── */}
       <ProgramWizard />
 
-      {/* ── 03 METRICS BAND ── */}
-      <section className="metrics-band" aria-label="Placement outcome statistics">
-        <div className="container">
-          <div className="metrics-grid" role="group">
-            {metricsData.map(m => (
-              <div key={m.label} className="metric-tile">
-                <div className="metric-num">{m.target}{m.suffix}</div>
-                <div className="metric-label">{m.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* ── 03 READINESS QUIZ ── */}
+      <ReadinessQuiz />
 
       {/* ── 04 PATH FINDER ── */}
       <section style={{ background: 'var(--white)', padding: 'var(--section-gap) 0' }} aria-labelledby="path-heading">
@@ -270,7 +309,21 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── 06 HOW IT WORKS — 6-step Career Roadmap ── */}
+      {/* ── 06 METRICS ── */}
+      <section className="metrics-band" aria-label="Placement outcome statistics">
+        <div className="container">
+          <div className="metrics-grid" role="group">
+            {metricsData.map(m => (
+              <div key={m.label} className="metric-tile">
+                <div className="metric-num">{m.target}{m.suffix}</div>
+                <div className="metric-label">{m.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 07 HOW IT WORKS ── */}
       <section style={{ background: 'var(--white)', padding: 'var(--section-gap) 0' }} aria-labelledby="how-heading">
         <div className="container">
           <div className="section-header">
@@ -294,8 +347,42 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── 07 MENTOR SPOTLIGHT ── */}
-      <section id="mentors" style={{ background: 'var(--bg-main)', padding: 'var(--section-gap) 0' }} aria-labelledby="mentors-heading">
+      {/* ── 07.5 PLACEMENT TIMELINE VISUALIZER ── */}
+      <section style={{ background: 'var(--bg-main)', padding: 'var(--section-gap) 0' }} aria-labelledby="timeline-heading">
+        <div className="container">
+          <div className="section-header">
+            <p className="eyebrow">What You Actually Sign Up For</p>
+            <h2 id="timeline-heading">Your 6-Week Placement Journey</h2>
+            <p>No vague promises. This is exactly what happens from Day 1 to Offer Letter — week by week.</p>
+          </div>
+          <div style={{ position: 'relative', overflowX: 'auto', paddingBottom: 8 }}>
+            {/* Connecting line */}
+            <div style={{ position: 'absolute', top: 28, left: '4%', right: '4%', height: 3, background: 'linear-gradient(90deg, #8b5cf6, #f97316, #22c55e, #60a5fa, #eab308, #ec4899)', borderRadius: 2, zIndex: 0 }} />
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, minmax(160px, 1fr))', gap: 16, position: 'relative', zIndex: 1 }}>
+              {TIMELINE.map((t, i) => (
+                <div key={t.week} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                  {/* Node */}
+                  <div style={{ width: 56, height: 56, borderRadius: '50%', background: t.color, border: '3px solid var(--white)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 900, fontSize: 18, color: '#fff', marginBottom: 16, boxShadow: `0 0 0 3px ${t.color}33`, flexShrink: 0 }}>
+                    {i + 1}
+                  </div>
+                  <div style={{ background: 'var(--white)', border: '2px solid var(--black)', borderRadius: 'var(--radius-card)', padding: '16px 14px', textAlign: 'center', width: '100%', boxShadow: '3px 3px 0 var(--black)' }}>
+                    <div style={{ fontSize: 11, fontWeight: 700, color: t.color, letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: 6 }}>{t.week}</div>
+                    <div style={{ fontWeight: 800, fontSize: 14, color: 'var(--navy)', marginBottom: 8 }}>{t.title}</div>
+                    <p style={{ fontSize: 12, color: 'var(--slate)', lineHeight: 1.5, margin: 0 }}>{t.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div style={{ textAlign: 'center', marginTop: 40 }}>
+            <Link href="/enroll" className="btn btn-primary">Start My Journey →</Link>
+            <p style={{ fontSize: 13, color: 'var(--slate)', marginTop: 12 }}>Full schedule sent within 24 hours of enrollment</p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 08 MENTOR SPOTLIGHT ── */}
+      <section id="mentors" style={{ background: 'var(--white)', padding: 'var(--section-gap) 0' }} aria-labelledby="mentors-heading">
         <div className="container">
           <div className="section-header">
             <p className="eyebrow">Mentors</p>
@@ -328,10 +415,50 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── 06.5 FREE RESOURCE KIT ── */}
+      {/* ── 08.5 FREE RESOURCE KIT ── */}
       <FreeResourceKit />
 
-      {/* ── 07.5 WALL OF FAME ── */}
+      {/* ── 09 WHAT RECRUITERS ACTUALLY SEE ── */}
+      <section style={{ background: 'var(--navy)', padding: 'var(--section-gap) 0' }} aria-labelledby="recruiter-pov-heading">
+        <div className="container">
+          <div className="section-header" style={{ marginBottom: 48 }}>
+            <p className="eyebrow" style={{ color: 'rgba(255,255,255,0.7)', background: 'rgba(255,255,255,0.1)' }}>Recruiter POV</p>
+            <h2 id="recruiter-pov-heading" style={{ color: 'var(--white)' }}>What Recruiters Actually See</h2>
+            <p style={{ color: 'rgba(255,255,255,0.65)' }}>The gap between a rejected application and a shortlisted one is not talent. It's preparation quality.</p>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+            {BEFORE_AFTER.map((item, i) => (
+              <div key={i} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 0, borderRadius: 'var(--radius-card)', overflow: 'hidden', border: '2px solid rgba(255,255,255,0.12)' }}>
+                {/* Before */}
+                <div style={{ background: 'rgba(239,68,68,0.08)', padding: '28px 28px', borderRight: '1px solid rgba(255,255,255,0.08)' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 14 }}>
+                    <span style={{ width: 20, height: 20, borderRadius: '50%', background: '#ef4444', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: 11, fontWeight: 900, flexShrink: 0 }}>✕</span>
+                    <span style={{ fontSize: 11, fontWeight: 700, color: '#ef4444', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Before MBA Partner</span>
+                  </div>
+                  <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.55)', lineHeight: 1.7, fontStyle: 'italic', margin: 0 }}>"{item.before}"</p>
+                </div>
+                {/* After */}
+                <div style={{ background: 'rgba(34,197,94,0.08)', padding: '28px 28px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 14 }}>
+                    <span style={{ width: 20, height: 20, borderRadius: '50%', background: '#22c55e', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: 11, fontWeight: 900, flexShrink: 0 }}>✓</span>
+                    <span style={{ fontSize: 11, fontWeight: 700, color: '#22c55e', letterSpacing: '0.08em', textTransform: 'uppercase' }}>After MBA Partner</span>
+                  </div>
+                  <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.85)', lineHeight: 1.7, fontStyle: 'italic', margin: 0, fontWeight: 500 }}>"{item.after}"</p>
+                </div>
+                {/* Tag */}
+                <div style={{ gridColumn: '1 / -1', background: 'rgba(255,255,255,0.04)', padding: '10px 28px', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+                  <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--yellow)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>{item.tag}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div style={{ textAlign: 'center', marginTop: 48 }}>
+            <Link href="/courses" className="btn btn-primary">Close the Gap →</Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 10 WALL OF FAME ── */}
       <section style={{ background: 'var(--bg-main)', padding: 'var(--section-gap) 0' }} aria-labelledby="wall-heading">
         <div className="container">
           <div className="section-header">
@@ -371,7 +498,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── 08 TESTIMONIALS ── */}
+      {/* ── 11 STUDENT OUTCOMES (Testimonials) ── */}
       <section id="testimonials" style={{ background: 'var(--white)', padding: 'var(--section-gap) 0' }} aria-labelledby="testimonials-heading">
         <div className="container">
           <div className="section-header">
@@ -379,8 +506,6 @@ export default function HomePage() {
             <h2 id="testimonials-heading">The Proof Is in the Placement</h2>
             <p>Named, specific, verifiable — not anonymous satisfaction scores.</p>
           </div>
-
-          {/* Featured quote */}
           {featuredTestimonials[0] && (
             <div style={{ textAlign: 'center', background: 'var(--bg-main)', border: '2px solid var(--black)', padding: 48, borderRadius: 'var(--radius-card)', marginBottom: 48, maxWidth: 900, margin: '0 auto 48px' }}>
               <div className="outcome-badge" style={{ justifyContent: 'center', marginBottom: 24 }}>
@@ -399,10 +524,8 @@ export default function HomePage() {
                   <div style={{ fontWeight: 700, color: 'var(--navy)', fontSize: 15, display: 'flex', alignItems: 'center', gap: 6 }}>
                     {featuredTestimonials[0].name}
                     {featuredTestimonials[0].linkedin && (
-                      <a href={featuredTestimonials[0].linkedin} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', color: '#0a66c2', background: 'white', borderRadius: 2 }} title={`View ${featuredTestimonials[0].name} on LinkedIn`}>
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                        </svg>
+                      <a href={featuredTestimonials[0].linkedin} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', color: '#0a66c2', background: 'white', borderRadius: 2 }}>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                       </a>
                     )}
                   </div>
@@ -411,7 +534,6 @@ export default function HomePage() {
               </div>
             </div>
           )}
-
           <div className="testimonials-grid">
             {featuredTestimonials.slice(1).map(t => (
               <article key={t.id} className="testimonial-card">
@@ -427,10 +549,8 @@ export default function HomePage() {
                     <div className="testimonial-name" style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                       {t.name}
                       {t.linkedin && (
-                        <a href={t.linkedin} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', color: '#0a66c2', background: 'white', borderRadius: 2 }} title={`View ${t.name} on LinkedIn`}>
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                          </svg>
+                        <a href={t.linkedin} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', color: '#0a66c2', background: 'white', borderRadius: 2 }}>
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                         </a>
                       )}
                     </div>
@@ -446,75 +566,25 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── VIDEO TESTIMONIALS ── */}
-      <section id="video-testimonials" style={{ background: 'var(--navy)', padding: 'var(--section-gap) 0' }} aria-labelledby="video-testimonials-heading">
-        <div className="container">
-          <div className="section-header" style={{ marginBottom: 48 }}>
-            <p className="eyebrow" style={{ color: 'rgba(255,255,255,0.7)', background: 'rgba(255,255,255,0.1)' }}>In Their Own Words</p>
-            <h2 id="video-testimonials-heading" style={{ color: 'var(--white)' }}>Video Testimonials</h2>
-            <p style={{ color: 'rgba(255,255,255,0.7)' }}>Unscripted. Real students. Real results.</p>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 24 }}>
-            {[
-              { name: 'Mridul Agarwal', college: 'IIM Calcutta', domain: 'Consulting', domainColor: 'var(--yellow)', file: 'Mridul IIM Calcutta.mp4' },
-              { name: 'Ananya Sharma', college: 'Welingkar Mumbai', domain: 'Marketing', domainColor: 'var(--blue)', file: 'Ananya Welingkar.mp4' },
-              { name: 'Jigar Mehta', college: 'IIM Amritsar', domain: 'Finance', domainColor: 'var(--purple)', file: 'Jigar IIM Amritsar.mp4' },
-            ].map(({ name, college, domain, domainColor, file }) => (
-              <div
-                key={name}
-                style={{
-                  background: 'rgba(255,255,255,0.04)',
-                  border: '1.5px solid rgba(255,255,255,0.12)',
-                  borderRadius: 'var(--radius-card)',
-                  overflow: 'hidden',
-                  transition: 'border-color 0.2s, transform 0.2s',
-                }}
-              >
-                <div style={{ height: 4, background: domainColor }} />
-                <video
-                  controls
-                  preload="metadata"
-                  style={{ width: '100%', display: 'block', maxHeight: 210, background: '#000' }}
-                  aria-label={`Video testimonial by ${name} from ${college}`}
-                >
-                  <source src={`/videos/${encodeURIComponent(file)}`} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-                <div style={{ padding: '16px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
-                  <div>
-                    <div style={{ fontWeight: 700, color: 'var(--white)', fontSize: 14, marginBottom: 2 }}>{name}</div>
-                    <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.55)' }}>{college}</div>
-                  </div>
-                  <span style={{ fontSize: 11, fontWeight: 700, background: domainColor, color: 'var(--navy)', padding: '4px 12px', borderRadius: 20, flexShrink: 0 }}>{domain}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div style={{ textAlign: 'center', marginTop: 40 }}>
-            <Link href="/testimonials" className="btn btn-primary">Watch All Video Testimonials →</Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 08.5 COMPETITOR TABLE ── */}
+      {/* ── 12 COMPETITOR TABLE ── */}
       <CompetitorTable />
 
-      {/* ── 08.7 MOCK COMMUNITY ── */}
+      {/* ── 13 COMMUNITY ── */}
       <MockCommunity />
 
-      {/* ── 09 FAQ ── */}
+      {/* ── 14 FAQ ── */}
       <section id="faq" style={{ background: 'var(--bg-main)', padding: 'var(--section-gap) 0' }} aria-labelledby="faq-heading">
         <div className="container">
           <div className="section-header">
             <p className="eyebrow">Questions & Answers</p>
             <h2 id="faq-heading">Before You Enroll</h2>
-            <p>The six questions we hear most from students comparing options.</p>
+            <p>The questions we hear most from students comparing options.</p>
           </div>
           <SearchableFAQ faqs={faqs} />
         </div>
       </section>
 
-      {/* ── 10 FINAL CTA ── */}
+      {/* ── 15 FINAL CTA ── */}
       <section style={{ background: 'var(--purple)', padding: 'var(--section-gap) 0', textAlign: 'center' }} aria-labelledby="cta-heading">
         <div className="container">
           <p className="eyebrow" style={{ color: 'var(--white)', background: 'rgba(255,255,255,0.2)', display: 'inline-block', padding: '6px 16px', borderRadius: 'var(--radius-tag)', marginBottom: 20 }}>Enroll Now</p>
@@ -524,14 +594,11 @@ export default function HomePage() {
             <Link href="/courses" className="btn btn-primary">Enroll Now</Link>
             <Link href="/courses/compare" className="btn" style={{ background: 'rgba(255,255,255,0.15)', color: 'var(--white)', border: '2px solid rgba(255,255,255,0.4)' }}>Compare Programs</Link>
           </div>
-          <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 14, marginTop: 24 }}>Trusted by 5,000+ MBA students · Secure checkout</p>
+          <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 14, marginTop: 24 }}>Trusted by 5,000+ MBA students · Secure checkout · EMI available</p>
         </div>
       </section>
 
-      {/* Scroll-reveal + FAQ — client component (no hydration issues) */}
       <PageScripts />
     </>
   );
 }
-
-

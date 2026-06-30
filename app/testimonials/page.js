@@ -182,58 +182,6 @@ export default function TestimonialsPage() {
         </div>
       </section>
 
-      {/* ── VIDEO TESTIMONIALS ── */}
-      <section style={{ background: 'var(--navy)', padding: 'var(--section-gap) 0' }} aria-labelledby="video-testimonials-heading">
-        <div className="container">
-          <div className="section-header" style={{ marginBottom: 48 }}>
-            <p className="eyebrow" style={{ color: 'rgba(255,255,255,0.7)', background: 'rgba(255,255,255,0.1)' }}>In Their Own Words</p>
-            <h2 id="video-testimonials-heading" style={{ color: 'var(--white)' }}>Video Testimonials</h2>
-            <p style={{ color: 'rgba(255,255,255,0.7)' }}>Unscripted. Real students. Real results.</p>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 24 }}>
-            {[
-              { name: 'Mridul Agarwal', college: 'IIM Calcutta', domain: 'Consulting', domainColor: 'var(--yellow)', file: 'Mridul IIM Calcutta.mp4' },
-              { name: 'Ananya Sharma', college: 'Welingkar Mumbai', domain: 'Marketing', domainColor: 'var(--blue)', file: 'Ananya Welingkar.mp4' },
-              { name: 'Jigar Mehta', college: 'IIM Amritsar', domain: 'Finance', domainColor: 'var(--purple)', file: 'Jigar IIM Amritsar.mp4' },
-              { name: 'Satwik Reddy', college: 'IMT Ghaziabad', domain: 'Operations', domainColor: 'var(--yellow)', file: 'Satwik IMT Ghaziabad.mp4' },
-              { name: 'Siddhant Gupta', college: 'Delhi School of Economics', domain: 'Product Management', domainColor: 'var(--blue)', file: 'Siddhant DSE.mp4' },
-              { name: 'Tushar Bhatt', college: 'GLIM Chennai', domain: 'General Management', domainColor: 'var(--yellow)', file: 'Tushar GLIM C.mp4' },
-            ].map(({ name, college, domain, domainColor, file }) => (
-              <div
-                key={name}
-                style={{
-                  background: 'rgba(255,255,255,0.04)',
-                  border: '1.5px solid rgba(255,255,255,0.12)',
-                  borderRadius: 'var(--radius-card)',
-                  overflow: 'hidden',
-                  transition: 'border-color 0.2s, transform 0.2s',
-                }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.35)'; e.currentTarget.style.transform = 'translateY(-4px)'; }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)'; e.currentTarget.style.transform = 'translateY(0)'; }}
-              >
-                <div style={{ height: 4, background: domainColor }} />
-                <video
-                  controls
-                  preload="metadata"
-                  style={{ width: '100%', display: 'block', maxHeight: 210, background: '#000' }}
-                  aria-label={`Video testimonial by ${name} from ${college}`}
-                >
-                  <source src={`/videos/${encodeURIComponent(file)}`} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-                <div style={{ padding: '16px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
-                  <div>
-                    <div style={{ fontWeight: 700, color: 'var(--white)', fontSize: 14, marginBottom: 2 }}>{name}</div>
-                    <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.55)' }}>{college}</div>
-                  </div>
-                  <span style={{ fontSize: 11, fontWeight: 700, background: domainColor, color: 'var(--navy)', padding: '4px 12px', borderRadius: 20, flexShrink: 0 }}>{domain}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
 
       {/* ── CTA ── */}
       <section style={{ background: 'var(--navy)', padding: '80px 0', textAlign: 'center' }}>
