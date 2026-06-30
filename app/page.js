@@ -522,7 +522,7 @@ export default function HomePage() {
             })}
           </div>
           <div style={{ textAlign: 'center', marginTop: 32 }}>
-            <Link href="/testimonials" className="btn btn-secondary">See All 70+ Placements →</Link>
+            <Link href="/testimonials" className="btn btn-secondary">Read All Student Stories →</Link>
           </div>
         </div>
       </section>

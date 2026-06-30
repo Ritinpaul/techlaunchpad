@@ -42,7 +42,7 @@ export default function TestimonialsPage() {
         <div className="container">
           <p className="eyebrow hero-eyebrow">Student Stories</p>
           <h1 className="hero-h1" id="testimonials-h1">
-            200+ Students.{' '}
+            5,000+ Students.{' '}
             <span className="text-purple">Real Outcomes.</span>
           </h1>
           <p className="hero-sub">
@@ -50,7 +50,7 @@ export default function TestimonialsPage() {
           </p>
           <div className="hero-stat-strip" style={{ marginTop: 40 }}>
             {[
-              { num: '200+', label: 'Students Trained' },
+              { num: '5,000+', label: 'Students Mentored' },
               { num: '4.8',  label: 'Average Rating' },
               { num: '78%',  label: 'Got Their Top-1 Domain' },
               { num: '12+',  label: 'Colleges Represented' },

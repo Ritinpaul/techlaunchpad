@@ -31,6 +31,9 @@ const DOMAIN_COLORS = {
   'all-in-one':   { bg: 'var(--navy)',   text: 'var(--white)' },
   'excel-cert':   { bg: 'var(--bg-main)', text: 'var(--black)' },
   'powerbi-cert': { bg: 'var(--bg-main)', text: 'var(--black)' },
+  'mock-interview':{ bg: 'var(--yellow)', text: 'var(--black)' },
+  'gd-practice':  { bg: 'var(--blue)',   text: 'var(--black)' },
+  'cv-review':    { bg: 'var(--purple)', text: 'var(--white)' },
 };
 
 export async function generateStaticParams() {
@@ -64,7 +67,7 @@ export default async function CourseDetailPage({ params }) {
   return (
     <>
       {/* ── HERO ── */}
-      <section className="hero-section" style={{ background: colors.bg, paddingBottom: 72 }} aria-labelledby="course-h1">
+      <section className="hero-section" style={{ background: colors.bg, paddingTop: 100, paddingBottom: 72 }} aria-labelledby="course-h1">
         <div className="container">
           <div style={{ marginBottom: 16 }}>
             <Link href="/courses" style={{ color: colors.text, opacity: 0.7, fontSize: 14 }}>← All Programs</Link>

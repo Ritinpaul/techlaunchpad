@@ -207,5 +207,101 @@
       { "week": "Week 2", "title": "Dynamic Dashboards + Publishing", "desc": "5+ data sources (Excel, SQL, Web), interactive filters, and publishing to Power BI Service." }
     ],
     "href": "/courses/powerbi-cert"
+  },
+  {
+    "id": "mock-interview",
+    "slug": "mock-interview",
+    "name": "Mock Interviews",
+    "shortName": "PI Mocks",
+    "category": "Preparation",
+    "tagline": "Domain-specific mock interviews",
+    "price": 1999,
+    "originalPrice": 2499,
+    "duration": "1 week",
+    "format": "1-on-1 Live",
+    "domains": "All Domains",
+    "isFlagship": false,
+    "comboId": "all-in-one",
+    "comboSavings": 500,
+    "groupOffer": null,
+    "tracker": { "cv": 0, "pi": 7, "gd": 0 },
+    "outcomes": "Master your personal interviews through rigorous 1-on-1 mock sessions with mentors from your target domain. Get detailed feedback on content, structure, and delivery to confidently face your placement rounds.",
+    "features": [
+      "7 domain-specific mock interviews",
+      "1-on-1 live sessions with industry mentors",
+      "Detailed actionable feedback after each mock",
+      "Access to interview transcript library",
+      "Company-specific interview strategies"
+    ],
+    "curriculum": [
+      { "week": "Session 1-2", "title": "Foundation Mocks", "desc": "Behavioral questions, resume walkthroughs, and HR prep." },
+      { "week": "Session 3-5", "title": "Domain-Specific Mocks", "desc": "Technical questions, guesstimates, and case interviews." },
+      { "week": "Session 6-7", "title": "Stress & Advanced Mocks", "desc": "High-pressure scenarios and cross-functional questions." }
+    ],
+    "href": "/courses/mock-interview"
+  },
+  {
+    "id": "gd-practice",
+    "slug": "gd-practice",
+    "name": "GD Practice",
+    "shortName": "GD Practice",
+    "category": "Preparation",
+    "tagline": "Guided group discussions",
+    "price": 1499,
+    "originalPrice": 1999,
+    "duration": "1 week",
+    "format": "Live Group",
+    "domains": "All Domains",
+    "isFlagship": false,
+    "comboId": "all-in-one",
+    "comboSavings": 500,
+    "groupOffer": null,
+    "tracker": { "cv": 0, "pi": 0, "gd": 7 },
+    "outcomes": "Excel in group discussions with our structured practice sessions. Learn to navigate different GD formats, articulate your points clearly, and develop strategies to stand out in a competitive setting.",
+    "features": [
+      "7 guided group discussion sessions",
+      "Coverage of Abstract, Case, and Current Affairs topics",
+      "Real-time feedback from expert moderators",
+      "Strategies for entry, exit, and summarization",
+      "Peer learning and performance benchmarking"
+    ],
+    "curriculum": [
+      { "week": "Session 1-2", "title": "Abstract & Current Affairs", "desc": "Tackling open-ended topics and recent news." },
+      { "week": "Session 3-5", "title": "Case-Based GDs", "desc": "Analyzing business cases and presenting structured arguments." },
+      { "week": "Session 6-7", "title": "Stress GDs & Role Plays", "desc": "Handling aggressive participants and maintaining composure." }
+    ],
+    "href": "/courses/gd-practice"
+  },
+  {
+    "id": "cv-review",
+    "slug": "cv-review",
+    "name": "CV Reviews",
+    "shortName": "CV Reviews",
+    "category": "Preparation",
+    "tagline": "ATS-optimised review rounds",
+    "price": 999,
+    "originalPrice": 1499,
+    "duration": "1 week",
+    "format": "Async + Live",
+    "domains": "All Domains",
+    "isFlagship": false,
+    "comboId": "all-in-one",
+    "comboSavings": 500,
+    "groupOffer": null,
+    "tracker": { "cv": 5, "pi": 0, "gd": 0 },
+    "outcomes": "Ensure your CV gets shortlisted with our comprehensive review rounds. We focus on ATS optimization, high-impact bullet points, and domain-specific tailoring to highlight your best achievements.",
+    "features": [
+      "5 detailed ATS-optimised CV review rounds",
+      "Formatting and structural enhancements",
+      "Action-verb and impact-metric optimization",
+      "Domain-specific tailoring (Consulting, Marketing, etc.)",
+      "1-on-1 final CV walk-through session"
+    ],
+    "curriculum": [
+      { "week": "Round 1-2", "title": "Structure & Formatting", "desc": "Initial ATS check, layout adjustments, and section organization." },
+      { "week": "Round 3-4", "title": "Impact Optimization", "desc": "Refining bullet points, adding metrics, and enhancing action verbs." },
+      { "week": "Round 5", "title": "Final Polish & Review", "desc": "Domain alignment check and final 1-on-1 consultation." }
+    ],
+    "href": "/courses/cv-review"
   }
 ]
