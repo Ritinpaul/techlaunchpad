@@ -25,15 +25,15 @@ const MENTORS = [
 ];
 
 const DOMAIN_COLORS = {
-  'bootcamp':     { bg: 'var(--purple)', text: 'var(--white)' },
-  'live-project': { bg: 'var(--yellow)', text: 'var(--black)' },
-  'case-comp':    { bg: 'var(--blue)',   text: 'var(--black)' },
-  'all-in-one':   { bg: 'var(--navy)',   text: 'var(--white)' },
-  'excel-cert':   { bg: 'var(--bg-main)', text: 'var(--black)' },
-  'powerbi-cert': { bg: 'var(--bg-main)', text: 'var(--black)' },
-  'mock-interview':{ bg: 'var(--yellow)', text: 'var(--black)' },
-  'gd-practice':  { bg: 'var(--blue)',   text: 'var(--black)' },
-  'cv-review':    { bg: 'var(--purple)', text: 'var(--white)' },
+  'bootcamp':     { bg: 'var(--black)', text: 'var(--white)' },
+  'live-project': { bg: 'var(--black)', text: 'var(--white)' },
+  'case-comp':    { bg: 'var(--black)', text: 'var(--white)' },
+  'all-in-one':   { bg: 'var(--black)', text: 'var(--white)' },
+  'excel-cert':   { bg: 'var(--black)', text: 'var(--white)' },
+  'powerbi-cert': { bg: 'var(--black)', text: 'var(--white)' },
+  'mock-interview':{ bg: 'var(--black)', text: 'var(--white)' },
+  'gd-practice':  { bg: 'var(--black)', text: 'var(--white)' },
+  'cv-review':    { bg: 'var(--black)', text: 'var(--white)' },
 };
 
 export async function generateStaticParams() {
@@ -194,7 +194,7 @@ export default async function CourseDetailPage({ params }) {
                   href={`https://wa.me/917042732092?text=${whatsappMsg}`}
                   target="_blank" rel="noopener noreferrer"
                   className="btn btn-primary"
-                  style={{ display: 'block', width: '100%', textAlign: 'center', marginBottom: 10 }}
+                  style={{ display: 'flex', width: '100%', textAlign: 'center', marginBottom: 10 }}
                 >
                   Reserve My Spot
                 </a>
@@ -206,7 +206,7 @@ export default async function CourseDetailPage({ params }) {
                   href={`https://wa.me/917042732092?text=${encodeURIComponent(`Hi! I'd like to book a consultation about ${course.name}`)}`}
                   target="_blank" rel="noopener noreferrer"
                   className="btn btn-secondary"
-                  style={{ display: 'block', width: '100%', textAlign: 'center' }}
+                  style={{ display: 'flex', width: '100%', textAlign: 'center' }}
                 >
                   Book Consultation
                 </a>
