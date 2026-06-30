@@ -1,8 +1,10 @@
 import { notFound } from 'next/navigation';
+import Image from 'next/image';
 import Link from 'next/link';
 import courses from '@/data/courses.json';
+import courseDetails from '@/data/courseDetails';
 import ComboSavingsBanner from '@/components/courses/ComboSavingsBanner';
-import GroupEnrollModal from '@/components/courses/GroupEnrollModal';
+import CourseFAQ from '@/components/courses/CourseFAQ';
 import { formatRupees } from '@/lib/utils';
 
 // Brochure Drive links (view only)
@@ -15,7 +17,22 @@ const BROCHURES = {
   'powerbi-cert': { url: null, label: null },
 };
 
-// Generate static routes for all course slugs
+const MENTORS = [
+  { img: '/images/aisha.jpg',  name: 'Aisha Verma',   cred: 'IIM Ahmedabad · ex-Strategy, Accenture', domain: 'Consulting' },
+  { img: '/images/rohan.jpg',  name: 'Rohan Sharma',  cred: 'IIM Bangalore · ex-Product, Media.net',  domain: 'Product'    },
+  { img: '/images/Priya.jpg',  name: 'Priya Krishnan', cred: 'IIM Calcutta · ex-Finance, JM Financial', domain: 'Finance'   },
+  { img: '/images/arjun.jpg',  name: 'Arjun Mehta',   cred: 'XLRI · ex-Marketing, Reliance Retail',   domain: 'Marketing'  },
+];
+
+const DOMAIN_COLORS = {
+  'bootcamp':     { bg: 'var(--purple)', text: 'var(--white)' },
+  'live-project': { bg: 'var(--yellow)', text: 'var(--black)' },
+  'case-comp':    { bg: 'var(--blue)',   text: 'var(--black)' },
+  'all-in-one':   { bg: 'var(--navy)',   text: 'var(--white)' },
+  'excel-cert':   { bg: 'var(--bg-main)', text: 'var(--black)' },
+  'powerbi-cert': { bg: 'var(--bg-main)', text: 'var(--black)' },
+};
+
 export async function generateStaticParams() {
   return courses.map(c => ({ slug: c.slug }));
 }
@@ -25,48 +42,52 @@ export async function generateMetadata({ params }) {
   const course = courses.find(c => c.slug === slug);
   if (!course) return {};
   return {
-    title: course.name,
+    title: `${course.name} | MBA Partner`,
     description: course.outcomes,
   };
 }
-
-const DOMAIN_TAGS = {
-  'bootcamp':     { bg: 'var(--purple)', text: 'var(--white)' },
-  'live-project': { bg: 'var(--yellow)', text: 'var(--black)' },
-  'case-comp':    { bg: 'var(--blue)',   text: 'var(--black)' },
-  'all-in-one':   { bg: 'var(--black)', text: 'var(--white)' },
-  'excel-cert':   { bg: 'var(--bg-main)', text: 'var(--black)' },
-  'powerbi-cert': { bg: 'var(--bg-main)', text: 'var(--black)' },
-};
 
 export default async function CourseDetailPage({ params }) {
   const { slug } = await params;
   const course = courses.find(c => c.slug === slug);
   if (!course) notFound();
 
-  const colors = DOMAIN_TAGS[course.slug] || { bg: 'var(--purple)', text: 'var(--white)' };
-  const combo = courses.find(c => c.id === course.comboId);
+  const colors  = DOMAIN_COLORS[course.slug] || { bg: 'var(--purple)', text: 'var(--white)' };
+  const combo   = courses.find(c => c.id === course.comboId);
   const brochure = BROCHURES[course.slug];
+  const detail  = courseDetails[course.slug] || {};
 
-  const whatsappMsg = encodeURIComponent(`Hi! I'd like to enroll in ${course.name}. Price: ₹${course.price.toLocaleString('en-IN')}`);
+  const whatsappMsg = encodeURIComponent(
+    `Hi! I'd like to enroll in ${course.name}. Price: ₹${course.price.toLocaleString('en-IN')}`
+  );
 
   return (
     <>
-      {/* ── COURSE HERO ── */}
-      <section className="hero-section" style={{ background: colors.bg, paddingBottom: 64 }} aria-labelledby="course-h1">
+      {/* ── HERO ── */}
+      <section className="hero-section" style={{ background: colors.bg, paddingBottom: 72 }} aria-labelledby="course-h1">
         <div className="container">
           <div style={{ marginBottom: 16 }}>
             <Link href="/courses" style={{ color: colors.text, opacity: 0.7, fontSize: 14 }}>← All Programs</Link>
           </div>
-          <span className="tag-category" style={{ background: 'rgba(255,255,255,0.2)', color: colors.text, border: '1.5px solid rgba(255,255,255,0.4)', marginBottom: 20, display: 'inline-block' }}>
-            {course.category}
-          </span>
-          <div className="course-hero-grid" style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 48, alignItems: 'start' }}>
+
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 340px', gap: 56, alignItems: 'start' }}>
+            {/* LEFT copy */}
             <div>
-              {course.isFlagship && <span className="tag-most-chosen" style={{ marginBottom: 16, display: 'inline-block' }}>Most Chosen</span>}
-              <h1 id="course-h1" style={{ color: colors.text, marginBottom: 12 }}>{course.name}</h1>
-              <p style={{ color: colors.text, opacity: 0.85, fontSize: 18, lineHeight: 1.6, maxWidth: 580, marginBottom: 32 }}>{course.outcomes}</p>
-              <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap', marginBottom: 32 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
+                <span className="tag-category" style={{ background: 'rgba(255,255,255,0.2)', color: colors.text, border: '1.5px solid rgba(255,255,255,0.4)' }}>
+                  {course.category}
+                </span>
+                {course.isFlagship && <span className="tag-most-chosen">Most Chosen</span>}
+              </div>
+
+              <h1 id="course-h1" style={{ color: colors.text, marginBottom: 14, fontSize: 'clamp(28px,4vw,46px)', lineHeight: 1.15 }}>
+                {course.name}
+              </h1>
+              <p style={{ color: colors.text, opacity: 0.85, fontSize: 17, lineHeight: 1.65, maxWidth: 560, marginBottom: 28 }}>
+                {course.outcomes}
+              </p>
+
+              <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap', marginBottom: 28 }}>
                 {[
                   { icon: '📅', label: course.duration },
                   { icon: '🖥️', label: course.format },
@@ -78,29 +99,33 @@ export default async function CourseDetailPage({ params }) {
                   </div>
                 ))}
               </div>
+
               <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
                 <a
                   href={`https://wa.me/917042732092?text=${whatsappMsg}`}
                   target="_blank" rel="noopener noreferrer"
                   className="btn btn-primary"
-                  id={`enroll-${course.slug}`}
+                  id={`enroll-hero-${course.slug}`}
                 >
                   Enroll Now — ₹{course.price.toLocaleString('en-IN')}
                 </a>
                 {brochure?.url ? (
                   <a href={brochure.url} target="_blank" rel="noopener noreferrer"
-                    className="btn" style={{ background: 'rgba(255,255,255,0.15)', color: colors.text, border: `2px solid rgba(255,255,255,0.4)` }}>
+                    className="btn"
+                    style={{ background: 'rgba(255,255,255,0.15)', color: colors.text, border: '2px solid rgba(255,255,255,0.4)' }}>
                     📄 View Brochure
                   </a>
                 ) : (
                   <a href={`https://wa.me/917042732092?text=${encodeURIComponent(`Hi! Can you share the brochure for ${course.name}?`)}`}
                     target="_blank" rel="noopener noreferrer"
-                    className="btn" style={{ background: 'rgba(255,255,255,0.15)', color: colors.text, border: `2px solid rgba(255,255,255,0.4)` }}>
+                    className="btn"
+                    style={{ background: 'rgba(255,255,255,0.15)', color: colors.text, border: '2px solid rgba(255,255,255,0.4)' }}>
                     📄 Get Brochure
                   </a>
                 )}
                 {course.groupOffer && (
-                  <Link href="#group-pricing" className="btn" style={{ background: 'rgba(255,255,255,0.15)', color: colors.text, border: `2px solid rgba(255,255,255,0.4)` }}>
+                  <Link href="#group-pricing" className="btn"
+                    style={{ background: 'rgba(255,255,255,0.15)', color: colors.text, border: '2px solid rgba(255,255,255,0.4)' }}>
                     👥 Group Pricing
                   </Link>
                 )}
@@ -110,55 +135,119 @@ export default async function CourseDetailPage({ params }) {
               </p>
             </div>
 
-            {/* Price box */}
-            <div style={{ background: 'rgba(255,255,255,0.15)', border: '2px solid rgba(255,255,255,0.3)', borderRadius: 'var(--radius-card)', padding: '32px', textAlign: 'center', minWidth: 220, flexShrink: 0 }}>
-              <div style={{ fontSize: 12, fontWeight: 700, color: colors.text, opacity: 0.7, letterSpacing: '0.08em', marginBottom: 8 }}>COHORT PRICE</div>
-              <div style={{ fontSize: 40, fontWeight: 700, color: 'var(--yellow)', marginBottom: 4 }}>₹{course.price.toLocaleString('en-IN')}</div>
-              {course.originalPrice && (
-                <>
-                  <div style={{ fontSize: 14, color: colors.text, opacity: 0.5, textDecoration: 'line-through', marginBottom: 6 }}>₹{course.originalPrice.toLocaleString('en-IN')}</div>
-                  <div style={{ display: 'inline-block', background: '#ecfdf5', color: '#059669', fontSize: 13, fontWeight: 700, padding: '4px 10px', borderRadius: 6, marginBottom: 16 }}>
+            {/* RIGHT sticky enroll panel */}
+            <aside aria-label="Enrollment details">
+              <div style={{
+                background: 'var(--white)',
+                borderRadius: 'var(--radius-card)',
+                padding: 28,
+                boxShadow: '0 8px 32px rgba(0,0,0,0.18)',
+                position: 'sticky',
+                top: 88,
+              }}>
+                {course.isFlagship && (
+                  <div style={{ marginBottom: 14 }}>
+                    <span className="tag-most-chosen">Most Chosen Program</span>
+                  </div>
+                )}
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginBottom: 4 }}>
+                  <span style={{ fontSize: 36, fontWeight: 700, color: 'var(--navy)', fontVariantNumeric: 'tabular-nums' }}>
+                    ₹{course.price.toLocaleString('en-IN')}
+                  </span>
+                  {course.originalPrice && (
+                    <span style={{ fontSize: 16, color: 'var(--slate)', textDecoration: 'line-through' }}>
+                      ₹{course.originalPrice.toLocaleString('en-IN')}
+                    </span>
+                  )}
+                </div>
+                {course.originalPrice && (
+                  <div style={{ display: 'inline-block', background: '#ecfdf5', color: '#059669', fontSize: 12, fontWeight: 700, padding: '3px 10px', borderRadius: 6, marginBottom: 10 }}>
                     Save ₹{(course.originalPrice - course.price).toLocaleString('en-IN')}
                   </div>
-                </>
-              )}
-              <div style={{ fontSize: 13, color: colors.text, opacity: 0.7 }}>One-time · All sessions included</div>
-              
-              <div style={{ marginTop: 16, paddingTop: 16, borderTop: '1px solid rgba(255,255,255,0.2)' }}>
-                <div style={{ fontSize: 13, color: colors.text, opacity: 0.9, marginBottom: 8, fontWeight: 600 }}>✅ 100% Refund Policy</div>
-                <div style={{ fontSize: 13, color: colors.text, opacity: 0.9, fontWeight: 600 }}>💳 No-Cost EMI Available</div>
+                )}
+                <p style={{ fontSize: 12, color: 'var(--slate)', marginBottom: 16 }}>Cohort Price · One-time payment</p>
+                <hr style={{ border: 'none', borderTop: '1px solid var(--hairline)', marginBottom: 16 }} />
+
+                <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 20px', display: 'flex', flexDirection: 'column', gap: 9 }}>
+                  {course.features.slice(0, 5).map(f => (
+                    <li key={f} style={{ display: 'flex', alignItems: 'flex-start', gap: 8, fontSize: 13, color: 'var(--navy)', lineHeight: 1.4 }}>
+                      <span style={{ color: '#059669', fontWeight: 700, flexShrink: 0, marginTop: 1 }}>✓</span> {f}
+                    </li>
+                  ))}
+                </ul>
+
+                <a
+                  href={`https://wa.me/917042732092?text=${whatsappMsg}`}
+                  target="_blank" rel="noopener noreferrer"
+                  className="btn btn-primary"
+                  style={{ display: 'block', width: '100%', textAlign: 'center', marginBottom: 10 }}
+                >
+                  Reserve My Spot
+                </a>
+                <a
+                  href={`https://wa.me/917042732092?text=${encodeURIComponent(`Hi! I'd like to book a consultation about ${course.name}`)}`}
+                  target="_blank" rel="noopener noreferrer"
+                  className="btn btn-secondary"
+                  style={{ display: 'block', width: '100%', textAlign: 'center' }}
+                >
+                  Book Consultation
+                </a>
+                <p style={{ fontSize: 12, color: 'var(--slate)', textAlign: 'center', marginTop: 12, lineHeight: 1.4 }}>
+                  Our team will confirm your cohort date within 24 hours.
+                </p>
+                <div style={{ borderTop: '1px solid var(--hairline)', marginTop: 16, paddingTop: 14, display: 'flex', gap: 16, justifyContent: 'center' }}>
+                  <span style={{ fontSize: 12, color: 'var(--slate)', display: 'flex', alignItems: 'center', gap: 4 }}>✅ 100% Refund Policy</span>
+                  <span style={{ fontSize: 12, color: 'var(--slate)', display: 'flex', alignItems: 'center', gap: 4 }}>💳 No-Cost EMI</span>
+                </div>
               </div>
-            </div>
+            </aside>
           </div>
         </div>
       </section>
 
+      {/* ── OUTCOME PROMISE BAND ── */}
+      {detail.outcomeTiles && (
+        <div style={{ background: 'var(--navy)', padding: '0' }} aria-label="What this program delivers">
+          <div className="container">
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 0 }}>
+              {detail.outcomeTiles.map((tile, i) => (
+                <div key={i} style={{
+                  padding: '36px 32px',
+                  borderRight: i < detail.outcomeTiles.length - 1 ? '1px solid rgba(255,255,255,0.1)' : 'none',
+                }}>
+                  <div style={{ fontSize: 16, fontWeight: 700, color: 'var(--yellow)', marginBottom: 10, lineHeight: 1.3 }}>{tile.title}</div>
+                  <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.65)', lineHeight: 1.65, margin: 0 }}>{tile.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* ── WHAT YOU GET ── */}
       <section style={{ background: 'var(--white)', padding: 'var(--section-gap) 0' }} aria-labelledby="features-heading">
         <div className="container">
-          <div className="course-features-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'start' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'start' }}>
             <div>
               <p className="eyebrow" style={{ marginBottom: 16 }}>What&apos;s Included</p>
-              <h2 id="features-heading" style={{ marginBottom: 32 }}>Exactly What You Get</h2>
+              <h2 id="features-heading" style={{ marginBottom: 28 }}>Exactly What You Get</h2>
               <ul className="feature-list">
                 {course.features.map(f => <li key={f}>{f}</li>)}
               </ul>
             </div>
-
-            {/* Tracker summary */}
             {(course.tracker.cv + course.tracker.pi + course.tracker.gd > 0) && (
               <div>
                 <p className="eyebrow" style={{ marginBottom: 16 }}>Your Bootcamp Tracker</p>
                 <h3 style={{ marginBottom: 24 }}>Progress You Can See</h3>
                 <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
                   {[
-                    { label: 'CV Reviews', val: course.tracker.cv, color: 'var(--purple)', bg: '#f3eeff' },
-                    { label: 'PI Mocks', val: course.tracker.pi, color: 'var(--yellow)', bg: 'var(--yellow)' },
-                    { label: 'GD Sessions', val: course.tracker.gd, color: 'var(--blue)', bg: 'var(--blue)' },
+                    { label: 'CV Reviews', val: course.tracker.cv, bg: '#f3eeff' },
+                    { label: 'PI Mocks',   val: course.tracker.pi, bg: 'var(--yellow)' },
+                    { label: 'GD Sessions', val: course.tracker.gd, bg: 'var(--blue)' },
                   ].filter(t => t.val > 0).map(t => (
-                    <div key={t.label} style={{ background: t.bg, border: '2px solid var(--black)', borderRadius: 'var(--radius-card)', padding: '20px 24px', textAlign: 'center', flex: 1, minWidth: 120 }}>
+                    <div key={t.label} style={{ background: t.bg, border: '2px solid var(--black)', borderRadius: 'var(--radius-card)', padding: '20px 24px', textAlign: 'center', flex: 1, minWidth: 100 }}>
                       <div style={{ fontSize: 40, fontWeight: 700, color: 'var(--navy)' }}>{t.val}</div>
-                      <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--slate)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{t.label}</div>
+                      <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--slate)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{t.label}</div>
                     </div>
                   ))}
                 </div>
@@ -169,27 +258,167 @@ export default async function CourseDetailPage({ params }) {
         </div>
       </section>
 
-      {/* ── CURRICULUM ── */}
-      <section style={{ background: 'var(--bg-main)', padding: 'var(--section-gap) 0' }} aria-labelledby="curriculum-heading">
+      {/* ── MODULES / PROGRAM STRUCTURE ── */}
+      {detail.modules && (
+        <section style={{ background: 'var(--bg-main)', padding: 'var(--section-gap) 0' }} aria-labelledby="modules-heading">
+          <div className="container">
+            <div className="section-header">
+              <p className="eyebrow">Program Structure</p>
+              <h2 id="modules-heading">
+                {course.slug === 'bootcamp' ? '6 Weeks. Zero Filler.' : "What's Included"}
+              </h2>
+              <p>
+                {course.slug === 'bootcamp'
+                  ? 'Every module maps to a specific gap in your interview readiness — not a generic curriculum.'
+                  : course.slug === 'case-comp'
+                  ? '4 Rounds. Progressive Difficulty. Each round builds on the last.'
+                  : course.slug === 'live-project'
+                  ? 'Four steps. Zero ambiguity about what happens after you pay.'
+                  : 'Six modules running concurrently over 10–12 weeks — designed around your academic calendar.'}
+              </p>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }}>
+              {detail.modules.map((mod, i) => (
+                <div key={i} style={{
+                  background: 'var(--white)',
+                  border: '1px solid var(--hairline)',
+                  borderRadius: 'var(--radius-card)',
+                  padding: '24px 20px',
+                }}>
+                  <div style={{ display: 'inline-block', background: 'var(--black)', color: 'var(--yellow)', borderRadius: 8, padding: '4px 10px', fontSize: 11, fontWeight: 700, marginBottom: 12 }}>
+                    {mod.num}
+                  </div>
+                  <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--navy)', marginBottom: 8, lineHeight: 1.3 }}>{mod.name}</div>
+                  <p style={{ fontSize: 13, color: 'var(--slate)', lineHeight: 1.6, margin: 0 }}>{mod.desc}</p>
+                  {mod.duration && (
+                    <div style={{ marginTop: 14, fontSize: 11, fontWeight: 700, color: 'var(--purple)', background: '#f3eeff', borderRadius: 6, padding: '3px 8px', display: 'inline-block' }}>
+                      {mod.duration}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ── CURRICULUM (timeline view) ── */}
+      <section style={{ background: 'var(--white)', padding: 'var(--section-gap) 0' }} aria-labelledby="curriculum-heading">
         <div className="container">
           <div className="section-header">
             <p className="eyebrow">Week by Week</p>
             <h2 id="curriculum-heading">The Curriculum</h2>
             <p>Designed to fit inside a full-time MBA schedule without sacrificing depth.</p>
           </div>
-          <div style={{ maxWidth: 800, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 0 }}>
+          <div style={{ maxWidth: 800, margin: '0 auto', display: 'flex', flexDirection: 'column' }}>
             {course.curriculum.map((c, i) => (
-              <div key={i} className="grid-curriculum" style={{ display: 'grid', gridTemplateColumns: '140px 1fr', gap: 24, padding: '28px 0', borderBottom: '1px solid var(--hairline)' }}>
+              <div key={i} style={{ display: 'grid', gridTemplateColumns: '140px 1fr', gap: 24, padding: '28px 0', borderBottom: '1px solid var(--hairline)' }}>
                 <div style={{ background: 'var(--black)', color: 'var(--yellow)', borderRadius: 12, padding: '8px 12px', fontSize: 12, fontWeight: 700, textAlign: 'center', alignSelf: 'flex-start' }}>{c.week}</div>
                 <div>
                   <div style={{ fontWeight: 700, color: 'var(--navy)', fontSize: 16, marginBottom: 4 }}>{c.title}</div>
-                  <p style={{ fontSize: 14, color: 'var(--slate)', lineHeight: 1.6 }}>{c.desc}</p>
+                  <p style={{ fontSize: 14, color: 'var(--slate)', lineHeight: 1.6, margin: 0 }}>{c.desc}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
       </section>
+
+      {/* ── WHO THIS IS FOR ── */}
+      {detail.idealProfiles && (
+        <section style={{ background: 'var(--bg-main)', padding: 'var(--section-gap) 0' }} aria-labelledby="ideal-heading">
+          <div className="container">
+            <div className="section-header">
+              <p className="eyebrow">Ideal Student Profile</p>
+              <h2 id="ideal-heading">Who This Is For</h2>
+              <p>Three student profiles this program is built around. If you recognise yourself in any of them, this is the right next step.</p>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
+              {detail.idealProfiles.map((prof, i) => (
+                <div key={i} style={{
+                  background: 'var(--white)',
+                  border: '1px solid var(--hairline)',
+                  borderRadius: 'var(--radius-card)',
+                  padding: 28,
+                }}>
+                  <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.07em', textTransform: 'uppercase', color: 'var(--yellow)', marginBottom: 12, display: 'flex', alignItems: 'center', gap: 6 }}>
+                    <span style={{ background: 'var(--yellow)', color: 'var(--navy)', borderRadius: 99, padding: '2px 9px', fontSize: 11 }}>{prof.label}</span>
+                  </div>
+                  <div style={{ fontSize: 16, fontWeight: 600, color: 'var(--navy)', marginBottom: 12, lineHeight: 1.4, fontStyle: 'italic' }}>{prof.statement}</div>
+                  <p style={{ fontSize: 14, color: 'var(--slate)', lineHeight: 1.65, margin: 0 }}>{prof.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ── MENTORS ── */}
+      <section style={{ background: 'var(--white)', padding: 'var(--section-gap) 0' }} aria-labelledby="mentors-detail-heading">
+        <div className="container">
+          <div className="section-header">
+            <p className="eyebrow">Your Mentors</p>
+            <h2 id="mentors-detail-heading">Placed by the Best. Now Mentoring You.</h2>
+            <p>Every mentor in this program placed at a company on your target list. Matched by domain and B-school profile within 48 hours of enrollment.</p>
+          </div>
+          <div className="mentors-grid">
+            {MENTORS.map(m => (
+              <article key={m.name} className="mentor-card">
+                <div className="mentor-photo">
+                  <Image src={m.img} alt={m.name} width={400} height={500} style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
+                </div>
+                <div className="mentor-info">
+                  <div className="mentor-credential">{m.cred}</div>
+                  <div className="mentor-name">{m.name}</div>
+                  <span className="tag-domain">{m.domain}</span>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── TESTIMONIALS ── */}
+      {detail.testimonials && (
+        <section style={{ background: 'var(--bg-main)', padding: 'var(--section-gap) 0' }} aria-labelledby="course-testimonials-heading">
+          <div className="container">
+            <div className="section-header">
+              <p className="eyebrow">Student Outcomes</p>
+              <h2 id="course-testimonials-heading">{course.name} Alumni</h2>
+              <p>Named, specific, verifiable outcomes — from students who enrolled in this exact program.</p>
+            </div>
+            <div className="testimonials-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
+              {detail.testimonials.map((t, i) => (
+                <article key={i} style={{
+                  background: 'var(--white)',
+                  border: '1px solid var(--hairline)',
+                  borderRadius: 'var(--radius-card)',
+                  padding: 24,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 16,
+                }}>
+                  <div style={{ display: 'inline-block', background: 'var(--black)', color: 'var(--yellow)', borderRadius: 99, padding: '5px 14px', fontSize: 11, fontWeight: 700 }}>
+                    {t.badge}
+                  </div>
+                  <blockquote style={{ margin: 0, flex: 1 }}>
+                    <p style={{ fontSize: 14, color: 'var(--navy)', lineHeight: 1.7, fontStyle: 'italic', margin: 0 }}>{t.quote}</p>
+                  </blockquote>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                    <div style={{ width: 40, height: 40, borderRadius: '50%', background: 'var(--purple)', color: 'var(--white)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 700, flexShrink: 0 }}>
+                      {t.avatar}
+                    </div>
+                    <div>
+                      <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--navy)' }}>{t.name}</div>
+                      <div style={{ fontSize: 12, color: 'var(--slate)' }}>{t.institution}</div>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ── GROUP PRICING ── */}
       {course.groupOffer && (
@@ -200,7 +429,7 @@ export default async function CourseDetailPage({ params }) {
               <h2 id="group-heading">Group Pricing for {course.name}</h2>
               <p>The more batchmates join, the less each person pays. 2 to 5 people in a group.</p>
             </div>
-            <div className="courses-group-strip" style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 0, border: '2px solid var(--black)', borderRadius: 'var(--radius-card)', overflow: 'hidden', maxWidth: 700, margin: '0 auto 32px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 0, border: '2px solid var(--black)', borderRadius: 'var(--radius-card)', overflow: 'hidden', maxWidth: 700, margin: '0 auto 32px' }}>
               {[
                 { size: '2 People', disc: 30, bg: 'var(--white)' },
                 { size: '3 People', disc: 35, bg: 'var(--white)' },
@@ -218,7 +447,8 @@ export default async function CourseDetailPage({ params }) {
               })}
             </div>
             <div style={{ textAlign: 'center' }}>
-              <a href={`https://wa.me/917042732092?text=${encodeURIComponent(`Hi! My group wants to enroll in ${course.name}. Please share group pricing details.`)}`} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+              <a href={`https://wa.me/917042732092?text=${encodeURIComponent(`Hi! My group wants to enroll in ${course.name}. Please share group pricing details.`)}`}
+                target="_blank" rel="noopener noreferrer" className="btn btn-primary">
                 Discuss Group Enrollment on WhatsApp
               </a>
             </div>
@@ -230,7 +460,7 @@ export default async function CourseDetailPage({ params }) {
       {combo && (
         <section style={{ background: 'var(--purple)', padding: '80px 0' }} aria-label="Combo upsell">
           <div className="container">
-            <div className="course-combo-grid" style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 32, alignItems: 'center' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 32, alignItems: 'center' }}>
               <div>
                 <p className="eyebrow" style={{ color: 'rgba(255,255,255,0.8)', background: 'rgba(255,255,255,0.2)', marginBottom: 12 }}>Better Together</p>
                 <h2 style={{ color: 'var(--white)', marginBottom: 12 }}>Get More for Less with the {combo.name}</h2>
@@ -250,37 +480,38 @@ export default async function CourseDetailPage({ params }) {
       )}
 
       {/* ── BROCHURE DOWNLOAD ── */}
-      {brochure?.url ? (
+      {brochure?.url && (
         <section style={{ background: 'var(--navy)', padding: '56px 0' }}>
           <div className="container">
             <div style={{ display: 'flex', alignItems: 'center', gap: 32, flexWrap: 'wrap', justifyContent: 'space-between' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
-                <div style={{ width: 60, height: 60, background: 'var(--yellow)', border: '2px solid rgba(255,255,255,0.3)', borderRadius: 16, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 28, flexShrink: 0 }}>📄</div>
+                <div style={{ width: 60, height: 60, background: 'var(--yellow)', borderRadius: 16, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 28, flexShrink: 0 }}>📄</div>
                 <div>
                   <div style={{ fontSize: 12, fontWeight: 700, color: 'rgba(255,255,255,0.6)', letterSpacing: '0.08em', marginBottom: 4 }}>FREE DOWNLOAD</div>
                   <div style={{ fontSize: 20, fontWeight: 700, color: 'var(--white)', marginBottom: 4 }}>{brochure.label}</div>
                   <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.6)' }}>Full course details, fees, curriculum, and outcomes — all in one document</div>
                 </div>
               </div>
-              <a
-                href={brochure.url}
-                target="_blank" rel="noopener noreferrer"
-                className="btn btn-primary"
-                style={{ flexShrink: 0 }}
-              >
+              <a href={brochure.url} target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ flexShrink: 0 }}>
                 ⬇ Open Brochure
               </a>
             </div>
           </div>
         </section>
-      ) : null}
+      )}
 
-      {/* ── BOTTOM ENROLL ── */}
-      <section style={{ background: 'var(--bg-main)', padding: '80px 0', textAlign: 'center' }}>
+      {/* ── PER-COURSE FAQ ── */}
+      <CourseFAQ items={detail.faq} courseName={course.name} />
+
+      {/* ── BOTTOM CTA ── */}
+      <section style={{ background: 'var(--navy)', padding: '80px 0', textAlign: 'center' }} aria-labelledby="bottom-cta-heading">
         <div className="container">
-          <h2 style={{ marginBottom: 12 }}>Ready to Enroll in {course.name}?</h2>
-          <p style={{ color: 'var(--slate)', fontSize: 16, marginBottom: 32 }}>Limited cohort seats · Next batch starting soon</p>
-          <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
+          <p className="eyebrow" style={{ color: 'var(--yellow)' }}>Reserve Your Spot</p>
+          <h2 id="bottom-cta-heading" style={{ color: 'var(--white)', marginBottom: 12, marginTop: 12, fontSize: 'clamp(24px,4vw,38px)' }}>
+            Ready to Enroll in {course.name}?
+          </h2>
+          <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 16, marginBottom: 32 }}>Limited cohort seats · Next batch starting soon</p>
+          <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
             <a
               href={`https://wa.me/917042732092?text=${whatsappMsg}`}
               target="_blank" rel="noopener noreferrer"

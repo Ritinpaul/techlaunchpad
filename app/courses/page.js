@@ -4,7 +4,6 @@ import CourseCard from '@/components/courses/CourseCard';
 import ComboSavingsBanner from '@/components/courses/ComboSavingsBanner';
 import GroupEnrollmentSection from '@/components/ui/GroupEnrollmentSection';
 import PageScripts from '@/components/ui/PageScripts';
-import EnrollButton from '@/components/ui/EnrollButton';
 
 export const metadata = {
   title: 'All Programs',
@@ -54,7 +53,13 @@ export default function CoursesPage() {
                   ))}
                 </div>
                 <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-                  <EnrollButton course={flagship} className="btn btn-primary">Enroll in All-In-One</EnrollButton>
+                  <Link href="/courses/all-in-one" className="btn btn-primary">View All-In-One Details</Link>
+                  <a
+                    href={`https://wa.me/917042732092?text=${encodeURIComponent('Hi! I want to enroll in the All-In-One Combo.')}`}
+                    target="_blank" rel="noopener noreferrer"
+                    className="btn"
+                    style={{ background: 'rgba(255,255,255,0.15)', color: 'var(--white)', border: '2px solid rgba(255,255,255,0.4)' }}
+                  >Enroll on WhatsApp</a>
                   <Link href="/courses/compare" className="btn" style={{ background: 'rgba(255,255,255,0.15)', color: 'var(--white)', border: '2px solid rgba(255,255,255,0.4)' }}>Compare with Others</Link>
                 </div>
               </div>

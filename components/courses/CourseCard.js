@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { formatRupees, makeWhatsAppLink } from '@/lib/utils';
 import GroupEnrollModal from './GroupEnrollModal';
-import EnrollButton from '@/components/ui/EnrollButton';
 
 export default function CourseCard({ course, showComboHint = true }) {
   const [modalOpen, setModalOpen] = useState(false);
@@ -64,9 +63,13 @@ export default function CourseCard({ course, showComboHint = true }) {
         </div>
 
         <div style={{ display: 'flex', gap: 8 }}>
-          <EnrollButton course={course} className="btn btn-primary" style={{ flex: 1, justifyContent: 'center' }}>
+          <Link
+            href={`/courses/${course.slug}`}
+            className="btn btn-primary"
+            style={{ flex: 1, textAlign: 'center', justifyContent: 'center' }}
+          >
             View Program
-          </EnrollButton>
+          </Link>
           {course.groupOffer && (
             <button
               className="btn btn-secondary-light"
