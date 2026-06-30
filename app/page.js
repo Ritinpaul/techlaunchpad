@@ -174,7 +174,7 @@ export default function HomePage() {
                   <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#f97316', display: 'inline-block', animation: 'pulse 1.5s infinite' }} />
                   Next batch closing Jul 10 — 8 seats remaining
                 </div>
-                <CountdownTimer targetDate="2025-07-10T23:59:59" />
+                <CountdownTimer targetDate="2026-07-10T23:59:59" />
               </div>
               <div className="hero-ctas">
                 <Link href="/courses" className="btn btn-primary">Explore Programs</Link>
@@ -306,32 +306,6 @@ export default function HomePage() {
             <p className="eyebrow">Program Catalog</p>
             <h2 id="programs-heading">Programs Built Around Placement Season</h2>
             <p>Each program maps to a specific gap in your placement profile — not a generic curriculum.</p>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16, marginBottom: 40 }}>
-            {[
-              { name: 'Live Project', price: '4,999' },
-              { name: 'Bootcamp', price: '7,999' },
-              { name: 'All-In-One Combo', price: '14,999', highlight: true }
-            ].map(p => (
-              <div key={p.name} style={{
-                background: p.highlight ? 'var(--navy)' : 'var(--white)',
-                border: `2px solid ${p.highlight ? 'var(--navy)' : 'rgba(0,0,0,0.1)'}`,
-                borderRadius: '16px',
-                padding: '20px',
-                textAlign: 'center',
-                boxShadow: p.highlight ? '0 12px 24px rgba(0,0,0,0.15)' : 'none',
-                transform: p.highlight ? 'scale(1.05)' : 'none',
-                zIndex: p.highlight ? 1 : 0
-              }}>
-                <div style={{ fontSize: 13, fontWeight: 800, color: p.highlight ? 'var(--yellow)' : 'var(--slate)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 8 }}>
-                  {p.name}
-                </div>
-                <div style={{ fontSize: 32, fontWeight: 900, color: p.highlight ? 'var(--white)' : 'var(--navy)' }}>
-                  ₹{p.price}
-                </div>
-                {p.highlight && <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.7)', marginTop: 4, fontWeight: 600 }}>Best Value · Save ₹3,999</div>}
-              </div>
-            ))}
           </div>
           <div className="programs-grid">
             {featuredCourses.map(course => (
