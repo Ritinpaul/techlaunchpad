@@ -9,6 +9,7 @@ import MockCommunity from '@/components/ui/MockCommunity';
 import CompetitorTable from '@/components/ui/CompetitorTable';
 import SearchableFAQ from '@/components/ui/SearchableFAQ';
 import ReadinessQuiz from '@/components/ui/ReadinessQuiz';
+import HomepageCompareStrip from '@/components/ui/HomepageCompareStrip';
 import PageScripts from '@/components/ui/PageScripts';
 import { getInitials } from '@/lib/utils';
 
@@ -249,6 +250,9 @@ export default function HomePage() {
       {/* ── 03 READINESS QUIZ ── */}
       <ReadinessQuiz />
 
+      {/* ── 03.5 INTERACTIVE COMPARE STRIP ── */}
+      <HomepageCompareStrip />
+
       {/* ── 04 PATH FINDER ── */}
       <section style={{ background: 'var(--white)', padding: 'var(--section-gap) 0' }} aria-labelledby="path-heading">
         <div className="container">
@@ -259,7 +263,10 @@ export default function HomePage() {
           </div>
           <div className="cat-tools-grid3" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 24 }}>
             {pathCards.map(c => (
-              <article key={c.letter} style={{ background: 'var(--white)', border: '2px solid var(--black)', borderRadius: 'var(--radius-card)', padding: '36px 28px', display: 'flex', flexDirection: 'column', transition: 'transform 200ms ease, box-shadow 200ms ease' }} className="card">
+              <article key={c.letter} style={{ background: 'var(--white)', border: `2px solid ${c.letter === 'C' ? 'var(--orange)' : 'var(--black)'}`, borderRadius: 'var(--radius-card)', padding: '36px 28px', display: 'flex', flexDirection: 'column', transition: 'transform 200ms ease, box-shadow 200ms ease', position: 'relative' }} className="card">
+                {c.letter === 'C' && (
+                  <div style={{ position: 'absolute', top: -13, left: 24, background: 'var(--orange)', color: 'var(--white)', fontSize: 11, fontWeight: 900, padding: '3px 12px', borderRadius: 99, letterSpacing: '0.05em' }}>★ MOST ENROLLED</div>
+                )}
                 <div style={{ fontFamily: "'Kodchasan',sans-serif", fontSize: 32, fontWeight: 600, color: 'var(--yellow)', marginBottom: 16 }}>{c.letter}</div>
                 <div style={{ fontSize: 17, fontWeight: 600, color: 'var(--navy)', marginBottom: 10, lineHeight: 1.3 }}>{c.title}</div>
                 <p style={{ fontSize: 14, color: 'var(--slate)', lineHeight: 1.6, marginBottom: 20, flexGrow: 1 }}>{c.desc}</p>
@@ -562,6 +569,53 @@ export default function HomePage() {
           </div>
           <div style={{ textAlign: 'center', marginTop: 40 }}>
             <Link href="/testimonials" className="btn btn-secondary">Read All Outcomes →</Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 11.5 FREE TOOLS DISCOVERY ── */}
+      <section style={{ background: 'var(--navy)', padding: 'var(--section-gap) 0' }} aria-labelledby="free-tools-heading">
+        <div className="container">
+          <div className="section-header" style={{ marginBottom: 48 }}>
+            <p className="eyebrow" style={{ color: 'rgba(255,255,255,0.7)', background: 'rgba(255,255,255,0.1)' }}>Free Tools</p>
+            <h2 id="free-tools-heading" style={{ color: 'var(--white)' }}>Free Tools Every MBA Student Should Use</h2>
+            <p style={{ color: 'rgba(255,255,255,0.65)' }}>No login required. No paywall. Built for students at every stage of their MBA journey.</p>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }}>
+            {[
+              { bg: 'var(--yellow)', textColor: 'var(--navy)', href: '/cat-omet/calculator', icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="3" width="20" height="18" rx="2"/><line x1="8" y1="8" x2="16" y2="8"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="16" x2="12" y2="16"/></svg>, badge: '2,400+ used', title: 'Percentile Calculator', hook: 'Paste your raw scores. Know your percentile and IIM shortlist in 10 seconds.' },
+              { bg: 'var(--purple)', textColor: 'var(--navy)', href: '/profile-evaluator', icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>, badge: 'Multi-step', title: 'Profile Strength Evaluator', hook: 'Score your academics, work-ex, and extras. See which IIMs your profile matches.' },
+              { bg: 'var(--blue)', textColor: 'var(--navy)', href: '/cat-omet/mocks', icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>, badge: '50 Free Mocks', title: '50 Sectional Mock Tests', hook: 'VARC, DILR, QA — CAT-difficulty mocks. No login. No time limit. Free forever.' },
+              { bg: 'var(--white)', textColor: 'var(--navy)', href: '/free-material', icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>, badge: 'No paywall', title: 'Free Material Library', hook: 'CV templates, GD frameworks, PI checklists. Used by students who placed Day 0.' },
+              { bg: 'var(--orange)', textColor: 'var(--white)', href: '/courses/compare', icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>, badge: 'Interactive', title: 'Full Course Compare', hook: "Can't decide? Every program, every feature, every price — one interactive table." },
+              { bg: 'rgba(255,255,255,0.08)', textColor: 'var(--white)', href: '/mentors', icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>, badge: '40+ Mentors', title: 'Mentor Profiles', hook: 'IIM + XLRI alumni at McKinsey, Bain, Goldman. Meet them before you enroll.', border: '1px solid rgba(255,255,255,0.15)' },
+            ].map((tool, i) => (
+              <Link
+                key={i}
+                href={tool.href}
+                style={{
+                  background: tool.bg,
+                  border: tool.border || 'none',
+                  borderRadius: 'var(--radius-card)',
+                  padding: '28px 24px',
+                  textDecoration: 'none',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 12,
+                  transition: 'transform 200ms ease, box-shadow 200ms ease',
+                  cursor: 'pointer',
+                }}
+                className="card"
+              >
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <div style={{ color: tool.textColor, opacity: 0.85 }}>{tool.icon}</div>
+                  <span style={{ fontSize: 11, fontWeight: 800, color: tool.textColor, opacity: 0.7, background: 'rgba(0,0,0,0.1)', borderRadius: 99, padding: '3px 10px', letterSpacing: '0.04em' }}>{tool.badge}</span>
+                </div>
+                <div style={{ fontSize: 17, fontWeight: 800, color: tool.textColor, lineHeight: 1.2 }}>{tool.title}</div>
+                <p style={{ fontSize: 13, color: tool.textColor, opacity: 0.75, lineHeight: 1.5, margin: 0 }}>{tool.hook}</p>
+                <div style={{ marginTop: 'auto', fontSize: 13, fontWeight: 700, color: tool.textColor, opacity: 0.9 }}>Explore →</div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
